@@ -13,5 +13,5 @@ setup(
     author='pichler',
     author_email='markus.pichler@tugraz.at',
     description='Diverse tools to export and analyse the >10a rain series from the ehyd.gv.at platform',
-    scripts=[],
+    scripts=['bin/ehyd_tools'],
 )
