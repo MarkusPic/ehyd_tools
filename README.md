@@ -3,7 +3,7 @@ Diverse tools to export and analyse the >10a rain time series from the [https://
 
 
 If you are interested in a heavy rain analysis based on *Kostra*, take a look at my other python package 
-[https://github.com/maxipi/kostra]() which is compatible with this package.
+[https://github.com/maxipi/intensity_duration_frequency_analysis]() which is compatible with this package.
 
 # Install
 
