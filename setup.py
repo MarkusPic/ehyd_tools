@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='ehyd_tools',
+    name='ehyd_tools.py',
     version='0.1',
     packages=find_packages(),
     package_data={
@@ -13,5 +13,5 @@ setup(
     author='pichler',
     author_email='markus.pichler@tugraz.at',
     description='Diverse tools to export and analyse the >10a rain series from the ehyd.gv.at platform',
-    scripts=['bin/ehyd_tools'],
+    scripts=['bin/ehyd_tools.py'],
 )

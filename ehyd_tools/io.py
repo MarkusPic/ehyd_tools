@@ -126,6 +126,7 @@ def get_station(id):
 
 
 def get_series(id):
+    print('You choose the station: "{}" with the id: "{}".'.format(get_station(id), iod))
     return _parse(_get_file(id))
 
 

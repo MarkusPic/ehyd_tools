@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from kostra import arg_parser
+import ehyd_tools
 
-user = arg_parser.heavy_rain_parser.parse_args()
+user = ehyd_tools.arg_parser.ehyd_parser.parse_args()
 print(user)

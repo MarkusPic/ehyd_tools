@@ -37,25 +37,35 @@ import argparse
 
 
 # ------------------------------------------------------------------------------------------------------------------
-heavy_rain_parser = argparse.ArgumentParser()
-heavy_rain_parser.add_argument('-i', '--input',
-                               help='rain input file in nieda format',
-                               required=False)
-# heavy_rain_parser.add_argument('-t', '--returnperiod',
-#                                help='return period in years',
-#                                required=False, type=float, choices=Borders(0.5, 100, 'a'))
-# heavy_rain_parser.add_argument('-d', '--duration',
-#                                help='duration in minutes',
-#                                required=False, type=int, choices=Borders(5, 12 * 60, 'min'))
-# heavy_rain_parser.add_argument('-r', '--rainfall',
-#                                help='rainfall in mm or Liters/m^2',
-#                                required=False, type=float, choices=Borders(0, unit='mm'))
-# heavy_rain_parser.add_argument('-ws', '--worksheet',
-#                                help='Worksheet used to calculate.',
-#                                default=DWA,
-#                                required=False, type=str, choices=[ATV, DWA, DWA_adv])
-# heavy_rain_parser.add_argument('-kind', '--series_kind',
-#                                help='The kind of series used for the calculation. '
-#                                     'Calculation with partial series is more precise',
-#                                default=PARTIAL,
-#                                required=False, type=str, choices=[PARTIAL, ANNUAL])
+ehyd_parser = argparse.ArgumentParser()
+ehyd_parser.add_argument('-id', '--id_number',
+                         help='the id number for the station from the ehyd.gv.at platform',
+                         required=False)
+ehyd_parser.add_argument('-i', '--input',
+                         help='path to the rain input file including the filename',
+                         required=False)
+
+ehyd_parser.add_argument('--add_gaps',
+                         help='get the gaps in the series as a csv table',
+                         required=False, action='store_true')
+
+ehyd_parser.add_argument('-ex', '--export',
+                         help='path to the rain input file including the filename',
+                         required=False)
+
+ehyd_parser.add_argument('--to_csv',
+                         help='save the data to the current directory',
+                         required=False, action='store_true')
+
+ehyd_parser.add_argument('--max10a',
+                         help='consider only 10 years with the most availability',
+                         required=False, action='store_true')
+
+ehyd_parser.add_argument('-s', '--start',
+                         help='custom start time, Format="YYYY-MM-DD"',
+                         required=False)
+
+ehyd_parser.add_argument('-e', '--end',
+                         help='custom end time, Format="YYYY-MM-DD"',
+                         required=False)
+
