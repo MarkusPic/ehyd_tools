@@ -105,12 +105,15 @@ def _parse(filepath_or_buffer, series_label='precipitation', index_label='dateti
     else:
         raise NotImplementedError()
 
+    print('start read')
     lines = list(map(lambda x: x.split(';'), csv_file.read().split(eof)))
     tuples = []
+    print('start parse')
     for line in lines:
         parsed = read_line(line)
         if parsed is not None:
             tuples.append(parsed)
+    print('end parse')
     ts = DataFrame.from_records(tuples, columns=[index_label, series_label], index=index_label)[series_label]
     # last_minute=str(year)+"-12-31 23:59:00"
     # try:
@@ -125,10 +128,16 @@ def get_station(id):
     return ehyd_stations[id]
 
 
+def get_all_stations():
+    for id, location in ehyd_stations:
+        print(id, ':', location)
+
+
 def get_series(id):
-    print('You choose the station: "{}" with the id: "{}".'.format(get_station(id), iod))
+    if id in ehyd_stations:
+        print('You choose the station: "{}" with the id: "{}".'.format(get_station(id), id))
     return _parse(_get_file(id))
 
 
-if __name__ == '__main__':
-    print(get_series(100370))
+# if __name__ == '__main__':
+#     get_series(105445)

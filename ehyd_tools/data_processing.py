@@ -7,19 +7,37 @@ __maintainer__ = "David Camhy, Markus Pichler"
 
 import pandas as pd
 from pandas.tseries.offsets import _delta_to_tick as delta_to_freq
+from os import path
 
 
-def export_series(series, save_as='csv'):
+def export_series(series, export_path=None, save_as='csv'):
     """
     export the series to a given format
     may be extended
+
+    :param export_path: path where file will be stored
+    :type export_path: str
 
     :type series: pd.Series
     :param save_as: export format
     :type save_as: str
     """
     if save_as is 'csv':
-        series.to_csv('{}.csv'.format(series.name))
+        if path.isdir(export_path):
+            pass
+        else:
+            raise UserWarning('Path is not available')
+
+        series.to_csv(path.join(export_path, '{}.csv'.format(series.name)))
+    else:
+        raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
+
+
+def import_series(filename):
+    if filename.endswith('csv'):
+        return pd.read_csv(filename, index_col=0, header=None, squeeze=True)
+    else:
+        raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
 
 
 def year_delta(years):

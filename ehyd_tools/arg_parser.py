@@ -40,7 +40,7 @@ import argparse
 ehyd_parser = argparse.ArgumentParser()
 ehyd_parser.add_argument('-id', '--id_number',
                          help='the id number for the station from the ehyd.gv.at platform',
-                         required=False)
+                         required=False, type=int)
 ehyd_parser.add_argument('-i', '--input',
                          help='path to the rain input file including the filename',
                          required=False)
@@ -50,7 +50,7 @@ ehyd_parser.add_argument('--add_gaps',
                          required=False, action='store_true')
 
 ehyd_parser.add_argument('-ex', '--export',
-                         help='path to the rain input file including the filename',
+                         help='path to the rain input file',  # including the filename',
                          required=False)
 
 ehyd_parser.add_argument('--to_csv',
@@ -69,3 +69,6 @@ ehyd_parser.add_argument('-e', '--end',
                          help='custom end time, Format="YYYY-MM-DD"',
                          required=False)
 
+ehyd_parser.add_argument('--plot',
+                         help='plot the data',
+                         required=False, action='store_true')

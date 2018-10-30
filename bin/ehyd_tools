@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-from ehyd_tools import arg_parser
+from ehyd_tools.main import execute_tools
 
-user = arg_parser.ehyd_parser.parse_args()
-print(user)
+execute_tools()
