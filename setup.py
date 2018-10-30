@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='lib.py',
+    name='ehyd_tools',
     version='0.1',
     packages=find_packages(),
     package_data={
