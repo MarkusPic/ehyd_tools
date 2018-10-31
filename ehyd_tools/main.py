@@ -10,7 +10,7 @@ from .arg_parser import ehyd_parser
 from .io import get_series
 
 
-def execute_tools():
+def execute_tool():
     args = ehyd_parser.parse_args()
 
     for i, e in vars(args).items():
