@@ -8,36 +8,7 @@ __maintainer__ = "David Camhy, Markus Pichler"
 import pandas as pd
 from pandas.tseries.offsets import _delta_to_tick as delta_to_freq
 from os import path
-
-
-def export_series(series, export_path=None, save_as='csv'):
-    """
-    export the series to a given format
-    may be extended
-
-    :param export_path: path where file will be stored
-    :type export_path: str
-
-    :type series: pd.Series
-    :param save_as: export format
-    :type save_as: str
-    """
-    if save_as is 'csv':
-        if path.isdir(export_path):
-            pass
-        else:
-            raise UserWarning('Path is not available')
-
-        series.to_csv(path.join(export_path, '{}.csv'.format(series.name)))
-    else:
-        raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
-
-
-def import_series(filename):
-    if filename.endswith('csv'):
-        return pd.read_csv(filename, index_col=0, header=None, squeeze=True)
-    else:
-        raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
+from warnings import warn
 
 
 def year_delta(years):
@@ -78,7 +49,7 @@ def data_availability(tags):
     :return: availability
     :rtype: pd.Series
     """
-    return ~tags.any()
+    return ~tags.any(axis=1)
 
 
 def max_10a(availability):
@@ -91,8 +62,42 @@ def max_10a(availability):
     :rtype: list[pd.datetime]
     :return: start & end time of most available time span
     """
-    avail_sum = availability.rolling(delta_to_freq(year_delta(years=10))).sum()
+    window = delta_to_freq(year_delta(years=10))
+    avail_sum = availability.rolling(window).sum()
 
     end = avail_sum.idxmax()
     start = end.replace(year=end.year - 10)
     return start, end
+
+
+def check_period(series):
+    if (series.index[-1] - series.index[0]) < year_delta(years=9.99):
+        warn('Series not longer than 10 years!')
+
+
+def rain_plot(series, fn):
+    msum = series.resample('M').sum()
+    ax = msum.plot(kind='bar', color='b')
+    # ax.set_ylim(msum.max(), 0)
+
+    ax.set_xlabel('Zeit - Monat/Jahr')
+    ax.set_ylabel('Niederschlag (mm/Monat)')
+
+    months = msum.index.strftime('%m').tolist()
+    years = msum.index.strftime('\n%Y').unique().tolist()
+
+    mticks = list(range(0, len(months), 4))
+    yticks = list(range(0, len(months), 12))
+
+    ax.set_xticks(mticks, minor=True)
+    ax.set_xticks(yticks)
+
+    ax.set_xticklabels(months[::4], minor=True)
+    ax.set_xticklabels(years, rotation='horizontal')
+
+    ax.get_xticklabels(minor=True)
+
+    fig = ax.get_figure()
+    fig.set_size_inches(w=29.7 / 2.54, h=21. / 2.54)
+    fig.tight_layout()
+    fig.savefig(fn)

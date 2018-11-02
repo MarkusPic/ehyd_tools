@@ -12,6 +12,45 @@ from io import BytesIO, TextIOWrapper, IOBase
 from pandas import DataFrame
 from zipfile import ZipFile
 from numpy import NaN
+from os import path
+import pandas as pd
+from pandas.errors import ParserError
+
+
+def export_series(series, export_path=None, save_as='csv'):
+    """
+    export the series to a given format
+    may be extended
+
+    :param export_path: path where file will be stored
+    :type export_path: str
+
+    :type series: pd.Series
+    :param save_as: export format
+    :type save_as: str
+    """
+    if save_as is 'csv':
+        if path.isdir(export_path):
+            pass
+        else:
+            raise UserWarning('Path is not available')
+
+        series.to_csv(path.join(export_path, '{}.csv'.format(series.name)))
+    else:
+        raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
+
+
+def import_series(filename, series_label='precipitation', index_label='datetime'):
+    if filename.endswith('csv'):
+        try:
+            ts = pd.read_csv(filename, index_col=0, header=None, squeeze=True, names=[series_label])
+            ts.index = pd.to_datetime(ts.index)
+            ts.index.name = index_label
+            return ts
+        except ParserError:
+            return _parse(filename)
+    else:
+        raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
 
 
 ehyd_stations = {100180: 'Tschagguns',
@@ -107,11 +146,13 @@ def _parse(filepath_or_buffer, series_label='precipitation', index_label='dateti
 
     print('start read')
     lines = list(map(lambda x: x.split(';'), csv_file.read().split(eof)))
+    csv_file.close()
     tuples = []
 
     l = len(lines)
     pct = int(l / 100)
-    print('_' + '_'*(len(lines) * pct) + '_')
+    # pct = 8000
+    print('_' + '_'*int(l / pct) + '_')
     print('[', end='')
 
     # print('start parse')

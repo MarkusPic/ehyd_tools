@@ -6,10 +6,11 @@ __version__ = "0.1"
 __license__ = "MIT"
 
 
-import pandas as pd
-from .data_processing import import_series, export_series, data_validation, data_availability, max_10a
+from pandas import to_datetime, DataFrame, Series
+from os import path
+from .data_processing import data_validation, data_availability, max_10a, check_period, rain_plot
 from .arg_parser import ehyd_parser
-from .io import get_series
+from .io import get_series, import_series, export_series
 from .sww_utils import span_table
 
 
@@ -22,31 +23,36 @@ def execute_tool():
     if args.id is not None:
         id_number = args.id
         series = get_series(id_number)
+        name = 'ehyd_{}'.format(id_number)
 
     elif args.input is not None:
         fn = args.input
         series = import_series(fn)
+        name = path.basename(fn).split('.')[0]
     else:
         raise UserWarning('No data selected. Use either a input file or a id. See help menu.')
 
     if args.start is not None:
-        start = pd.to_datetime(args.start)
+        start = to_datetime(args.start)
         series = series[start:].copy()
+        check_period(series)
 
     if args.end is not None:
-        end = pd.to_datetime(args.end)
+        end = to_datetime(args.end)
         series = series[:end].copy()
+        check_period(series)
 
     if args.max10a:
         tags = data_validation(series)
         availability = data_availability(tags)
         start, end = max_10a(availability)
         series = series.loc[start:end].copy()
+        check_period(series)
     else:
-        tags = pd.DataFrame()
-        availability = pd.Series()
+        tags = DataFrame()
+        availability = Series()
 
-    print('Data was clipped to start="{:%Y-%m-%d}" and end="{:%Y-%m-%d}".'.format(*series.iloc[[0, -1]].values))
+    print('Data was clipped to start="{:%Y-%m-%d}" and end="{:%Y-%m-%d}".'.format(*series.index[[0, -1]].tolist()))
 
     if args.export is not None:
         out_dir = args.export
@@ -58,15 +64,11 @@ def execute_tool():
         if availability.empty:
             availability = data_availability(tags)
 
-        gaps = span_table(~availability)
-        gaps.to_csv('gaps.csv')
+        gaps = span_table(availability.index, ~availability)
+        gaps.to_csv('{}_gaps.csv'.format(name))
 
     if args.to_csv:
-        series.to_csv('series.csv')
+        series.to_csv('{}.csv'.format(name))
 
     if args.plot:
-        ax = series.resample('AM').sum().plot()
-        fig = ax.get_figure()
-        # fig.set_size_inches()
-        fig.tight_figure()
-        fig.savefig('plot.pdf')
+        rain_plot(series, '{}_plot.pdf'.format(name))

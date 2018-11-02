@@ -62,29 +62,3 @@ def span_table(index, span_bool, min_span=pd.Timedelta(minutes=1)):
     span_bool[0] = False
     span_bool[-1] = False
     return time_delta_table(index[~span_bool], timedelta=min_span, monotonic=False)
-
-#
-# def gap_table(data, min_gap=pd.Timedelta(minutes=1)):
-#     """
-#     time gaps with consist 'NaN' with a minimum span of <min_gap> are the resulting events
-#
-#     :type data: DataFrame | Series
-#     :param Timedelta min_gap: minimum time range of an event
-#
-#     :return: start-time [start], end-time [end], duration of the gap [delta]
-#     :rtype: DataFrame[start, end, delta]
-#     """
-#     if isinstance(data, pd.DataFrame):
-#         index = data.dropna(axis=0, how='any').index.copy()
-#     elif isinstance(data, pd.Series):
-#         index = data.dropna().index.copy()
-#     else:
-#         raise NotImplementedError('Wrong data used in <gap_table>: DataFrame or Series - used "{}"'.format(type(data)))
-#
-#     # to see NaN gaps at the start and the end of the data
-#     for i in data.index[[0, -1]]:
-#         if i not in index:
-#             index = index.append(pd.DatetimeIndex([i]))
-#     index = index.sort_values()
-#
-#     return time_delta_table(index, timedelta=min_gap, monotonic=False)
