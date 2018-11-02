@@ -30,9 +30,18 @@ pip3 install git+https://github.com/maxipi/ehyd_tools.git --upgrade
 # Commandline tool 
 
 ```
-ehyd_tools --export csv --id 100180 --path .
-ehyd_tools --export csv --max10years --id 100180 --path .
-```
+usage: ehyd_tools [-h] [-id ID] [-input INPUT] [--add_gaps] [-export EXPORT]
+                  [--to_csv] [--max10a] [-start START] [-end END] [--plot]
 
-pip3 install /home/markus/PycharmProjects/ehyd_tools --upgrade --user
-pip3 install /Users/markus/PycharmProjects/ehyd_tools --upgrade --user
+optional arguments:
+  -h, --help      show this help message and exit
+  -id ID          the id number for the station from the ehyd.gv.at platform
+  -input INPUT    path to the rain input file including the filename
+  --add_gaps      get the gaps in the series as a csv table
+  -export EXPORT  path to the rain input file
+  --to_csv        save the data to the current directory
+  --max10a        consider only 10 years with the most availability
+  -start START    custom start time, Format="YYYY-MM-DD"
+  -end END        custom end time, Format="YYYY-MM-DD"
+  --plot          plot the data
+```
