@@ -1,5 +1,8 @@
 from setuptools import setup, find_packages
 
+with open('requirements.txt', 'r') as f:
+    requirements = f.read().splitlines()
+
 setup(
     name='ehyd_tools',
     version='0.1',
@@ -14,4 +17,5 @@ setup(
     author_email='markus.pichler@tugraz.at',
     description='Diverse tools to export and analyse the >10a rain series from the ehyd.gv.at platform',
     scripts=['bin/ehyd_tools'],
+    install_requires=requirements,
 )

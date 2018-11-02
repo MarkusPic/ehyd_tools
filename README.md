@@ -1,15 +1,15 @@
 # eHYD Tools
-Diverse tools to export and analyse the >10a rain time series from the [https://ehyd.gv.at]() platform
+Diverse tools to export and analyse the >10a rain time series from the [https://ehyd.gv.at](https://ehyd.gv.at) platform
 
 
 If you are interested in a heavy rain analysis based on *Kostra*, take a look at my other python package 
-[https://github.com/maxipi/intensity_duration_frequency_analysis]() which is compatible with this package.
+[https://github.com/maxipi/intensity_duration_frequency_analysis](https://github.com/maxipi/intensity_duration_frequency_analysis) which is compatible with this package.
 
 # Install
 
 See the python packages requirements in the 'requirements.txt'.
 
-To install the packages via github, git must be installed first. (see [https://git-scm.com/]())
+To install the packages via github, git must be installed first. (see [https://git-scm.com/](https://git-scm.com/))
 
 Otherwise download the package manually via your browser and replace git+xxx.git with the path to the unzipped folder.
 
@@ -35,3 +35,4 @@ ehyd_tools --export csv --max10years --id 100180 --path .
 ```
 
 pip3 install /home/markus/PycharmProjects/ehyd_tools --upgrade --user
+pip3 install /Users/markus/PycharmProjects/ehyd_tools --upgrade --user

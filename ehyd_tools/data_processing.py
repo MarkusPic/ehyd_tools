@@ -50,41 +50,49 @@ def year_delta(years):
     :return: time period
     :rtype: pd.Timedelta
     """
-    return pd.Timedelta(days=365.2425 * years)
+    return pd.Timedelta(days=365.25) * years
 
 
-def max_10a(frame, name):
-    """
-    get the minimal gaps and minimal nan
-
-    :param frame: dataframe with columns 'nans', 'gaps' and <name>
-    :type frame: pd.DataFrame
-
-    :param name: name of the data of interest in the dataframe
-    :type name: str
-
-    :rtype: pd.Series
-    :return: 10 years of the time series of interest
-    """
-    df = frame.copy()
-    avail = ~(df['nans'] | df['gaps'])
-    avail_sum = avail.rolling(delta_to_freq(year_delta(years=10))).sum()
-    max_avail_end = avail_sum.idxmax()
-    max_avail_start = max_avail_end - year_delta(years=10)
-    return df.loc[max_avail_start:max_avail_end, name].copy()
-
-
-def data_analysis(series):
+def data_validation(series):
     """
     add gaps sum & nan sum to the time series
 
     :type series: pd.Series
     :param series:
 
-    :return: dataframe with columns 'nans', 'gaps' and <name>
+    :return: tags with columns 'nans', 'gaps', ...
     :rtype: pd.DataFrame
     """
-    df = series.to_frame()
-    df['nans'] = pd.isna(series).astype(int)
-    df['gaps'] = pd.isna(series.fillna(0).resample('T').sum()).astype(int)
-    return df
+    tags = pd.DataFrame(index=series.index)
+    tags['nans'] = pd.isna(series).astype(int)
+    tags['gaps'] = pd.isna(series.fillna(0).resample('T').sum()).astype(int)
+    return tags
+
+
+def data_availability(tags):
+    """
+
+    :param tags: errors tagged as true
+    :type tags: pd.DataFrame
+
+    :return: availability
+    :rtype: pd.Series
+    """
+    return ~tags.any()
+
+
+def max_10a(availability):
+    """
+    get the minimal gaps and minimal nan
+
+    :param availability: series with available data tagged as True
+    :type availability: pd.Series[True]
+
+    :rtype: list[pd.datetime]
+    :return: start & end time of most available time span
+    """
+    avail_sum = availability.rolling(delta_to_freq(year_delta(years=10))).sum()
+
+    end = avail_sum.idxmax()
+    start = end.replace(year=end.year - 10)
+    return start, end

@@ -108,12 +108,24 @@ def _parse(filepath_or_buffer, series_label='precipitation', index_label='dateti
     print('start read')
     lines = list(map(lambda x: x.split(';'), csv_file.read().split(eof)))
     tuples = []
-    print('start parse')
+
+    l = len(lines)
+    pct = int(l / 100)
+    print('_' + '_'*(len(lines) * pct) + '_')
+    print('[', end='')
+
+    # print('start parse')
+    i = 0
     for line in lines:
+        if i < pct:
+            i += 1
+        else:
+            print('#', end='')
+            i = 0
         parsed = read_line(line)
         if parsed is not None:
             tuples.append(parsed)
-    print('end parse')
+    print('] end parse')
     ts = DataFrame.from_records(tuples, columns=[index_label, series_label], index=index_label)[series_label]
     # last_minute=str(year)+"-12-31 23:59:00"
     # try:

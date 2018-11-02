@@ -38,10 +38,10 @@ import argparse
 
 # ------------------------------------------------------------------------------------------------------------------
 ehyd_parser = argparse.ArgumentParser()
-ehyd_parser.add_argument('-id', '--id_number',
+ehyd_parser.add_argument('-id',
                          help='the id number for the station from the ehyd.gv.at platform',
                          required=False, type=int)
-ehyd_parser.add_argument('-i', '--input',
+ehyd_parser.add_argument('-input',
                          help='path to the rain input file including the filename',
                          required=False)
 
@@ -49,7 +49,7 @@ ehyd_parser.add_argument('--add_gaps',
                          help='get the gaps in the series as a csv table',
                          required=False, action='store_true')
 
-ehyd_parser.add_argument('-ex', '--export',
+ehyd_parser.add_argument('-export',
                          help='path to the rain input file',  # including the filename',
                          required=False)
 
@@ -61,11 +61,11 @@ ehyd_parser.add_argument('--max10a',
                          help='consider only 10 years with the most availability',
                          required=False, action='store_true')
 
-ehyd_parser.add_argument('-s', '--start',
+ehyd_parser.add_argument('-start',
                          help='custom start time, Format="YYYY-MM-DD"',
                          required=False)
 
-ehyd_parser.add_argument('-e', '--end',
+ehyd_parser.add_argument('-end',
                          help='custom end time, Format="YYYY-MM-DD"',
                          required=False)
 
