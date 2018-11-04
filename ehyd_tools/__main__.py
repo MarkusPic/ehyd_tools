@@ -10,15 +10,15 @@ from pandas import to_datetime, DataFrame, Series
 from os import path
 from .data_processing import data_validation, data_availability, max_10a, check_period, rain_plot
 from .arg_parser import ehyd_parser
-from .io import get_series, import_series, export_series
+from .in_out import get_series, import_series, export_series
 from .sww_utils import span_table
 
 
 def execute_tool():
-    args = ehyd_parser.parse_args()
+    args = ehyd_parser()
 
-    for i, e in vars(args).items():
-        print(i, ':', e)
+    # for i, e in vars(args).items():
+    #     print(i, ':', e)
 
     if args.id is not None:
         id_number = args.id

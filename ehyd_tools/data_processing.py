@@ -71,11 +71,29 @@ def max_10a(availability):
 
 
 def check_period(series):
+    """
+    calculate the period of the series
+
+    :param series: data
+    :type series: pd.Series
+
+    :return: period of the series
+    :rtype: pd.Timedelta
+    """
     if (series.index[-1] - series.index[0]) < year_delta(years=9.99):
         warn('Series not longer than 10 years!')
 
 
 def rain_plot(series, fn):
+    """
+    monthly sum bar plot
+
+    :param series: data
+    :type series: pd.Series
+
+    :param fn: path + filename of the resulting plot
+    :type fn: str
+    """
     msum = series.resample('M').sum()
     ax = msum.plot(kind='bar', color='b')
     # ax.set_ylim(msum.max(), 0)

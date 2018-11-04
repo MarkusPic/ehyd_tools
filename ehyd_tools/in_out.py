@@ -5,13 +5,11 @@ __license__ = "MIT"
 __version__ = "1.0.0"
 __maintainer__ = "David Camhy, Markus Pichler"
 
+
 import codecs
-import datetime
 import requests
-from io import BytesIO, TextIOWrapper, IOBase
-from pandas import DataFrame
+from io import BytesIO, TextIOWrapper, IOBase, StringIO
 from zipfile import ZipFile
-from numpy import NaN
 from os import path
 import pandas as pd
 from pandas.errors import ParserError
@@ -41,6 +39,13 @@ def export_series(series, export_path=None, save_as='csv'):
 
 
 def import_series(filename, series_label='precipitation', index_label='datetime'):
+    """
+
+    :param filename:
+    :param series_label:
+    :param index_label:
+    :return:
+    """
     if filename.endswith('csv'):
         try:
             ts = pd.read_csv(filename, index_col=0, header=None, squeeze=True, names=[series_label])
@@ -102,95 +107,84 @@ ehyd_stations = {100180: 'Tschagguns',
 
 
 def _get_file(id):
+    """
+
+    :param id:
+    :return:
+    """
     url = 'https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id={id}&file=2'.format(id=id)
     r = requests.get(url, allow_redirects=True)
-    z = ZipFile(BytesIO(r.content))
-    csv_file = TextIOWrapper(z.open(z.namelist()[0]), encoding='iso8859')
-    return csv_file
+    c = r.content
+    if c != b'':
+        z = ZipFile(BytesIO(c))
+        filename = z.namelist()[0]
+        csv_file = TextIOWrapper(z.open(filename), encoding='iso8859')
+        return csv_file
 
 
-def _parse_time(x):
-    return datetime.datetime.strptime(x, '%d.%m.%Y %H:%M:%S')
+def _parse(filepath_or_buffer, series_label='precipitation', index_label='datetime'):
+    """
 
-
-def _parse(filepath_or_buffer, series_label='precipitation', index_label='datetime', **args):
-    # bn = os.path.basename(path)
-
-    # print(path)
-    # year=int(bn[bn.find('_')+1:bn.rfind('-')])
-    def read_line(line):
-        try:
-            time = _parse_time(line[0].strip())
-            # if time.year !=year:
-            #    return None
-            val = line[1].strip()
-            if val == 'Lücke':
-                value = NaN
-            else:
-                value = float(val.replace(',', '.'))
-            return time, value
-        except ValueError as e:
-            if str(e).startswith("time data"):
-                return None
-            else:
-                raise e
-
+    :param filepath_or_buffer:
+    :param series_label:
+    :param index_label:
+    :return:
+    """
     if isinstance(filepath_or_buffer, str):
         csv_file = codecs.open(filepath_or_buffer, 'r', encoding='iso8859')
-        eof = '\r\n'
     elif isinstance(filepath_or_buffer, IOBase):
-        eof = '\n'
         csv_file = filepath_or_buffer
     else:
         raise NotImplementedError()
 
-    print('start read')
-    lines = list(map(lambda x: x.split(';'), csv_file.read().split(eof)))
+    # meta = []
+    for line in csv_file:
+        if line.startswith('Werte:'):
+            break
+        # else:
+        #     meta.append(line)
+
+    f = csv_file.read().replace(' ', '').replace(',', '.')
     csv_file.close()
-    tuples = []
-
-    l = len(lines)
-    pct = int(l / 100)
-    # pct = 8000
-    print('_' + '_'*int(l / pct) + '_')
-    print('[', end='')
-
-    # print('start parse')
-    i = 0
-    for line in lines:
-        if i < pct:
-            i += 1
-        else:
-            print('#', end='')
-            i = 0
-        parsed = read_line(line)
-        if parsed is not None:
-            tuples.append(parsed)
-    print('] end parse')
-    ts = DataFrame.from_records(tuples, columns=[index_label, series_label], index=index_label)[series_label]
-    # last_minute=str(year)+"-12-31 23:59:00"
-    # try:
-    #     df.loc[last_minute]
-    # except KeyError:
-    #     df.loc[datetime.datetime(year,12,31,23,59,00)]=df.tail(1)
+    ts = pd.read_csv(StringIO(f), sep=';', header=None, index_col=0, squeeze=True, names=[series_label],
+                     na_values=['Lücke'], date_parser=lambda s: pd.to_datetime(s, format='%d.%m.%Y%H:%M:%S'))
+    # ts.index = pd.to_datetime(ts.index, format='%d.%m.%Y%H:%M:%S')
+    ts = ts.rename_axis(index_label, axis='index')
     ts = ts.resample('1T').ffill()
     return ts
 
 
 def get_station(id):
+    """
+
+    :param id:
+    :return:
+    """
     return ehyd_stations[id]
 
 
 def get_all_stations():
+    """
+
+    :return:
+    """
     for id, location in ehyd_stations:
         print(id, ':', location)
 
 
 def get_series(id):
+    """
+
+    :param id:
+    :return:
+    """
     if id in ehyd_stations:
         print('You choose the station: "{}" with the id: "{}".'.format(get_station(id), id))
     return _parse(_get_file(id))
 
 
 # if __name__ == '__main__':
+#     NOW = time.time()
+#     print('{:0.0f}'.format(time.time() - NOW))
 #     get_series(105445)
+#     print('{:0.0f}'.format(time.time() - NOW))
