@@ -1,5 +1,4 @@
-© [Institut für Siedlungswasserwirtschaft und Landschaftswasserbau](https://www.tugraz.at)
-© Markus Pichler
+© [Institut für Siedlungswasserwirtschaft und Landschaftswasserbau](https://www.tugraz.at) and [Markus Pichler](mailto:markus.pichler@tugraz.at)
 
 # eHYD Tools
 Diverse tools to export and analyse the >10a rain time series from the [https://ehyd.gv.at](https://ehyd.gv.at) platform
