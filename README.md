@@ -1,9 +1,12 @@
+© [Institut für Siedlungswasserwirtschaft und Landschaftswasserbau](https://www.tugraz.at)
+© Markus Pichler
+
 # eHYD Tools
 Diverse tools to export and analyse the >10a rain time series from the [https://ehyd.gv.at](https://ehyd.gv.at) platform
 
 
 If you are interested in a heavy rain analysis like on *Kostra*, take a look at my other python package 
-[https://github.com/maxipi/intensity_duration_frequency_analysis](https://github.com/maxipi/intensity_duration_frequency_analysis) which is compatible with this package.
+[https://github.com/MarkusPic/intensity_duration_frequency_analysis](https://github.com/MarkusPic/intensity_duration_frequency_analysis) which is compatible with this package.
 
 # Install
 
@@ -20,7 +23,7 @@ I recommend to use Anaconda to install python on Windows and the [Anaconda](http
 The script is written in Python3.
 
 ```
-pip install git+https://github.com/maxipi/ehyd_tools.git
+pip install git+https://github.com/MarkusPic/ehyd_tools.git
 ```
 
 To install the package only for the local user account, add ```--user``` to the install command.
@@ -30,12 +33,12 @@ To install the package only for the local user account, add ```--user``` to the 
 To update the package, add ```--upgrade``` to the install command.
 
 ```
-pip install git+https://github.com/maxipi/ehyd_tools.git --upgrade
+pip install git+https://github.com/MarkusPic/ehyd_tools.git --upgrade
 ```
 
 ## Install without git
 
-First download the package as a zip with the green download button above:
+First download the package as a [zip-file](https://codeload.github.com/MarkusPic/ehyd_tools/zip/master).
 
 Then unzip the folder.
 
