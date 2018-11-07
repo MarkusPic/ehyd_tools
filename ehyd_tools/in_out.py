@@ -15,7 +15,14 @@ import pandas as pd
 from pandas.errors import ParserError
 
 
-def export_series(series, export_path=None, save_as='csv'):
+def csv_args(unix=False):
+    if unix:
+        return dict(sep=',', decimal='.')
+    else:
+        return dict(sep=';', decimal=',')
+
+
+def export_series(series, filename, export_path=None, save_as='csv', unix=False):
     """
     export the series to a given format
     may be extended
@@ -23,32 +30,46 @@ def export_series(series, export_path=None, save_as='csv'):
     :param export_path: path where file will be stored
     :type export_path: str
 
+    :param filename: name of the file
+    :type filename: str
+
     :type series: pd.Series
+
     :param save_as: export format
     :type save_as: str
+
+    :param unix: whether to use "," or ";" for the csv
+    :type unix: bool
     """
     if save_as is 'csv':
-        if path.isdir(export_path):
+
+        if export_path == '':
+            pass
+        elif export_path is None:
+            export_path = ''
+        elif path.isdir(export_path):
             pass
         else:
             raise UserWarning('Path is not available')
 
-        series.to_csv(path.join(export_path, '{}.csv'.format(series.name)))
+        series.to_csv(path.join(export_path, '{}.csv'.format(filename)), **csv_args(unix))
     else:
         raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
 
 
-def import_series(filename, series_label='precipitation', index_label='datetime'):
+def import_series(filename, series_label='precipitation', index_label='datetime', unix=False):
     """
 
     :param filename:
     :param series_label:
     :param index_label:
+    :param unix: whether to use "," or ";" for the csv
+    :type unix: bool
     :return:
     """
     if filename.endswith('csv'):
         try:
-            ts = pd.read_csv(filename, index_col=0, header=None, squeeze=True, names=[series_label])
+            ts = pd.read_csv(filename, index_col=0, header=None, squeeze=True, names=[series_label], **csv_args(unix))
             ts.index = pd.to_datetime(ts.index)
             ts.index.name = index_label
             return ts
@@ -122,7 +143,7 @@ def _get_file(id):
         return csv_file
 
 
-def _parse(filepath_or_buffer, series_label='precipitation', index_label='datetime'):
+def _parse(filepath_or_buffer, series_label='precipitation', index_label='datetime', with_meta=False):
     """
 
     :param filepath_or_buffer:
@@ -137,21 +158,27 @@ def _parse(filepath_or_buffer, series_label='precipitation', index_label='dateti
     else:
         raise NotImplementedError()
 
-    # meta = []
+    if with_meta:
+        meta = []
     for line in csv_file:
         if line.startswith('Werte:'):
             break
-        # else:
-        #     meta.append(line)
+        elif with_meta:
+            meta.append(line)
+    if with_meta:
+        meta = ''.join(meta)
 
     f = csv_file.read().replace(' ', '').replace(',', '.')
     csv_file.close()
     ts = pd.read_csv(StringIO(f), sep=';', header=None, index_col=0, squeeze=True, names=[series_label],
                      na_values=['Lücke'], date_parser=lambda s: pd.to_datetime(s, format='%d.%m.%Y%H:%M:%S'))
-    # ts.index = pd.to_datetime(ts.index, format='%d.%m.%Y%H:%M:%S')
     ts = ts.rename_axis(index_label, axis='index')
     ts = ts.resample('1T').ffill()
-    return ts
+
+    if with_meta:
+        return ts, meta
+    else:
+        return ts
 
 
 def get_station(id):
@@ -172,19 +199,25 @@ def get_all_stations():
         print(id, ':', location)
 
 
-def get_series(id):
+def get_series(id, with_meta=False):
     """
 
     :param id:
-    :return:
+    :type id: int
+
+    :param with_meta: whether to return meta data or not
+    :type with_meta: bool
+
+    :return: data or data with the meta-data
+    :rtype:  pd.Series | list[pd.Series, str]
     """
     if id in ehyd_stations:
         print('You choose the station: "{}" with the id: "{}".'.format(get_station(id), id))
-    return _parse(_get_file(id))
+    return _parse(_get_file(id), with_meta=with_meta)
 
 
-if __name__ == '__main__':
-    print(pd.Series(ehyd_stations).to_string())
+# if __name__ == '__main__':
+#     print(pd.Series(ehyd_stations).to_string())
 #     NOW = time.time()
 #     print('{:0.0f}'.format(time.time() - NOW))
 #     get_series(105445)

@@ -9,6 +9,7 @@ import pandas as pd
 from pandas.tseries.offsets import _delta_to_tick as delta_to_freq
 from os import path
 from warnings import warn
+from matplotlib.pyplot import subplots
 
 
 def year_delta(years):
@@ -55,6 +56,7 @@ def data_availability(tags):
 def max_10a(availability):
     """
     get the minimal gaps and minimal nan
+    and take the latest possible time span
 
     :param availability: series with available data tagged as True
     :type availability: pd.Series[True]
@@ -65,7 +67,9 @@ def max_10a(availability):
     window = delta_to_freq(year_delta(years=10))
     avail_sum = availability.rolling(window).sum()
 
-    end = avail_sum.idxmax()
+    maximums = avail_sum == avail_sum.max()
+
+    end = maximums.index[-1]
     start = end.replace(year=end.year - 10)
     return start, end
 
@@ -80,8 +84,24 @@ def check_period(series):
     :return: period of the series
     :rtype: pd.Timedelta
     """
-    if (series.index[-1] - series.index[0]) < year_delta(years=9.99):
+    if not is_longer(series, years=9.99):
         warn('Series not longer than 10 years!')
+
+
+def is_longer(series, years):
+    """
+    calculate the period of the series
+
+    :param series: data
+    :type series: pd.Series
+
+    :param years: number of years
+    :type years: float
+
+    :return: whether the series is longer
+    :rtype: bool
+    """
+    return (series.index[-1] - series.index[0]) > year_delta(years=years)
 
 
 def rain_plot(series, fn):
@@ -94,28 +114,27 @@ def rain_plot(series, fn):
     :param fn: path + filename of the resulting plot
     :type fn: str
     """
-    msum = series.resample('M').sum()
-    ax = msum.plot(kind='bar', color='b')
-    # ax.set_ylim(msum.max(), 0)
 
-    ax.set_xlabel('Zeit - Monat/Jahr')
-    ax.set_ylabel('Niederschlag (mm/Monat)')
+    if is_longer(series, years=15):
+        freq = 'Y'
+        freq_long = 'Year'
+    else:
+        freq = 'M'
+        freq_long = 'Month'
 
-    months = msum.index.strftime('%m').tolist()
-    years = msum.index.strftime('\n%Y').unique().tolist()
+    sums = series.resample(freq).sum()
+    index = series.index.to_series().resample(freq).apply(lambda s: s.min() + abs(s.min() - s.max()) / 2).values
 
-    mticks = list(range(0, len(months), 4))
-    yticks = list(range(0, len(months), 12))
+    dummy = sums.rename('dummy').copy()
+    dummy.loc[:] = 0
 
-    ax.set_xticks(mticks, minor=True)
-    ax.set_xticks(yticks)
-
-    ax.set_xticklabels(months[::4], minor=True)
-    ax.set_xticklabels(years, rotation='horizontal')
-
-    ax.get_xticklabels(minor=True)
-
-    fig = ax.get_figure()
+    fig, ax = subplots()
     fig.set_size_inches(w=29.7 / 2.54, h=21. / 2.54)
+
+    ax = dummy.plot(ax=ax, lw=0)
+    ax.bar(index, sums.values, color='b')
+
+    ax.set_ylabel('Niederschlag (mm/{})'.format(freq_long))
+    ax.set_xlabel('Zeit')
     fig.tight_layout()
     fig.savefig(fn)

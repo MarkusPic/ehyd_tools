@@ -1,0 +1,6 @@
+The annual totals of the data series serve as the data basis.
+The following statistics were analyzed:
+
+The maximum is 1438 mm and was in the year 2012.
+The minimum is 0 mm and was in the year 2016.
+The mean is 1090 mm.

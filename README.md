@@ -33,6 +33,18 @@ To update the package, add ```--upgrade``` to the install command.
 pip install git+https://github.com/maxipi/ehyd_tools.git --upgrade
 ```
 
+## Install without git
+
+First download the package as a zip with the green download button above:
+
+Then unzip the folder.
+
+Now you can install the package with the local files
+
+```
+pip install <PATH_TO_FOLDER>\ehyd_tools-master
+```
+
 # Usage
 
 To start the script use following commands in the terminal/Anaconda Prompt
@@ -45,21 +57,27 @@ Unix-Like:
 
 ## Commandline tool 
 
+> ehyd_tools -h
+
 ```
-usage: ehyd_tools [-h] [-id ID] [-input INPUT] [--add_gaps] [-export EXPORT]
-                  [--to_csv] [--max10a] [-start START] [-end END] [--plot]
+usage: ehyd_tools [-h] [-id ID] [--input INPUT] [--add_gaps] [--to_csv]
+                  [--max10a] [--start START] [--end END] [--plot]
+                  [--statistics] [--meta] [--unix]
 
 optional arguments:
-  -h, --help      show this help message and exit
-  -id ID          the id number for the station from the ehyd.gv.at platform
-  -input INPUT    path to the rain input file including the filename
-  --add_gaps      get the gaps in the series as a csv table
-  -export EXPORT  path to the rain input file
-  --to_csv        save the data to the current directory
-  --max10a        consider only 10 years with the most availability
-  -start START    custom start time, Format="YYYY-MM-DD"
-  -end END        custom end time, Format="YYYY-MM-DD"
-  --plot          plot the data
+  -h, --help     show this help message and exit
+  -id ID         the id number for the station from the ehyd.gv.at platform
+  --input INPUT  path to the rain input file including the filename
+  --add_gaps     get the gaps in the series as a csv table
+  --to_csv       save the data to the current directory
+  --max10a       consider only 10 years with the most availability
+  --start START  custom start time, Format="YYYY-MM-DD"
+  --end END      custom end time, Format="YYYY-MM-DD"
+  --plot         plot the data
+  --statistics   creates a txt file with basic statistics (sum, max & min)
+  --meta         add the txt file with the meta data of the ehyd data
+  --unix         export the csv files with a "," as separator and a "." as
+                 decimal sign.
 ```
 
 ## Example
@@ -90,16 +108,80 @@ With the ```--to_csv``` argument, a csv file of the series with the name *ehyd_\
 After the command above two files will be created:
 
 > ehyd_100180.csv
-
+>
 > ehyd_100180_gaps.csv
+
 
 ### Example 2
 
 ```ehyd_tools -id 100180 --plot```
 
-With the ```--plot``` argument, a png file of the series bar plot with the name *ehyd_\<ID\>_plot.csv* will be created.
+With the ```--plot``` argument, a png file of the series bar plot with the name *ehyd_\<ID\>_plot.png* will be created.
 
-> ehyd_100180_plot.csv
+For data series longer than 15 years, annual sums, otherwise monthly sums, are used.
+
+After the command above these file will be created:
+
+> ehyd_100180_plot.png
+
+![Regenhöhenlinien](example/ehyd_100180_plot.png)
+
+### Example 3
+
+```ehyd_tools -id 100180 --meta --statistics```
+
+With the ```--meta``` argument, a txt file containing the meta data with the name *ehyd_\<ID\>_meta.txt* will be created.
+
+With the ```--statistics``` argument, a txt file containing the statistics of the series with the name *ehyd_\<ID\>_stats.txt* will be created.
+
+After the command above these two files will be created:
+
+
+> ehyd_100180_meta.txt
+
+```
+Messstelle:                ;Tschagguns
+HZB-Nummer:                ;100180
+HD-Nummer:                 ;HD8000018
+DBMS-Nummer:               ;8000018
+Sachgebiet:                ;NLV
+Dienststelle:              ;HD-Vorarlberg
+Messstellenbetreiber:      ;Hydrographischer Dienst
+H�he:
+ g�ltig seit:              ;H�he [m �.A.]:
+  01.08.1921               ;681
+Geographische Koordinaten (Referenzellipsoid: Bessel 1841):
+ g�ltig seit:              ;L�nge (Grad,Min,Sek):    ;Breite  (Grad,Min,Sek):
+  01.08.1921               ;09 54 57                 ;47 04 03
+Zugeordnete Messcodes:
+ g�ltig seit: ;g�ltig bis:  ;Messcode:                           ;Entstehungsart:
+  01.01.1953;   30.03.2004;  Nh/Schwimmer (Heber);                digitalisiert
+  30.03.2004;              ; Nh/elekt.Waage, 500 cm�, beh.;       Datensammler -> DF�
+Ursprungszeitreihe:        ;Niederschlag,K,,,0,O,Z,0,,,
+Transformation:            ;Summe
+Summenintervall:           ;1 Minute
+Exportzeitreihe:           ;Abgeleitete Intervallzeitreihe
+                           ;Niederschlag,I,Sum,E,12,M,Z,0,,,
+Exportqualit�t:            ;MAXQUAL (2)
+Exportzeitraum:            ;Beginn der Datenaufzeichnung; bis ;01.01.2016 00:00
+Hinweis:                   ;Der Intervallwert gilt bis zum n�chsten Zeitpunkt mit einem Wert oder L�cke
+Hinweis:                   ;ACHTUNG: Aufeinanderfolgende gleiche Werte von 0 und L�cke sind jeweils zu einem l�ngeren Intervall zusammengefasst
+Hinweis:                   ;Werte aus (teilweise) ungepr�ften Rohdaten
+Werteformat:               ;3 Nachkommastellen
+Einheit:                   ;mm
+```
+
+> ehyd_100180_stats.txt
+
+```
+The annual totals of the data series serve as the data basis.
+The following statistics were analyzed:
+
+The maximum is 1438 mm and was in the year 2012.
+The minimum is 0 mm and was in the year 2016.
+The mean is 1090 mm.
+```
+
 
 ## The stations
 
