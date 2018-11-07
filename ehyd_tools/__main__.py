@@ -133,6 +133,11 @@ def execute_tool():
         export_series(series, filename=name, save_as='csv', unix=args.unix)
         print('The time series was saved in the file "{}".'.format(out_fn))
 
+    if args.to_parquet:
+        out_fn = name + '.parquet'
+        export_series(series, filename=name, save_as='parquet')
+        print('The time series was saved in the file "{}".'.format(out_fn))
+
     if args.plot:
         plot_fn = '{}_plot.png'.format(name)
         rain_plot(series, plot_fn)

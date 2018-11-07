@@ -22,6 +22,17 @@ def csv_args(unix=False):
         return dict(sep=';', decimal=',')
 
 
+def check_path(pth=None):
+    if pth == '':
+        return pth
+    elif pth is None:
+        return ''
+    elif path.isdir(pth):
+        return pth
+    else:
+        raise UserWarning('Path is not available')
+
+
 def export_series(series, filename, export_path=None, save_as='csv', unix=False):
     """
     export the series to a given format
@@ -42,17 +53,11 @@ def export_series(series, filename, export_path=None, save_as='csv', unix=False)
     :type unix: bool
     """
     if save_as is 'csv':
+        series.to_csv(path.join(check_path(export_path), '{}.csv'.format(filename)), **csv_args(unix))
 
-        if export_path == '':
-            pass
-        elif export_path is None:
-            export_path = ''
-        elif path.isdir(export_path):
-            pass
-        else:
-            raise UserWarning('Path is not available')
+    elif save_as is 'parquet':
+        series.to_frame().to_parquet(path.join(check_path(export_path), '{}.parquet'.format(filename)))
 
-        series.to_csv(path.join(export_path, '{}.csv'.format(filename)), **csv_args(unix))
     else:
         raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
 
@@ -75,6 +80,8 @@ def import_series(filename, series_label='precipitation', index_label='datetime'
             return ts
         except ParserError:
             return _parse(filename)
+    elif filename.endswith('parquet'):
+        return pd.read_parquet(filename).iloc[:, 0].copy()
     else:
         raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
 

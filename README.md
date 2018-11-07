@@ -59,7 +59,7 @@ Unix-Like:
 
 ## Commandline tool 
 
-> ehyd_tools -h
+> ```ehyd_tools -h```
 
 ```
 usage: ehyd_tools [-h] [-id ID] [--input INPUT] [--add_gaps] [--to_csv]
