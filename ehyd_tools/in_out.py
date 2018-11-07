@@ -183,7 +183,8 @@ def get_series(id):
     return _parse(_get_file(id))
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
+    print(pd.Series(ehyd_stations).to_string())
 #     NOW = time.time()
 #     print('{:0.0f}'.format(time.time() - NOW))
 #     get_series(105445)

@@ -20,6 +20,16 @@ def execute_tool():
     # for i, e in vars(args).items():
     #     print(i, ':', e)
 
+    if args.start is not None:
+        start = to_datetime(args.start)
+    else:
+        start = None
+
+    if args.end is not None:
+        end = to_datetime(args.end)
+    else:
+        end = None
+
     if args.id is not None:
         id_number = args.id
         series = get_series(id_number)
@@ -32,13 +42,11 @@ def execute_tool():
     else:
         raise UserWarning('No data selected. Use either a input file or a id. See help menu.')
 
-    if args.start is not None:
-        start = to_datetime(args.start)
+    if start is not None:
         series = series[start:].copy()
         check_period(series)
 
-    if args.end is not None:
-        end = to_datetime(args.end)
+    if end is not None:
         series = series[:end].copy()
         check_period(series)
 
