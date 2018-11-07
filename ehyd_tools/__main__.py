@@ -72,3 +72,7 @@ def execute_tool():
 
     if args.plot:
         rain_plot(series, '{}_plot.pdf'.format(name))
+
+
+if __name__ == '__main__':
+    execute_tool()
