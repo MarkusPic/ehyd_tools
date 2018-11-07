@@ -64,6 +64,9 @@ optional arguments:
 
 ## Example
 
+
+### Example 1
+
 ```ehyd_tools -id 100180 --to_csv --max10a --add_gaps```
 
 The results will be:
@@ -89,6 +92,14 @@ After the command above two files will be created:
 > ehyd_100180.csv
 
 > ehyd_100180_gaps.csv
+
+### Example 2
+
+```ehyd_tools -id 100180 --plot```
+
+With the ```--plot``` argument, a png file of the series bar plot with the name *ehyd_\<ID\>_plot.csv* will be created.
+
+> ehyd_100180_plot.csv
 
 ## The stations
 

@@ -79,7 +79,7 @@ def execute_tool():
         series.to_csv('{}.csv'.format(name))
 
     if args.plot:
-        rain_plot(series, '{}_plot.pdf'.format(name))
+        rain_plot(series, '{}_plot.png'.format(name))
 
 
 if __name__ == '__main__':
