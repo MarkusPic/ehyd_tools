@@ -111,6 +111,40 @@ After the command above two files will be created:
 >
 > ehyd_100180_gaps.csv
 
+```
+;start;end;gaps in days
+8;1961-10-27 06:58:00;1962-05-16 07:00:00;201,001
+20;1972-10-19 06:58:00;1973-05-02 07:00:00;195,001
+5;1958-11-01 07:01:00;1959-05-15 07:00:00;194,999
+2;1955-10-23 07:01:00;1956-05-01 07:00:00;190,999
+22;1974-10-27 06:58:00;1975-05-05 07:00:00;190,001
+0;1953-11-01 06:59:00;1954-05-06 07:01:00;186,001
+13;1966-11-01 06:59:00;1967-05-04 07:00:00;184,001
+27;1979-10-31 06:58:00;1980-05-01 07:00:00;183,001
+23;1975-10-31 06:58:00;1976-05-01 07:00:00;183,001
+12;1965-10-31 06:58:00;1966-05-01 07:00:00;182,001
+21;1973-11-01 06:59:00;1974-05-01 07:01:00;181,001
+29;1981-11-01 06:59:00;1982-05-01 07:01:00;181,001
+26;1978-10-31 06:58:00;1979-04-25 07:01:00;176,002
+15;1968-10-31 06:58:00;1969-04-24 07:00:00;175,001
+3;1956-10-26 07:01:00;1957-04-19 07:00:00;174,999
+7;1960-10-14 06:59:00;1961-04-04 07:00:00;172,001
+9;1962-11-01 06:59:00;1963-04-19 07:00:00;169,001
+25;1977-11-14 06:58:00;1978-05-01 07:02:00;168,003
+10;1963-11-01 06:59:00;1964-04-15 07:00:00;166,001
+19;1971-10-31 06:58:00;1972-04-13 07:00:00;165,001
+24;1976-11-20 06:59:00;1977-05-01 07:00:00;162,001
+1;1954-11-06 06:59:00;1955-04-16 07:00:00;161,001
+6;1959-10-26 06:58:00;1960-04-01 07:00:00;158,001
+4;1957-10-31 06:58:00;1958-04-01 07:00:00;152,001
+14;1967-11-01 07:01:00;1968-04-01 07:00:00;151,999
+18;1970-11-01 06:59:00;1971-04-01 07:00:00;151,001
+11;1964-11-16 06:59:00;1965-04-01 07:00:00;136,001
+17;1970-01-01 00:00:00;1970-04-30 07:00:00;119,292
+16;1969-10-31 06:58:00;1970-01-01 00:00:00;61,710
+28;1981-01-01 06:59:00;1981-03-01 07:01:00;59,001
+```
+
 
 ### Example 2
 
@@ -147,26 +181,26 @@ DBMS-Nummer:               ;8000018
 Sachgebiet:                ;NLV
 Dienststelle:              ;HD-Vorarlberg
 Messstellenbetreiber:      ;Hydrographischer Dienst
-H�he:
- g�ltig seit:              ;H�he [m �.A.]:
+Höhe:
+ gültig seit:              ;Höhe [m ü.A.]:
   01.08.1921               ;681
 Geographische Koordinaten (Referenzellipsoid: Bessel 1841):
- g�ltig seit:              ;L�nge (Grad,Min,Sek):    ;Breite  (Grad,Min,Sek):
+ gültig seit:              ;Länge (Grad,Min,Sek):    ;Breite  (Grad,Min,Sek):
   01.08.1921               ;09 54 57                 ;47 04 03
 Zugeordnete Messcodes:
- g�ltig seit: ;g�ltig bis:  ;Messcode:                           ;Entstehungsart:
+ gültig seit: ;gültig bis:  ;Messcode:                           ;Entstehungsart:
   01.01.1953;   30.03.2004;  Nh/Schwimmer (Heber);                digitalisiert
-  30.03.2004;              ; Nh/elekt.Waage, 500 cm�, beh.;       Datensammler -> DF�
+  30.03.2004;              ; Nh/elekt.Waage, 500 cm², beh.;       Datensammler -> DFÜ
 Ursprungszeitreihe:        ;Niederschlag,K,,,0,O,Z,0,,,
 Transformation:            ;Summe
 Summenintervall:           ;1 Minute
 Exportzeitreihe:           ;Abgeleitete Intervallzeitreihe
                            ;Niederschlag,I,Sum,E,12,M,Z,0,,,
-Exportqualit�t:            ;MAXQUAL (2)
+Exportqualität:            ;MAXQUAL (2)
 Exportzeitraum:            ;Beginn der Datenaufzeichnung; bis ;01.01.2016 00:00
-Hinweis:                   ;Der Intervallwert gilt bis zum n�chsten Zeitpunkt mit einem Wert oder L�cke
-Hinweis:                   ;ACHTUNG: Aufeinanderfolgende gleiche Werte von 0 und L�cke sind jeweils zu einem l�ngeren Intervall zusammengefasst
-Hinweis:                   ;Werte aus (teilweise) ungepr�ften Rohdaten
+Hinweis:                   ;Der Intervallwert gilt bis zum nächsten Zeitpunkt mit einem Wert oder Lücke
+Hinweis:                   ;ACHTUNG: Aufeinanderfolgende gleiche Werte von 0 und Lücke sind jeweils zu einem längeren Intervall zusammengefasst
+Hinweis:                   ;Werte aus (teilweise) ungeprüften Rohdaten
 Werteformat:               ;3 Nachkommastellen
 Einheit:                   ;mm
 ```
