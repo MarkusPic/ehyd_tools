@@ -52,14 +52,18 @@ def export_series(series, filename, export_path=None, save_as='csv', unix=False)
     :param unix: whether to use "," or ";" for the csv
     :type unix: bool
     """
+    fn = path.join(check_path(export_path), '{}.{}'.format(filename, save_as))
+
     if save_as is 'csv':
-        series.to_csv(path.join(check_path(export_path), '{}.csv'.format(filename)), **csv_args(unix))
+        series.to_csv(fn, **csv_args(unix))
 
     elif save_as is 'parquet':
-        series.to_frame().to_parquet(path.join(check_path(export_path), '{}.parquet'.format(filename)))
+        series.to_frame().to_parquet(fn)
 
     else:
         raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
+
+    return fn
 
 
 def import_series(filename, series_label='precipitation', index_label='datetime', unix=False):
@@ -175,7 +179,6 @@ def _parse(filepath_or_buffer, series_label='precipitation', index_label='dateti
     if with_meta:
         meta = pd.Series(meta).str.replace('\n', '').str.split(';', expand=True).fillna('').apply(lambda x: x.str.strip())
         # meta = ''.join(meta)
-
 
     f = csv_file.read().replace(' ', '').replace(',', '.')
     csv_file.close()

@@ -5,9 +5,9 @@ __license__ = "MIT"
 __version__ = "1.0.0"
 __maintainer__ = "David Camhy, Markus Pichler"
 
-import pandas as pd
+from pandas import Timedelta, DataFrame, isna
+from numpy import NaN
 from pandas.tseries.offsets import _delta_to_tick as delta_to_freq
-from os import path
 from warnings import warn
 from matplotlib.pyplot import subplots
 
@@ -22,7 +22,7 @@ def year_delta(years):
     :return: time period
     :rtype: pd.Timedelta
     """
-    return pd.Timedelta(days=365.25) * years
+    return Timedelta(days=365.25) * years
 
 
 def data_validation(series):
@@ -35,9 +35,9 @@ def data_validation(series):
     :return: tags with columns 'nans', 'gaps', ...
     :rtype: pd.DataFrame
     """
-    tags = pd.DataFrame(index=series.index)
-    tags['nans'] = pd.isna(series).astype(int)
-    tags['gaps'] = pd.isna(series.fillna(0).resample('T').sum()).astype(int)
+    tags = DataFrame(index=series.index)
+    tags['nans'] = isna(series).astype(int)
+    tags['gaps'] = isna(series.fillna(0).resample('T').sum()).astype(int)
     return tags
 
 
@@ -138,3 +138,16 @@ def rain_plot(series, fn):
     ax.set_xlabel('Zeit')
     fig.tight_layout()
     fig.savefig(fn)
+
+
+def statistics(series, availability, availability_cut=0.2):
+    sums = series.resample('Y').sum()
+    avail = availability.resample('Y').sum() / (year_delta(1) / series.index.freq)
+
+    sums[avail < availability_cut] = NaN
+
+    stats = dict()
+    stats['max'] = (sums.max(), sums.idxmax(), avail.loc[sums.idxmax()])
+    stats['min'] = (sums.min(), sums.idxmin(), avail.loc[sums.idxmin()])
+    stats['mean'] = (sums.mean(), avail.mean())
+    return stats
