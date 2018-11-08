@@ -7,6 +7,7 @@ __license__ = "MIT"
 
 from pandas import to_datetime, DataFrame, Series
 from os import path
+from webbrowser import open as show_file
 from .data_processing import data_validation, data_availability, max_10a, check_period, rain_plot, statistics
 from .arg_parser import ehyd_parser
 from .in_out import get_series, import_series, export_series, csv_args, get_station_meta
@@ -143,10 +144,18 @@ def execute_tool():
 
     # __________________________________________________________________________________________________________________
     if args.plot:
-        plot_fn = '{}_plot.png'.format(name)
-        rain_plot(series, plot_fn)
-        print('The plot was saved in the file "{}".'.format(plot_fn))
 
+        if tags.empty:
+            tags = data_validation(series)
+        if availability.empty:
+            availability = data_availability(tags)
+
+        plot_fn = '{}_plot.png'.format(name)
+        rain_plot(series, availability, plot_fn)
+        print('The plot was saved in the file "{}".'.format(plot_fn))
+        show = True
+        if show:
+            show_file(plot_fn)
 
 # ______________________________________________________________________________________________________________________
 if __name__ == '__main__':

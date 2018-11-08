@@ -85,7 +85,7 @@ def import_series(filename, series_label='precipitation', index_label='datetime'
         except ParserError:
             return _parse(filename)
     elif filename.endswith('parquet'):
-        return pd.read_parquet(filename).iloc[:, 0].copy()
+        return pd.read_parquet(filename).iloc[:, 0].asfreq('T').copy()
     else:
         raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
 

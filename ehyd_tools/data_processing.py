@@ -1,3 +1,5 @@
+from matplotlib.gridspec import GridSpec
+
 __author__ = "David Camhy, Markus Pichler"
 __copyright__ = "Copyright 2017, University of Technology Graz"
 __credits__ = ["David Camhy", "Markus Pichler"]
@@ -9,7 +11,7 @@ from pandas import Timedelta, DataFrame, isna
 from numpy import NaN
 from pandas.tseries.offsets import _delta_to_tick as delta_to_freq
 from warnings import warn
-from matplotlib.pyplot import subplots
+from matplotlib.pyplot import subplots, subplot
 
 
 def year_delta(years):
@@ -104,7 +106,7 @@ def is_longer(series, years):
     return (series.index[-1] - series.index[0]) > year_delta(years=years)
 
 
-def rain_plot(series, fn):
+def rain_plot(series, availability, fn):
     """
     monthly sum bar plot
 
@@ -117,26 +119,42 @@ def rain_plot(series, fn):
 
     if is_longer(series, years=15):
         freq = 'Y'
-        freq_long = 'Year'
+        freq_long = 'Jahr'
+        base_delta = year_delta(1)
     else:
         freq = 'M'
-        freq_long = 'Month'
+        freq_long = 'Monat'
+        base_delta = year_delta(1) / 12
 
     sums = series.resample(freq).sum()
-    index = series.index.to_series().resample(freq).apply(lambda s: s.min() + abs(s.min() - s.max()) / 2).values
+    index = series.index.to_series().resample(freq).apply(lambda s: s.min() + abs(s.min() - s.max()) / 2).dt.date.values
+    avail = availability.resample(freq).sum() / (base_delta / series.index.freq)
 
     dummy = sums.rename('dummy').copy()
     dummy.loc[:] = 0
 
-    fig, ax = subplots()
-    fig.set_size_inches(w=29.7 / 2.54, h=21. / 2.54)
+    height_ratios = [1, 10]
+
+    fig, (ax1, ax) = subplots(2, gridspec_kw=dict(height_ratios=height_ratios), sharex=True)
 
     ax = dummy.plot(ax=ax, lw=0)
-    ax.bar(index, sums.values, color='b')
+    fig.set_size_inches(w=29.7 / 2.54, h=21. / 2.54)
 
+    ax1.set_ylim(0, 100)
+    ax1.set_ylabel('% Verfügbar')
+    ax1.set_yticks(range(0,110,10), minor=True)
+    ax1.grid(axis='y', which='minor', color='lightgrey', linestyle=':', linewidth=0.5)  # , zorder=-10000000)
+    ax1 = dummy.plot(ax=ax1, lw=0)
+    # ax1.scatter(x=index, y=avail.values * 100, color='grey', clip_on=False, marker='_')
+    ax1.bar(x=index, height=avail.values*100, color='grey')
+    ax1.set_axisbelow(True)
+
+    ax.bar(x=index, height=sums.values, color='k')
     ax.set_ylabel('Niederschlag (mm/{})'.format(freq_long))
     ax.set_xlabel('Zeit')
     fig.tight_layout()
+    fig.subplots_adjust(hspace=0)
+    # fig.show()
     fig.savefig(fn)
 
 
