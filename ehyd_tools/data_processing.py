@@ -147,7 +147,7 @@ def statistics(series, availability, availability_cut=0.2):
     sums[avail < availability_cut] = NaN
 
     stats = dict()
-    stats['max'] = (sums.max(), sums.idxmax(), avail.loc[sums.idxmax()])
-    stats['min'] = (sums.min(), sums.idxmin(), avail.loc[sums.idxmin()])
+    stats['maximum'] = (sums.max(), sums.idxmax(), avail.loc[sums.idxmax()])
+    stats['minimum'] = (sums.min(), sums.idxmin(), avail.loc[sums.idxmin()])
     stats['mean'] = (sums.mean(), avail.mean())
     return stats

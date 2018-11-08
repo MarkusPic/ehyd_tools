@@ -125,8 +125,8 @@ def execute_tool():
                 'The maximum is {rain} and was in the year {date} (with {avail} Data available).\n'
                 'The minimum is {rain} and was in the year {date} (with {avail} Data available).\n'
                 'The mean is {rain} (with {avail} Data available in average).'
-                ''.format(rain=rain_fmt, date=date_fmt, avail=avail_fmt).format(*stats['max'],
-                                                                                *stats['min'],
+                ''.format(rain=rain_fmt, date=date_fmt, avail=avail_fmt).format(*stats['maximum'],
+                                                                                *stats['minimum'],
                                                                                 *stats['mean'])
             )
             print('The statistics was written in the file "{}".'.format(f.name))
