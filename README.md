@@ -176,35 +176,28 @@ After the command above these two files will be created:
 > ehyd_100180_meta.txt
 
 ```
-Messstelle:                ;Tschagguns
-HZB-Nummer:                ;100180
-HD-Nummer:                 ;HD8000018
-DBMS-Nummer:               ;8000018
-Sachgebiet:                ;NLV
-Dienststelle:              ;HD-Vorarlberg
-Messstellenbetreiber:      ;Hydrographischer Dienst
+Messstelle:                Tschagguns
+HZB-Nummer:                100180
+Errichtet:                 1921
+
+Sachgebiet:                NLV
+Dienststelle:              HD-Vorarlberg
+Messstellenbetreiber:      Hydrographischer Dienst
+
 Höhe:
- gültig seit:              ;Höhe [m ü.A.]:
-  01.08.1921               ;681
+ gültig seit:              Höhe [m ü.A.]:
+  01.08.1921               681
+
 Geographische Koordinaten (Referenzellipsoid: Bessel 1841):
- gültig seit:              ;Länge (Grad,Min,Sek):    ;Breite  (Grad,Min,Sek):
-  01.08.1921               ;09 54 57                 ;47 04 03
-Zugeordnete Messcodes:
- gültig seit: ;gültig bis:  ;Messcode:                           ;Entstehungsart:
-  01.01.1953;   30.03.2004;  Nh/Schwimmer (Heber);                digitalisiert
-  30.03.2004;              ; Nh/elekt.Waage, 500 cm², beh.;       Datensammler -> DFÜ
-Ursprungszeitreihe:        ;Niederschlag,K,,,0,O,Z,0,,,
-Transformation:            ;Summe
-Summenintervall:           ;1 Minute
-Exportzeitreihe:           ;Abgeleitete Intervallzeitreihe
-                           ;Niederschlag,I,Sum,E,12,M,Z,0,,,
-Exportqualität:            ;MAXQUAL (2)
-Exportzeitraum:            ;Beginn der Datenaufzeichnung; bis ;01.01.2016 00:00
-Hinweis:                   ;Der Intervallwert gilt bis zum nächsten Zeitpunkt mit einem Wert oder Lücke
-Hinweis:                   ;ACHTUNG: Aufeinanderfolgende gleiche Werte von 0 und Lücke sind jeweils zu einem längeren Intervall zusammengefasst
-Hinweis:                   ;Werte aus (teilweise) ungeprüften Rohdaten
-Werteformat:               ;3 Nachkommastellen
-Einheit:                   ;mm
+ gültig seit:              Länge (Grad,Min,Sek):    Breite  (Grad,Min,Sek):
+  01.08.1921               09 54 57                 47 04 03
+
+Messgrößen,-art:           seit:     bis:
+  Niederschlag-Ombrometer  1921
+  Niederschlag-Ombrograph  1953
+  Schneehöhe               1921
+  Neuschneehöhe            1921
+  Temperatur               1922
 ```
 
 > ehyd_100180_stats.txt

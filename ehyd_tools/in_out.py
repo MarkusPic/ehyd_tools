@@ -134,13 +134,13 @@ ehyd_stations = {100180: 'Tschagguns',
                  120022: 'Hall in Tirol'}
 
 
-def _get_file(id):
+def _get_file(id_):
     """
 
-    :param id:
+    :param id_:
     :return:
     """
-    url = 'https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id={id}&file=2'.format(id=id)
+    url = 'https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id={id}&file=2'.format(id=id_)
     r = requests.get(url, allow_redirects=True)
     c = r.content
     if c != b'':
@@ -173,7 +173,9 @@ def _parse(filepath_or_buffer, series_label='precipitation', index_label='dateti
         elif with_meta:
             meta.append(line)
     if with_meta:
-        meta = ''.join(meta)
+        meta = pd.Series(meta).str.replace('\n', '').str.split(';', expand=True).fillna('').apply(lambda x: x.str.strip())
+        # meta = ''.join(meta)
+
 
     f = csv_file.read().replace(' ', '').replace(',', '.')
     csv_file.close()
@@ -188,13 +190,13 @@ def _parse(filepath_or_buffer, series_label='precipitation', index_label='dateti
         return ts
 
 
-def get_station(id):
+def get_station(id_):
     """
 
-    :param id:
+    :param id_:
     :return:
     """
-    return ehyd_stations[id]
+    return ehyd_stations[id_]
 
 
 def get_all_stations():
@@ -206,11 +208,11 @@ def get_all_stations():
         print(id, ':', location)
 
 
-def get_series(id, with_meta=False):
+def get_series(id_, with_meta=False):
     """
 
-    :param id:
-    :type id: int
+    :param id_:
+    :type id_: int
 
     :param with_meta: whether to return meta data or not
     :type with_meta: bool
@@ -218,10 +220,23 @@ def get_series(id, with_meta=False):
     :return: data or data with the meta-data
     :rtype:  pd.Series | list[pd.Series, str]
     """
-    if id in ehyd_stations:
-        print('You choose the station: "{}" with the id: "{}".'.format(get_station(id), id))
-    return _parse(_get_file(id), with_meta=with_meta)
+    if id_ in ehyd_stations:
+        print('You choose the station: "{}" with the id: "{}".'.format(get_station(id_), id_))
+    return _parse(_get_file(id_), with_meta=with_meta)
 
+
+def get_station_meta(id_):
+    """
+
+    :param id_:
+    :return:
+    """
+    url = 'https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id={id}&file=1'.format(id=id_)
+    r = requests.get(url, allow_redirects=True)
+    c = r.content
+    if c != b'':
+        file = TextIOWrapper(BytesIO(c), encoding='iso8859')
+        return file.read()
 
 # if __name__ == '__main__':
 #     print(pd.Series(ehyd_stations).to_string())

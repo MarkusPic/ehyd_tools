@@ -10,7 +10,7 @@ from pandas import to_datetime, DataFrame, Series
 from os import path
 from .data_processing import data_validation, data_availability, max_10a, check_period, rain_plot
 from .arg_parser import ehyd_parser
-from .in_out import get_series, import_series, export_series, csv_args
+from .in_out import get_series, import_series, export_series, csv_args, get_station_meta
 from .sww_utils import span_table
 
 
@@ -41,15 +41,14 @@ def execute_tool():
         name = 'ehyd_{}'.format(id_number)
 
         if args.meta:
-            series, meta = get_series(id_number, with_meta=args.meta)
+            meta = get_station_meta(id_number)
             meta_fn = '{}_meta.txt'.format(name)
             stats_f = open(meta_fn, 'w+')
             stats_f.write(meta)
             stats_f.close()
             print('Meta-data written in "{}".'.format(meta_fn))
 
-        else:
-            series = get_series(id_number)
+        series = get_series(id_number)
 
     elif args.input is not None:
         fn = args.input
