@@ -1,11 +1,11 @@
 © [Institute of Urban Water Management and Landscape Water Engineering](https://www.tugraz.at), [Graz University of Technology](https://www.tugraz.at/home/) and [Markus Pichler](mailto:markus.pichler@tugraz.at)
 
 # eHYD Tools
-Diverse tools to export and analyse the >10a rain time series from the [https://ehyd.gv.at](https://ehyd.gv.at) platform
+Diverse tools to export and analyse the >10a rain time series from the [ehyd.gv.at](https://ehyd.gv.at) platform
 
 
 If you are interested in a heavy rain analysis like on *Kostra*, take a look at my other python package 
-[https://github.com/MarkusPic/intensity_duration_frequency_analysis](https://github.com/MarkusPic/intensity_duration_frequency_analysis) which is compatible with this package.
+[intensity_duration_frequency_analysis](https://github.com/MarkusPic/intensity_duration_frequency_analysis) which is compatible with this package.
 
 # Install
 
