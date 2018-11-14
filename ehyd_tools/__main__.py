@@ -94,7 +94,7 @@ def execute_tool():
         if availability.empty:
             availability = data_availability(tags)
 
-        gaps = span_table(availability.index, ~availability)
+        gaps = span_table(series.index, ~availability)
         gaps['delta'] = gaps['delta'].dt.total_seconds() / (60 * 60 * 24)
         gaps = gaps.sort_values('delta', ascending=False)
         gaps.columns = ['start', 'end', 'gaps in days']
