@@ -59,6 +59,6 @@ def span_table(index, span_bool, min_span=pd.Timedelta(minutes=1)):
     :return: start-time [start], end-time [end], duration of the gap [delta]
     :rtype: DataFrame[start, end, delta]
     """
-    span_bool[0] = False
-    span_bool[-1] = False
+    # span_bool[0] = False
+    # span_bool[-1] = False
     return time_delta_table(index[~span_bool], timedelta=min_span, monotonic=False)

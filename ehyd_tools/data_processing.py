@@ -7,7 +7,7 @@ __license__ = "MIT"
 __version__ = "1.0.0"
 __maintainer__ = "David Camhy, Markus Pichler"
 
-from pandas import Timedelta, DataFrame, isna
+from pandas import Timedelta, DataFrame, isna, DatetimeIndex, Series
 from numpy import NaN
 from pandas.tseries.offsets import _delta_to_tick as delta_to_freq
 from warnings import warn
@@ -37,9 +37,15 @@ def data_validation(series):
     :return: tags with columns 'nans', 'gaps', ...
     :rtype: pd.DataFrame
     """
-    tags = DataFrame(index=series.index)
-    tags['nans'] = isna(series).astype(int)
-    tags['gaps'] = isna(series.fillna(0).resample('T').sum()).astype(int)
+    ts = series.copy()
+    ts = ts.append(Series(index=[ts.index[0].replace(day=1, month=1, hour=0, minute=0),
+                                 ts.index[-1].replace(day=31, month=12, hour=23, minute=59)],
+                          data=[NaN, NaN])).sort_index()
+
+    tags = DataFrame(index=ts.index)
+    tags['nans'] = isna(ts).astype(int)
+    tags = tags.reindex(tags.asfreq('T').index)
+    tags['gaps'] = isna(ts.fillna(0).reindex(tags.index)).astype(int)
     return tags
 
 
@@ -120,15 +126,16 @@ def rain_plot(series, availability, fn):
     if is_longer(series, years=15):
         freq = 'Y'
         freq_long = 'Jahr'
-        base_delta = year_delta(1)
+        # base_delta = year_delta(1)
     else:
         freq = 'M'
         freq_long = 'Monat'
-        base_delta = year_delta(1) / 12
+        # base_delta = year_delta(1) / 12
 
     sums = series.resample(freq).sum()
     index = series.index.to_series().resample(freq).apply(lambda s: s.min() + abs(s.min() - s.max()) / 2).dt.date.values
-    avail = availability.resample(freq).sum() / (base_delta / series.index.freq)
+    freq_avail = availability.resample(freq)
+    avail = (freq_avail.sum()/ freq_avail.count())[sums.index]
 
     dummy = sums.rename('dummy').copy()
     dummy.loc[:] = 0
