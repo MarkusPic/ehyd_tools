@@ -113,7 +113,9 @@ def execute_tool():
             if availability.empty:
                 availability = data_availability(tags)
 
-            stats = statistics(series, availability)
+            availability_cut = 0.9
+
+            stats = statistics(series, availability, availability_cut=availability_cut)
 
             rain_fmt = '{:0.0f} mm'
             date_fmt = '{:%Y}'
@@ -122,11 +124,13 @@ def execute_tool():
             f.write(
                 'The annual totals of the data series serve as the data basis.\n'
                 'The following statistics were analyzed:\n'
+                'Only years with a availability of {avail_fmt} will be evaluated.\n'
                 '\n'
                 'The maximum is {rain} and was in the year {date} (with {avail} Data available).\n'
                 'The minimum is {rain} and was in the year {date} (with {avail} Data available).\n'
                 'The mean is {rain} (with {avail} Data available in average).'
-                ''.format(rain=rain_fmt, date=date_fmt, avail=avail_fmt).format(*stats['maximum'],
+                ''.format(rain=rain_fmt, date=date_fmt, avail=avail_fmt).format(availability_cut,
+                                                                                *stats['maximum'],
                                                                                 *stats['minimum'],
                                                                                 *stats['mean'])
             )
