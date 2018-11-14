@@ -124,7 +124,7 @@ def execute_tool():
             f.write(
                 'The annual totals of the data series serve as the data basis.\n'
                 'The following statistics were analyzed:\n'
-                'Only years with a availability of {avail_fmt} will be evaluated.\n'
+                'Only years with a availability of {avail} will be evaluated.\n'
                 '\n'
                 'The maximum is {rain} and was in the year {date} (with {avail} Data available).\n'
                 'The minimum is {rain} and was in the year {date} (with {avail} Data available).\n'
