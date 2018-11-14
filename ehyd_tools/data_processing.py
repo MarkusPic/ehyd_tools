@@ -40,7 +40,9 @@ def data_validation(series):
     ts = series.copy()
     ts = ts.append(Series(index=[ts.index[0].replace(day=1, month=1, hour=0, minute=0),
                                  ts.index[-1].replace(day=31, month=12, hour=23, minute=59)],
-                          data=[NaN, NaN])).sort_index()
+                          data=[NaN, NaN]))
+
+    ts = ts[~ts.index.duplicated()].copy().sort_index()
 
     tags = DataFrame(index=ts.index)
     tags['nans'] = isna(ts).astype(int)
