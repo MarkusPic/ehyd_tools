@@ -9,11 +9,22 @@ If you are interested in a heavy rain analysis like on *Kostra*, take a look at 
 
 # Install
 
-See the python packages requirements in the 'requirements.txt'. (those packages will get installed during the installing process)
+The script is written in Python3.
 
 I recommend to use [Anaconda](https://www.anaconda.com/download/) to install python on Windows and the Anaconda-Prompt for the commandline tool.
 
-The script is written in Python3.
+But you can install the plain python from the [website](https://www.python.org/downloads/).
+To use the syntax explained in the usage section below, 
+you have to add the path to your python binary to the environment variables.
+
+To do the latter your have to follow the following tasks (for Windows 10):
+
+1. Open system settings
+2. search for "edit environment variables" (for your account)
+3. edit the "Path" variable
+4. add new path to your python.exe (usually ```C:\\PythonX``` where ```X``` is your installed version number)
+
+See the python packages requirements in the 'requirements.txt'. (those packages will get installed during the installing process)
 
 ## Fresh install
 
