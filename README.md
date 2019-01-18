@@ -22,7 +22,7 @@ This is an option in the installation window as seen below:
 
 ![python_install](example/python_install.png)
 
-See the python packages requirements in the 'requirements.txt'. (those packages will get installed during the installing process)
+Packages required for this program will be installed during the installation process and can be seen in the 'requirements.txt' file.
 
 ## Fresh install
 
