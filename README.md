@@ -13,16 +13,14 @@ The script is written in Python3.
 
 I recommend to use [Anaconda](https://www.anaconda.com/download/) to install python on Windows and the Anaconda-Prompt for the commandline tool.
 
-But you can install the plain python from the [website](https://www.python.org/downloads/).
+Alternatively, you can install the original python from the [website](https://www.python.org/downloads/).
 To use the syntax explained in the usage section below, 
-you have to add the path to your python binary to the environment variables.
+you have to add the path to your python binary to the environment variables. 
+This is an option in the installation window as seen below:
 
-To do the latter your have to follow the following tasks (for Windows 10):
+- [x] Add Python 3.7 to PATH
 
-1. Open system settings
-2. search for "edit environment variables" (for your account)
-3. edit the "Path" variable
-4. add new path to your python.exe (usually ```C:\\PythonX``` where ```X``` is your installed version number)
+![python_install](example/python_install.png)
 
 See the python packages requirements in the 'requirements.txt'. (those packages will get installed during the installing process)
 
