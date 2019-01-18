@@ -11,6 +11,8 @@ If you are interested in a heavy rain analysis like on *Kostra*, take a look at 
 
 The script is written in Python3.
 
+## Windows
+
 I recommend to use [Anaconda](https://www.anaconda.com/download/) to install python on Windows and the Anaconda-Prompt for the commandline tool.
 
 Alternatively, you can install the original python from the [website](https://www.python.org/downloads/).
@@ -22,7 +24,13 @@ This is an option in the installation window as seen below:
 
 ![python_install](example/python_install.png)
 
-Packages required for this program will be installed during the installation process and can be seen in the 'requirements.txt' file.
+## Linux/Unix
+
+Python is pre-installed on most operating systems.
+
+## python Packages
+
+Packages required for this program will be installed with pip during the installation process and can be seen in the 'requirements.txt' file.
 
 ## Fresh install
 
@@ -43,7 +51,7 @@ pip install https://codeload.github.com/MarkusPic/ehyd_tools/zip/master --upgrad
 
 # Usage
 
-To start the script use following commands in the terminal/Anaconda Prompt
+To start the script use following commands in the terminal/Prompt
 
 Windows:
 ```python -m ehyd_tools```
