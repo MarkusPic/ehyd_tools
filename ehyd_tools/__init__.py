@@ -1,1 +1,1 @@
-from .__main__ import execute_tool
+from ._cl_script import execute_tool

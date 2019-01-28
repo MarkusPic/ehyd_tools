@@ -18,8 +18,8 @@ setup(
         # If any package contains *.txt or *.rst files, include them:
         '': ['*.json', '*.', '*.png', '*.pdf', '*.csv', '*.tex','*.xslx'],
     },
-    url='',
-    license='',
+    url='https://github.com/MarkusPic/ehyd_tools',
+    license='MIT',
     author='pichler',
     author_email='markus.pichler@tugraz.at',
     description='Diverse tools to export and analyse the >10a rain series from the ehyd.gv.at platform',
