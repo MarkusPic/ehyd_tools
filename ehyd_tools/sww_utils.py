@@ -15,11 +15,13 @@ def time_delta_table(date_time_index, timedelta=pd.Timedelta(minutes=1), monoton
     :type date_time_index: pd.DatetimeIndex
 
     :param timedelta: at witch delta a gap is defined
-    :type timedelta: Timedelta
+    :type timedelta: pd.Timedelta
 
-    :param bool monotonic: whether to look for time gaps or time setbacks
+    :param monotonic: whether to look for time gaps or time setbacks
+    :type monotonic: bool
+
     :return: start-time [start], end-time [end], duration of the gap [delta]
-    :rtype: DataFrame[start, end, delta]
+    :rtype: pd.DataFrame[start, end, delta]
     """
     if isinstance(date_time_index, pd.DatetimeIndex) and date_time_index.tzinfo is not None:
         temp = pd.Series(data=date_time_index, index=date_time_index)
@@ -52,9 +54,14 @@ def span_table(index, span_bool, min_span=pd.Timedelta(minutes=1)):
     """
     time span with consist "True" with a minimum span of <min_span> are the resulting events
 
+    :param index: index of the bool series
     :type index: DatetimeIndex
-    :param Series[bool]| list[bool] span_bool: len(span_bool)=len(index); "True"=Event
-    :param Timedelta min_span: minimum time range of an event
+
+    :param span_bool: len(span_bool)=len(index); "True"=Event
+    :type span_bool: Series[bool] | list[bool]
+
+    :param min_span: minimum time range of an event
+    :type min_span: Timedelta
 
     :return: start-time [start], end-time [end], duration of the gap [delta]
     :rtype: DataFrame[start, end, delta]
