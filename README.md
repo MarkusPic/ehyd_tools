@@ -1,11 +1,9 @@
 © [Institute of Urban Water Management and Landscape Water Engineering](https://www.tugraz.at), [Graz University of Technology](https://www.tugraz.at/home/) and [Markus Pichler](mailto:markus.pichler@tugraz.at)
 
 # eHYD Tools
-Diverse tools to export and analyse the >10a rain time series from the [ehyd.gv.at](https://ehyd.gv.at) platform
+Various tools for exporting and analyzing >10a rain time-series from the [ehyd.gv.at](https://ehyd.gv.at) platform of the Austian government.
 
-
-If you are interested in a heavy rain analysis like on *Kostra*, take a look at my other python package 
-[intensity_duration_frequency_analysis](https://github.com/MarkusPic/intensity_duration_frequency_analysis) which is compatible with this package.
+If you are interested in a statistical heavy rain analysis like on *(Ö)Kostra*, take a look at my other python package [intensity_duration_frequency_analysis](https://github.com/MarkusPic/intensity_duration_frequency_analysis) which is compatible with this package.
 
 # Install
 
@@ -28,7 +26,7 @@ This is an option in the installation window as seen below:
 
 Python is pre-installed on most operating systems.
 
-## python Packages
+## Required python packages
 
 Packages required for this program will be installed with pip during the installation process and can be seen in the 'requirements.txt' file.
 
@@ -36,18 +34,13 @@ Packages required for this program will be installed with pip during the install
 
 
 ```
-pip install https://codeload.github.com/MarkusPic/ehyd_tools/zip/master
+pip install ehyd_tools
 ```
 
-To install the package only for the local user account, add ```--user``` to the install command.
+Add the following tags to the command for special options:
 
-## Update package
-
-To update the package, add ```--upgrade``` to the install command.
-
-```
-pip install https://codeload.github.com/MarkusPic/ehyd_tools/zip/master --upgrade
-```
+- ```--user```: To install the package only for the local user account
+- ```--upgrade```: To update the package
 
 # Usage
 
@@ -61,32 +54,31 @@ Unix-Like:
 
 ## Commandline tool 
 
-> ```ehyd_tools -h```
+```ehyd_tools -h```
 
-```
-usage: ehyd_tools [-h] [-id ID] [--input INPUT] [--add_gaps] [--to_csv]
-                  [--to_parquet] [--max10a] [--start START] [--end END]
-                  [--plot] [--statistics] [--meta] [--unix]
+> ```
+> usage: ehyd_tools [-h] [-id ID] [--input INPUT] [--add_gaps] [--to_csv]
+>                   [--to_parquet] [--max10a] [--start START] [--end END]
+>                   [--plot] [--statistics] [--meta] [--unix]
+> 
+> optional arguments:
+>   -h, --help     show this help message and exit
+>   -id ID         the id number for the station from the ehyd.gv.at platform
+>   --input INPUT  path to the rain input file including the filename
+>   --add_gaps     get the gaps in the series as a csv table
+>   --to_csv       save the data to the current directory
+>   --to_parquet   save the data to the current directory
+>   --max10a       consider only 10 years with the most availability
+>   --start START  custom start time, Format="YYYY-MM-DD"
+>   --end END      custom end time, Format="YYYY-MM-DD"
+>   --plot         plot the data
+>   --statistics   creates a txt file with basic statistics (sum, max & min)
+>   --meta         add the txt file with the meta data of the ehyd data
+>   --unix         export the csv files with a "," as separator and a "." as
+>                  decimal sign.
+> ```
 
-optional arguments:
-  -h, --help     show this help message and exit
-  -id ID         the id number for the station from the ehyd.gv.at platform
-  --input INPUT  path to the rain input file including the filename
-  --add_gaps     get the gaps in the series as a csv table
-  --to_csv       save the data to the current directory
-  --to_parquet   save the data to the current directory
-  --max10a       consider only 10 years with the most availability
-  --start START  custom start time, Format="YYYY-MM-DD"
-  --end END      custom end time, Format="YYYY-MM-DD"
-  --plot         plot the data
-  --statistics   creates a txt file with basic statistics (sum, max & min)
-  --meta         add the txt file with the meta data of the ehyd data
-  --unix         export the csv files with a "," as separator and a "." as
-                 decimal sign.
-```
-
-## Example
-
+## Examples
 
 ### Example 1
 

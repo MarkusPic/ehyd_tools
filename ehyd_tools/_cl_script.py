@@ -15,6 +15,7 @@ from .sww_utils import span_table
 
 
 def execute_tool():
+    # parse command line arguments
     args = ehyd_parser()
 
     # __________________________________________________________________________________________________________________
