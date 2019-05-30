@@ -34,7 +34,7 @@ Packages required for this program will be installed with pip during the install
 
 
 ```
-pip install ehyd_tools
+pip install ehyd-tools
 ```
 
 Add the following tags to the command for special options:

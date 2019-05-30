@@ -14,8 +14,8 @@ with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 setup(
-    name='ehyd_tools',
-    version='0.1dev',
+    name='ehyd-tools',
+    version='0.1dev0',
     packages=['ehyd_tools'],
     url='https://github.com/MarkusPic/ehyd_tools',
     license='MIT',
