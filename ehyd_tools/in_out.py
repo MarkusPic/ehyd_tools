@@ -100,7 +100,7 @@ def import_series(filename, series_label='precipitation', index_label='datetime'
             ts.index = pd.to_datetime(ts.index)
             ts.index.name = index_label
             return ts
-        except ParserError:
+        except (ParserError, UnicodeDecodeError):
             return _parse(filename)
     elif filename.endswith('parquet'):
         return pd.read_parquet(filename).iloc[:, 0].asfreq('T').copy()
@@ -333,9 +333,9 @@ def get_station_meta(id_):
 
 
 # if __name__ == '__main__':
-    # print(pd.Series(ehyd_stations).to_string())
-    # import time
-    # NOW = time.time()
-    # print('{:0.0f}'.format(time.time() - NOW))
-    # print(get_series(105445))
-    # print('{:0.0f}'.format(time.time() - NOW))
+# print(pd.Series(ehyd_stations).to_string())
+# import time
+# NOW = time.time()
+# print('{:0.0f}'.format(time.time() - NOW))
+# print(get_series(105445))
+# print('{:0.0f}'.format(time.time() - NOW))
