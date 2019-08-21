@@ -1,3 +1,5 @@
+from pandas.tseries.frequencies import to_offset
+
 __author__ = "David Camhy, Markus Pichler"
 __copyright__ = "Copyright 2018, University of Technology Graz"
 __credits__ = ["David Camhy", "Markus Pichler"]
@@ -69,3 +71,40 @@ def span_table(index, span_bool, min_span=pd.Timedelta(minutes=1)):
     span_bool[index[0]] = False
     span_bool[index[-1]] = False
     return time_delta_table(index[~span_bool[index]], timedelta=min_span, monotonic=False)
+
+
+def guess_freq(date_time_index, default=pd.Timedelta(minutes=1)):
+    """
+    guess the frequency by evaluating the most often frequency
+
+    Args:
+        date_time_index (pandas.DatetimeIndex): index of a time-series
+        default (pandas.Timedelta):
+
+    Returns:
+        DateOffset: frequency of the date-time-index
+    """
+    freq = date_time_index.freq
+    if pd.notnull(freq):
+        return to_offset(freq)
+
+    if not len(date_time_index) <= 3:
+        freq = pd.infer_freq(date_time_index)  # 'T'
+
+        if pd.notnull(freq):
+            return to_offset(freq)
+
+        delta_series = date_time_index.to_series().diff(periods=1).fillna(method='backfill')
+        counts = delta_series.value_counts()
+        counts.drop(pd.Timedelta(minutes=0), errors='ignore')
+
+        if counts.empty:
+            delta = default
+        else:
+            delta = counts.index[0]
+            if delta == pd.Timedelta(minutes=0):
+                delta = default
+    else:
+        delta = default
+
+    return to_offset(delta)

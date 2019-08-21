@@ -13,7 +13,7 @@ from os import path
 import pandas as pd
 from pandas.errors import ParserError
 
-from idf_analysis.sww_utils import guess_freq
+from .sww_utils import guess_freq
 
 
 def csv_args(unix=False):
