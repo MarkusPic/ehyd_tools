@@ -1,5 +1,3 @@
-from pandas.tseries.frequencies import to_offset
-
 __author__ = "David Camhy, Markus Pichler"
 __copyright__ = "Copyright 2018, University of Technology Graz"
 __credits__ = ["David Camhy", "Markus Pichler"]
@@ -7,70 +5,54 @@ __license__ = "MIT"
 __version__ = "1.0.0"
 __maintainer__ = "David Camhy, Markus Pichler"
 
+from pandas.tseries.frequencies import to_offset
 import pandas as pd
 
+START = 'start'
+END = 'end'
 
-def time_delta_table(date_time_index, timedelta=pd.Timedelta(minutes=1), monotonic=False):
-    """
-    get the timedelta of data gaps in a dataframe
 
-    :type date_time_index: pd.DatetimeIndex
-
-    :param timedelta: at witch delta a gap is defined
-    :type timedelta: pd.Timedelta
-
-    :param monotonic: whether to look for time gaps or time setbacks
-    :type monotonic: bool
-
-    :return: start-time [start], end-time [end], duration of the gap [delta]
-    :rtype: pd.DataFrame[start, end, delta]
-    """
+def _index_series(date_time_index):
+    """create a time series from a datetime index without loosing the timezone info"""
     if isinstance(date_time_index, pd.DatetimeIndex) and date_time_index.tzinfo is not None:
-        temp = pd.Series(data=date_time_index, index=date_time_index)
+        return pd.Series(data=date_time_index, index=date_time_index)
     else:
-        temp = date_time_index.to_series()
-
-    if monotonic:
-        timedelta = pd.Timedelta(minutes=0)
-        start = temp[temp.diff(periods=-1) > -timedelta]
-        end = temp[temp.diff() < timedelta]
-
-    else:
-        start = temp[temp.diff(periods=-1) < -timedelta]
-        end = temp[temp.diff() > timedelta]
-
-    check = pd.concat([start.reset_index(drop=True), end.reset_index(drop=True)], axis=1, ignore_index=True)
-
-    if monotonic:
-        check.columns = ['time_of_reset', 'reset_to']
-        check['delta'] = check['time_of_reset'] - check['reset_to']
-
-    else:
-        check.columns = ['start', 'end']
-        check['delta'] = check['end'] - check['start']
-
-    return check
+        return date_time_index.to_series()
 
 
-def span_table(index, span_bool, min_span=pd.Timedelta(minutes=1)):
+def span_table(span_bool, min_span=None):
     """
     time span with consist "True" with a minimum span of <min_span> are the resulting events
 
-    :param index: index of the bool series
-    :type index: DatetimeIndex
+    Args:
+        span_bool (pandas.Series[bool]): "True"=Event
+        min_span (pandas.Timedelta): minimum time range of an event (default=freq of index)
 
-    :param span_bool: len(span_bool)=len(index); "True"=Event
-    :type span_bool: Series[bool] | list[bool]
-
-    :param min_span: minimum time range of an event
-    :type min_span: Timedelta
-
-    :return: start-time [start], end-time [end], duration of the gap [delta]
-    :rtype: DataFrame[start, end, delta]
+    Returns:
+        pandas.DataFrame: with the columns:
+            'start' = start-time,
+            'end' = end-time,
     """
-    span_bool[index[0]] = False
-    span_bool[index[-1]] = False
-    return time_delta_table(index[~span_bool[index]], timedelta=min_span, monotonic=False)
+    index = span_bool.index
+
+    # minimum duration which is considered as one event
+    if min_span is None:
+        min_span = guess_freq(index).delta  # TODO: Will not work on monthly or yearly data steps
+
+    # pandas.Series with DatetimeIndex as index AND data
+    temp = _index_series(index[span_bool])
+
+    # first value in diff will default to NaN
+    # fill value is set to double the value of the greater than operation = fixed true value
+    start_bool = temp.diff().gt(min_span, fill_value=min_span * 2)
+    end_bool = start_bool.shift(-1).fillna(True)
+
+    events = pd.DataFrame()
+
+    events[START] = temp[start_bool].index
+    events[END] = temp[end_bool].index
+
+    return events
 
 
 def guess_freq(date_time_index, default=pd.Timedelta(minutes=1)):

@@ -7,6 +7,10 @@ __email__ = "markus.pichler@tugraz.at"
 __version__ = "0.1"
 __license__ = "MIT"
 
-from ehyd_tools import execute_tool
+"""
+execute the command line tool
+"""
 
-execute_tool()
+from ehyd_tools.cl_tool import execute_cl_tool
+
+execute_cl_tool()

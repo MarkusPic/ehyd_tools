@@ -5,6 +5,10 @@ __email__ = "markus.pichler@tugraz.at"
 __version__ = "0.1"
 __license__ = "MIT"
 
-from ._cl_script import execute_tool
+"""
+execute the command line tool
+"""
 
-execute_tool()
+from .cl_tool import execute_cl_tool
+
+execute_cl_tool()

@@ -8,7 +8,7 @@ __license__ = "MIT"
 import argparse
 
 
-def ehyd_parser():
+def ehyd_arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-id',
                         help='the id number for the station from the ehyd.gv.at platform',

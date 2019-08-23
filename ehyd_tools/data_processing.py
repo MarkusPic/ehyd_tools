@@ -76,34 +76,37 @@ def max_10a(availability):
     window = year_delta(years=10)
     avail_sum = availability.rolling(window).sum()
 
-    end = avail_sum.idxmax()
+    end = avail_sum[::-1].idxmax()
     start = end - DateOffset(years=10)
     return start, end
 
 
 def check_period(series):
     """
-    calculate the period of the series
+    check if the period of the series is at least 10 years long
+
+    Warnings:
+        UserWarning - if the series is shorter
 
     Args:
         series (pandas.Series): time-series
     """
-    if not is_longer(series, years=9.99):
+    if not is_longer(series, years=10):
         warn('Series not longer than 10 years!')
 
 
 def is_longer(series, years):
     """
-    calculate the period of the series
+    check if the period of the series is at least x years long
 
     Args:
         series (pandas.Series): time-series
-        years (float): number of years to compare with
+        years (int): number of years to compare with
 
     Returns:
         bool: whether the series is longer
     """
-    return series.index[0] + DateOffset(years=years) < series.index[-1]
+    return series.index[0] + DateOffset(years=years) <= series.index[-1]
     # return (series.index[-1] - series.index[0]) > year_delta(years=years)
 
 
@@ -158,7 +161,7 @@ def rain_plot(series, availability, fn):
     fig.savefig(fn)
 
 
-def statistics(series, availability, availability_cut=0.2):
+def create_statistics(series, availability, availability_cut=0.2):
     """
     creates basic (maximum, minimum and mean) yearly statistics of the time-series
 
@@ -173,9 +176,10 @@ def statistics(series, availability, availability_cut=0.2):
     sums = series.resample('Y').sum()
     avail_sum = availability.resample('Y').sum()
 
-    with avail_sum.index as i:
-        avail_full = (i - (i - DateOffset(years=1))) / series.index.freq
-
+    base_freq = series.index.freq
+    yearly_index = avail_sum.index
+    delta_per_year = yearly_index - (yearly_index - DateOffset(years=1))
+    avail_full = delta_per_year / base_freq
     avail = avail_sum / avail_full
     sums[avail < availability_cut] = NaN
 
