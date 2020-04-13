@@ -180,8 +180,14 @@ def create_statistics(series, availability, availability_cut=0.2):
     yearly_index = avail_sum.index
     delta_per_year = yearly_index - (yearly_index - DateOffset(years=1))
     avail_full = delta_per_year / base_freq
-    avail = avail_sum / avail_full
-    sums[avail < availability_cut] = NaN
+    avail = avail_sum / avail_full  # type: Series
+    if (avail < availability_cut).all():
+        print('ATTENTION: only very small data availability! The statistic may be not very meaningful.')
+        if (avail < 0.1).all():
+            return dict()
+        sums[avail < 0.1] = NaN
+    else:
+        sums[avail < availability_cut] = NaN
 
     stats = dict()
     stats['maximum'] = (sums.max(), sums.idxmax(), avail.loc[sums.idxmax()])
