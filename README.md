@@ -26,6 +26,12 @@ This is an option in the installation window as seen below:
 
 ![python_install](example/python_install.png)
 
+### Commandline usage in windows
+
+The following commands show the usage on Linux/Unix systems. 
+To use these features on Windows you must add ```python -m``` before each command. 
+This way you can use Python scripts from the commandline.
+
 ## Linux/Unix
 
 Python is pre-installed on most operating systems.
@@ -43,22 +49,22 @@ pip install ehyd-tools
 
 Add the following tags to the command for special options:
 
-- ```--user```: To install the package only for the local user account
+- ```--user```: To install the package only for the local user account (no admin rights needed)
 - ```--upgrade```: To update the package
 
 # Usage
 
 To start the script use following commands in the terminal/Prompt
 
-Windows:
-```python -m ehyd_tools```
-
-Unix-Like:
 ```ehyd_tools```
 
 ## Commandline tool 
 
-```ehyd_tools -h```
+With the `-h` (help) flag you can see the complete functionality of the tool.
+
+```
+ehyd_tools -h
+```
 
 > ```
 > usage: ehyd_tools [-h] [-id ID] [--input INPUT] [--add_gaps] [--to_csv]
