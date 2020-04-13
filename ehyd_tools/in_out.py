@@ -61,7 +61,7 @@ def export_series(series, filename, export_path=None, save_as='csv', unix=False)
     Args:
         series (pandas.Series):
         filename (str): name of the file
-        export_path (str): path where file will be stored
+        export_path (str): path where the file will be stored
         save_as (str): export format
         unix (bool): whether to use "," or ";" for the csv
 

@@ -6,6 +6,7 @@ from pandas import DataFrame
 from zipfile import ZipFile, is_zipfile
 from numpy import NaN
 import pandas as pd
+from tqdm import tqdm
 
 
 def get_all_ehyd_stations_online():
@@ -27,19 +28,28 @@ def get_all_ehyd_stations_online():
                 # print(i, ':', filename)
                 if filename.startswith('N-Minutensummen'):
                     # print('check')
-                    return i
+                    # print(i)
+                    # return i
+                    with open('ids.txt', 'a+') as f:
+                        f.write(str(i) + '\n')
+
                     # print(i)
                 # z = BytesIO(c).read()
                 # print('_'*100, '\n', 'id =',i, '\n', c, '\n', z)
 
     id_range = range(100000, 130000)
+    # id_range = [1,2,3,4,5,100180, 100370, 100446, 100479, 100776, 101303, 101816, 102772]
 
-    if 1:
+    if 0:
         b = db.from_sequence(id_range, npartitions=8).map(t)
-        b.compute(scheduler='processes')
+        bb = b.compute(scheduler='processes')
     else:
-        for i in id_range:
+        for i in tqdm(id_range):
             t(i)
+
+
+if __name__ == '__main__':
+    get_all_ehyd_stations_online()
 
 
 def _parse_time(x):
