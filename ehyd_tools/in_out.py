@@ -61,7 +61,7 @@ def export_series(series, filename, export_path=None, save_as='csv', unix=False)
     Args:
         series (pandas.Series):
         filename (str): name of the file
-        export_path (str): path where the file will be stored
+        export_path (str): path where the file will be stored.
         save_as (str): export format
         unix (bool): whether to use "," or ";" for the csv
 
@@ -70,10 +70,10 @@ def export_series(series, filename, export_path=None, save_as='csv', unix=False)
     """
     fn = path.join(check_path(export_path), '{}.{}'.format(filename, save_as))
 
-    if save_as is 'csv':
+    if save_as == 'csv':
         series.to_csv(fn, **csv_args(unix))
 
-    elif save_as is 'parquet':
+    elif save_as == 'parquet':
         series.to_frame().to_parquet(fn)
 
     else:
@@ -96,8 +96,9 @@ def import_series(filename, series_label='precipitation', index_label='datetime'
     """
     if filename.endswith('csv'):
         try:
-            ts = pd.read_csv(filename, index_col=0, header=None, squeeze=True, names=[series_label], **csv_args(unix))
+            ts = pd.read_csv(filename, index_col=0, header=0, squeeze=True, **csv_args(unix))
             ts.index = pd.to_datetime(ts.index)
+            ts.name = series_label
             ts.index.name = index_label
             return ts
         except (ParserError, UnicodeDecodeError):

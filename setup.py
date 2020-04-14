@@ -15,7 +15,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='ehyd-tools',
-    version='0.1dev6',
+    version='0.1dev7',
     packages=['ehyd_tools'],
     url='https://github.com/MarkusPic/ehyd_tools',
     license='MIT',
