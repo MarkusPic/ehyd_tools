@@ -1,6 +1,0 @@
-The annual totals of the data series serve as the data basis.
-The following statistics were analyzed:
-
-The maximum is 1740 mm and was in the year 1999 (with 100% Data available).
-The minimum is 462 mm and was in the year 1959 (with 45% Data available).
-The mean is 1030 mm (with 77% Data available in average).

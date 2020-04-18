@@ -1,0 +1,23 @@
+Messstelle:                Graz-Andritz
+HZB-Nummer:                112086
+Errichtet:                 1946
+Sachgebiet:                NLV
+Dienststelle:              HD-Steiermark
+Messstellenbetreiber:      Hydrographischer Dienst
+
+Höhe:
+ gültig seit:              Höhe [m ü.A.]:
+  01.01.1946               360
+  01.01.2011               361
+
+Geographische Koordinaten (Referenzellipsoid: Bessel 1841):
+ gültig seit:              Länge (Grad,Min,Sek):    Breite  (Grad,Min,Sek):
+  01.01.1946               15 24 46                 47 06 05
+  01.01.2011               15 24 57                 47 06 35
+
+Messgrößen,-art:           seit:     bis:
+  Niederschlag-Ombrometer  1946
+  Niederschlag-Ombrograph  2007
+  Schneehöhe               1946
+  Neuschneehöhe            1946
+  Temperatur               1947

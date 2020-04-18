@@ -8,7 +8,8 @@ __license__ = "MIT"
 from pandas import to_datetime, DataFrame, Series
 from os import path
 from webbrowser import open as show_file
-from .data_processing import data_validation, data_availability, max_10a, check_period, rain_plot, create_statistics
+from .data_processing import (data_validation, data_availability, max_10a, check_period, rain_plot, create_statistics,
+                              start_end_date, )
 from .arg_parser import ehyd_arg_parser
 from .in_out import get_series, import_series, export_series, csv_args, get_station_meta
 from .sww_utils import span_table
@@ -19,6 +20,15 @@ def convert_time(time=None, helper=''):
         return to_datetime(time)
     except ValueError():
         raise UserWarning('Wrong time format for the {} time. Use the format="YYYY-MM-DD"'.format(helper))
+
+
+def output_filename(fn):
+    if '/' in fn or '\\' in fn:
+        message = 'in the file "{}"'
+    else:
+        message = 'in the current working directory as "{}"'
+
+    return message.format(fn)
 
 
 def execute_cl_tool():
@@ -35,6 +45,17 @@ def execute_cl_tool():
 
 
 def get_data(id_=None, input_=None, meta=False, unix=False):
+    """
+
+    Args:
+        id_ (str | int): ID-number of the series to be downloaded
+        input_ (str): filename of the series to be imported
+        meta (bool): if the meta data should be saved as txt file
+        unix (bool): if the <input_> file is a csv-file: True={sep=',', decimal='.'} False={sep=';', decimal=','}
+
+    Returns:
+        (pandas.Series, str): precipitation series and the label of the series
+    """
     if id_ is not None:
         id_number = id_
         name = 'ehyd_{}'.format(id_number)
@@ -42,25 +63,22 @@ def get_data(id_=None, input_=None, meta=False, unix=False):
         if meta:
             with open('{}_meta.txt'.format(name), 'w') as f:
                 f.write(get_station_meta(id_number))
-                print('Meta-data written in "{}".'.format(f.name))
+                print('The meta-data are saved in {}.'.format(output_filename(f.name)))
 
         series = get_series(id_number)
 
     # __________________________________________________________________________________________________________________
     elif input_ is not None:
         fn = input_
-        series = import_series(fn, unix)
-        print('Series "{}" was imported.'.format(fn))
+        series = import_series(fn, unix=unix)
+        print('The data in "{}" were imported and are used as the precipitation time-series.'.format(fn))
         name = path.basename(fn).split('.')[0]
-        print('The filename basis of the output files is "{}".'.format(name))
 
     # __________________________________________________________________________________________________________________
     else:
         raise UserWarning('No data selected. Use either a input file or a id. See help menu.')
 
-    print('The original time series has the start at "{:%Y-%m-%d}"'
-          ' and the end at "{:%Y-%m-%d}".'.format(*series.index[[0, -1]].tolist())
-          )
+    print('The selected time-series starts at "{:%Y-%m-%d}" and ends at "{:%Y-%m-%d}".'.format(*start_end_date(series)))
 
     return series, name
 
@@ -79,13 +97,12 @@ def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=F
     series, name = get_data(id_, input_, meta, unix)
 
     # __________________________________________________________________________________________________________________
-    if start is not None:
-        series = series[start:].copy()
-        check_period(series)
+    series = series[start:end].copy()
+    check_period(series)
 
-    if end is not None:
-        series = series[:end].copy()
-        check_period(series)
+    # ______________________________________________________
+    tags = None
+    availability = None
 
     # __________________________________________________________________________________________________________________
     if max10a:
@@ -94,19 +111,16 @@ def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=F
         start, end = max_10a(availability)
         series = series.loc[start:end].copy()
         check_period(series)
-    else:
-        tags = DataFrame()
-        availability = Series()
 
-    print('Data was clipped to start="{:%Y-%m-%d}" and end="{:%Y-%m-%d}".'
-          ''.format(*series.index[[0, -1]].tolist())
-          )
+    if start or end or max10a:
+        print('The time-series is clipped to '
+              'start at "{:%Y-%m-%d}" and end at "{:%Y-%m-%d}".'.format(*start_end_date(series)))
 
     # __________________________________________________________________________________________________________________
     if add_gaps:
-        if tags.empty:
+        if tags is None:
             tags = data_validation(series)
-        if availability.empty:
+        if availability is None:
             availability = data_availability(tags)
 
         gaps = span_table(~availability)
@@ -117,21 +131,21 @@ def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=F
         gaps_fn = '{}_gaps.csv'.format(name)
 
         gaps.to_csv(gaps_fn, float_format='%0.3f', **csv_args(unix))
-        print('The gaps table was written in "{}".'.format(gaps_fn))
+
+        print('The gaps table is saved {}.'.format(output_filename(gaps_fn)))
 
     # __________________________________________________________________________________________________________________
     if statistics:
+        if tags is None:
+            tags = data_validation(series)
+        if availability is None:
+            availability = data_availability(tags)
+
+        availability_cut = 0.9
+
+        stats = create_statistics(series, availability, availability_cut=availability_cut)
+
         with open('{}_stats.txt'.format(name), 'w+') as f:
-
-            if tags.empty:
-                tags = data_validation(series)
-            if availability.empty:
-                availability = data_availability(tags)
-
-            availability_cut = 0.9
-
-            stats = create_statistics(series, availability, availability_cut=availability_cut)
-
             rain_fmt = '{:0.0f} mm'
             date_fmt = '{:%Y}'
             avail_fmt = '{:0.0%}'
@@ -149,29 +163,29 @@ def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=F
                                                                                 *stats['minimum'],
                                                                                 *stats['mean'])
             )
-            print('The statistics was written in the file "{}".'.format(f.name))
+            print('The statistics are saved {}.'.format(output_filename(f.name)))
 
     # __________________________________________________________________________________________________________________
+    save_formats = list()
     if to_csv:
-        out_fn = export_series(series, filename=name, save_as='csv', unix=unix)
-        print('The time series was saved in the file "{}".'.format(out_fn))
-
-    # __________________________________________________________________________________________________________________
+        save_formats.append('csv')
     if to_parquet:
-        out_fn = export_series(series, filename=name, save_as='parquet')
-        print('The time series was saved in the file "{}".'.format(out_fn))
+        save_formats.append('parquet')
+
+    for save_as in save_formats:
+        out_fn = export_series(series, filename=name, save_as=save_as, unix=unix)
+        print('The time-series is saved {}.'.format(output_filename(out_fn)))
 
     # __________________________________________________________________________________________________________________
     if plot:
-
-        if tags.empty:
+        if tags is None:
             tags = data_validation(series)
-        if availability.empty:
+        if availability is None:
             availability = data_availability(tags)
 
         plot_fn = '{}_plot.png'.format(name)
         rain_plot(series, availability, plot_fn)
-        print('The plot was saved in the file "{}".'.format(plot_fn))
+        print('The plot is saved {}.'.format(output_filename(plot_fn)))
         show = True
         if show:
             show_file(plot_fn)

@@ -11,6 +11,10 @@ from warnings import warn
 from matplotlib.pyplot import subplots
 
 
+def start_end_date(series):
+    return series.index[[0, -1]].tolist()
+
+
 def year_delta(years):
     """
     return a timedelta object for a given number of years
@@ -92,7 +96,7 @@ def check_period(series):
         series (pandas.Series): time-series
     """
     if not is_longer(series, years=10):
-        warn('Series not longer than 10 years!')
+        print('WARNING: The Series is only {:.1f} < 10 years long!'.format((series.index[-1] - series.index[0]) / Timedelta(days=365)))
 
 
 def is_longer(series, years):
@@ -110,7 +114,7 @@ def is_longer(series, years):
     # return (series.index[-1] - series.index[0]) > year_delta(years=years)
 
 
-def rain_plot(series, availability, fn):
+def rain_figure(series, availability):
     """
     creates a monthly sum bar plot
 
@@ -157,6 +161,19 @@ def rain_plot(series, availability, fn):
     ax.set_xlabel('Zeit')
     fig.tight_layout()
     fig.subplots_adjust(hspace=0)
+    return fig, ax
+
+
+def rain_plot(series, availability, fn):
+    """
+    creates a monthly sum bar plot
+
+    Args:
+        series (pandas.Series): time-series
+        availability (pandas.Series): availability
+        fn (str): path + filename of the resulting plot
+    """
+    fig, ax = rain_figure(series, availability)
     # fig.show()
     fig.savefig(fn)
 

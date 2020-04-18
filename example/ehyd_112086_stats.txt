@@ -1,0 +1,7 @@
+The annual totals of the data series serve as the data basis.
+The following statistics were analyzed:
+Only years with a availability of 90% will be evaluated.
+
+The maximum is 1189 mm and was in the year 2009 (with 100% Data available).
+The minimum is 566 mm and was in the year 2011 (with 100% Data available).
+The mean is 871 mm (with 84% Data available in average).
