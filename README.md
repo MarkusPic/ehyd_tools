@@ -91,6 +91,10 @@ ehyd_tools -h
 >                  sign will be used)
 > ```
 
+## The stations
+
+[List of ehyd-stations with the id-number and the label](ehyd_tools/ehyd_stations.yaml)
+
 ## Examples
 
 [Example Jupyter notebooks for the commandline](example/example_commandline.ipynb)
@@ -101,8 +105,6 @@ ehyd_tools -h
 
 ### Example Files
 
-[CSV-Data of the rain series](example/ehyd_112086.csv)
-
 [Data-gaps in the series](example/ehyd_112086_gaps.csv)
 
 [Meta-data of the series](example/ehyd_112086_meta.txt)
@@ -111,55 +113,3 @@ ehyd_tools -h
 ### Example Plot
 
 ![Regenhöhenlinien](example/ehyd_112086_plot.png)
-
-
-## The stations
-
-|id      |                      station|
-|--------|-----------------------------|
-|100180  |                   Tschagguns|
-|100370  |                    Thüringen|
-|100446  |                     Lustenau|
-|100479  |                     Dornbirn|
-|100776  |                      Bregenz|
-|101303  |         Leutasch-Kirchplatzl|
-|101816  |                 Ladis-Neuegg|
-|102772  |                     Kelchsau|
-|103143  |  St. Johann in Tirol-Almdorf|
-|103895  |                    Eugendorf|
-|104604  |                      Schlägl|
-|104877  |                  Linz-Urfahr|
-|105445  |                  Vöcklabruck|
-|105528  |                         Wels|
-|105908  |                      Flachau|
-|106112  |                       Liezen|
-|106252  |                    Wildalpen|
-|106435  |       Klaus an der Pyhrnbahn|
-|106559  |                        Steyr|
-|106856  |      Weitersfelden-Ritzenedt|
-|107029  |                  Lunz am See|
-|107284  |                         Melk|
-|107854  |                   Hollabrunn|
-|108118  |    Wien (Botanischer Garten)|
-|108456  |                   Gutenstein|
-|108563  |                      Naglern|
-|109280  |       Waidhofen an der Thaya|
-|109918  |                  Neunkirchen|
-|110064  |                   Gattendorf|
-|110312  |                         Karl|
-|110734  |                   Eisenstadt|
-|111112  |                     Oberwart|
-|111435  |                         Alpl|
-|111716  |                    Judenburg|
-|112086  |                 Graz-Andritz|
-|112391  |       St.Peter am Ottersbach|
-|112995  |             Ried im Innkreis|
-|113001  |                      Sillian|
-|113050  |           Matrei in Osttirol|
-|113548  |                       Afritz|
-|113670  |                      Waidegg|
-|114561  |                   Klagenfurt|
-|114702  |                    Wolfsberg|
-|115055  |                   Kendlbruck|
-|115642  |                    St.Pölten|
-|120022  |                Hall in Tirol|
