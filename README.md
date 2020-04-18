@@ -93,7 +93,7 @@ ehyd_tools -h
 
 ## The stations
 
-[List of ehyd-stations with the id-number and the label](ehyd_tools/ehyd_stations.yaml)
+[List of ehyd-stations with the id-number and the label](ehyd_tools/ehyd_stations.json)
 
 ## Examples
 
