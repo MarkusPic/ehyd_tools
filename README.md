@@ -97,9 +97,9 @@ ehyd_tools -h
 
 ## Examples
 
-[Example Jupyter notebooks for the commandline](example/example_commandline.ipynb)
+[Example Jupyter notebook for the commandline](example/example_commandline.ipynb)
 
-[Example Jupyter notebooks for the python api](example/example_python_api.ipynb)
+[Example Jupyter notebook for the python api](example/example_python_api.ipynb)
 
 [Example python skript](example/example_python_api.py)
 
