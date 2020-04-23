@@ -16,7 +16,7 @@ end = '2016-12-31'
 label = 'ehyd_{}'.format(id_number)
 # export_series(series, filename=label, save_as='csv')
 # export_series(series, filename=label, save_as='parquet')
-
+# exit()
 # __________________________________________________________________________________________________________________
 series = import_series(label + '.parquet')
 

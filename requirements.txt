@@ -3,3 +3,4 @@ pandas>=1
 matplotlib>=3
 requests
 fastparquet
+pyarrow

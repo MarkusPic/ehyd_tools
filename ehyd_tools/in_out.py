@@ -81,7 +81,7 @@ def export_series(series, filename, export_path=None, save_as='csv', unix=False)
         series.to_csv(fn, **csv_args(unix))
 
     elif save_as == 'parquet':
-        series.to_frame().to_parquet(fn, compression=None)
+        series.to_frame().to_parquet(fn)
 
     else:
         raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
