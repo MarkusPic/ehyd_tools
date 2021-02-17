@@ -120,7 +120,7 @@ def _parse2(filepath_or_buffer, series_label='precipitation', index_label='datet
     return ts
 
 
-def parse_meta_data(meta_info):
+def parse_meta_data_OLD(meta_info):
     meta_data = dict()
     subtable = False
     for line in meta_info:
@@ -158,3 +158,50 @@ def parse_meta_data(meta_info):
                         meta_data[head] = d[1]
             else:
                 meta_data[d[0].replace(':', '')] = d[1:]
+
+import re
+
+
+def parse_meta_data(meta_str):
+    meta = dict()
+    currant_table = None
+    currant_header = None
+    table_key = None
+    is_table = False
+    lines = iter(meta_str.split('\n'))
+    for line in lines:
+        # print(f'"{line}"')
+        if not is_table and line.endswith(':'):
+            is_table = True
+            table_key = line[:-1].split(':  ')[0]
+            currant_header = re.split(r':\s*', line.strip().strip(':'))
+            currant_table = list()
+
+        elif is_table and line.endswith(':'):
+            # line is header
+            currant_header = re.split(r':\s*', line.strip().strip(':'))
+            # currant_table += line + '\n'
+
+        elif ':' in line:
+            # simple key: value
+            key, value = re.split(r':\s*', line)
+            meta[key] = value
+
+        elif is_table and line == '':
+            meta[table_key] = currant_table
+            currant_table = None
+            currant_header = None
+            table_key = None
+            is_table = False
+
+        elif is_table:
+            values = re.split(r'\s\s+', line.strip())
+            currant_table.append(dict(zip(currant_header, values)))
+            # currant_table += line + '\n'
+
+        elif line == '':
+            pass
+
+        else:
+            print('UNKOWN:', line)
+    return meta

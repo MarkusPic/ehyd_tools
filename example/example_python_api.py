@@ -5,7 +5,7 @@ from ehyd_tools.sww_utils import span_table
 
 id_number = 112086
 
-# series = get_series(id_number)
+series = get_series(id_number)
 
 start = '2007-01-01'
 end = '2016-12-31'

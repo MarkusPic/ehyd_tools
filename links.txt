@@ -1,0 +1,100 @@
+Hydrographische Jahrbuch von Österreich
+    https://wasser.umweltbundesamt.at/hydjb
+
+eHYD
+    https://ehyd.gv.at
+
+https://www.bmlrt.gv.at/wasser/wasser-oesterreich/wasserkreislauf/hydrographische_daten/eHyd2015.html
+https://www.bmlrt.gv.at/service/geo-informationen.html
+
+
+
+Niederschlag, Lufttemperatur und Verdunstung
+IDs von 100008 bis 128033
+Oberflächenwasser: Wasserstand, Abfluss, Schwebstoffe und Wassertemperatur
+IDs von 200014 bis 231688
+Unterirdisches Wasser - Quellen
+IDs von 395012 bis 396796
+
+Messstellen und Daten > Quellen (QU Messstelle)
+ - Stammdaten
+ - Quelleitfähigkeit-Tagesmittel
+ - Quellschüttung-Tagesmittel
+ - Quellwassertemperatur-Tagesmittel
+
+ https://ehyd.gv.at/eHYD/MessstellenExtraData/qu?id=395293&file=1
+
+
+Messstellen und Daten > Niederschlag (NLV Messstelle)
+Niederschlag-Messstelle
+ - Stammdaten
+ - N-Tagessummen
+ - NS-Tagessummen
+ - SH-Tageswerte
+Niederschlag-Messstelle Schreiberdaten
+ - Stammdaten
+ - N-Minutensummen
+ - N-Tagessummen
+ - NS-Tagessummen
+ - SH-Tageswerte
+
+
+IDs von 100008 bis 128033
+
+https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id=101063&file=1
+
+
+Messstellen und Daten > Grundwasser  (GW Messstelle)
+
+Grundwasser-Messstelle
+ - Stammdaten
+ - Grundwasserstand-Jahresmaxima
+ - Grundwasserstand-Jahresminima
+ - Grundwasserstand-Monatsmittel
+
+Grundwasser-Landesmessstelle (nur in OÖ)
+ - Stammdaten
+ - Grundwasserstand-Jahresmaxima
+ - Grundwasserstand-Jahresminima
+ - Grundwasserstand-Monatsmittel
+
+Grundwasser-Messstelle mit Temperatur
+ - Stammdaten
+ - Grundwasserstand-Jahresmaxima
+ - Grundwasserstand-Jahresminima
+ - Grundwasserstand-Monatsmittel
+ - Grundwassertemperatur-Monatsmittel
+
+https://ehyd.gv.at/eHYD/MessstellenExtraData/gw?id=325274&file=1
+
+
+Oberflächengewässer
+ - Wasserstand
+ - Wasserstand & Wassertemperatur
+ - Wasserstand, Wassertemperatur & Feststoffe
+ - Wassertemperatur
+ - Wassertemperatur & Feststoffe
+ - Durchfluss
+ - Durchfluss & Wassertemperatur
+ - Durchfluss, Wassertemperatur & Feststoffe
+ - Durchfluss & Feststoffe
+ - Feststoffe
+ - Oberflächengewässer-Messstelle aufgelassen
+
+OWF Messstelle
+ - Stammdaten
+ - Q-Monatsmaxima
+ - Q-Monatsminima
+ - Q-Tagesmittel
+ - W-Monatsmaxima
+ - W-Monatsminima
+ - W-Tagesmittel
+ - WT-Monatsmittel
+
+ https://ehyd.gv.at/eHYD/MessstellenExtraData/owf?id=211912&file=2
+
+
+
+ Kennwerte und Bemessung
+ Bemessungsniederschlag
+ https://ehyd.gv.at/eHYD/BemessungsniederschlagExtraData?id=4108

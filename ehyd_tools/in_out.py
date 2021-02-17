@@ -7,18 +7,17 @@ __maintainer__ = "David Camhy, Markus Pichler"
 
 import codecs
 import json
-
-import requests
+import warnings
 from io import BytesIO, TextIOWrapper, IOBase, StringIO
-from zipfile import ZipFile
 from os import path
+from zipfile import ZipFile
+
+import numba
 import pandas as pd
+import requests
 from pandas.errors import ParserError
 
 from .sww_utils import guess_freq
-
-import warnings
-import numba
 
 warnings.filterwarnings("ignore", category=numba.NumbaDeprecationWarning)
 
@@ -119,6 +118,39 @@ def import_series(filename, series_label='precipitation', index_label='datetime'
 ehyd_stations = json.load(open(path.join(path.dirname(__file__), 'ehyd_stations.json'), 'r', encoding='utf-8'))
 
 
+class DATA_KIND:
+    MEASUREMENT = 'MessstellenExtraData'
+    DESIGN = 'BemessungsniederschlagExtraData'
+
+
+class FIELDS:
+    NIEDERSCHLAG = 'MessstellenExtraData/nlv'
+    QUELLEN = 'MessstellenExtraData/qu'
+    GRUNDWASSER = 'MessstellenExtraData/gw'
+    OBERFLAECHENWASSER = 'MessstellenExtraData/ofw'
+    BEMESSUNGSNIEDERSCHLAG = 'BemessungsniederschlagExtraData'
+
+
+def get_url(identifier, field=FIELDS.NIEDERSCHLAG, file_number=2, data_kind=DATA_KIND.MEASUREMENT):
+    # data_kind = MessstellenExtraData; BemessungsniederschlagExtraData
+    # field = nlv; qu; gw; owf
+    # file_number = 1
+
+    """
+    https://ehyd.gv.at/eHYD/MessstellenExtraData/qu?id=395293&file=1
+    https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id=101063&file=1
+    https://ehyd.gv.at/eHYD/MessstellenExtraData/gw?id=325274&file=1
+    https://ehyd.gv.at/eHYD/MessstellenExtraData/owf?id=211912&file=2
+    https://ehyd.gv.at/eHYD/BemessungsniederschlagExtraData?id=4108
+    https://ehyd.gv.at/eHYD/BemessungsniederschlagExtraData/pdf?id=3499
+    """
+
+    return 'https://ehyd.gv.at/eHYD/{kind}/{field}?id={id}&file={no}'.format(kind=data_kind,
+                                                                             field=field,
+                                                                             id=identifier,
+                                                                             no=file_number)
+
+
 def _get_file(id_):
     """
     get the file of the series of the station
@@ -129,10 +161,16 @@ def _get_file(id_):
     Returns:
         TextIOWrapper | IOBase:
     """
-    url = 'https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id={id}&file=2'.format(id=id_)
+    url = get_url(identifier=id_, field='nlv', file_number=2, data_kind='MessstellenExtraData')
+    # url = 'https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id={id}&file=2'.format(id=id_)
     r = requests.get(url, allow_redirects=True)
-    c = r.content
-    if c != b'':
+    h = r.headers
+    if 'content-disposition' in h:
+        # h['content-disposition'] = 'attachment; filename=N-Minutensummen-112086.zip'
+        filename = h['content-disposition'].split('filename=')[1]
+        if ('N-Minutensummen' not in filename) or ('.zip' not in filename):
+            raise NotImplementedError('This kind of request is not implemented yet. Sorry!')
+        c = r.content
         z = ZipFile(BytesIO(c))
         filename = z.namelist()[0]
         csv_file = TextIOWrapper(z.open(filename), encoding='iso8859')
@@ -287,7 +325,8 @@ def get_station_meta(id_):
     Returns:
         str:
     """
-    url = 'https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id={id}&file=1'.format(id=id_)
+    url = get_url(identifier=id_, field='nlv', file_number=1, data_kind='MessstellenExtraData')
+    # url = 'https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id={id}&file=1'.format(id=id_)
     r = requests.get(url, allow_redirects=True)
     c = r.content
     if c != b'':
