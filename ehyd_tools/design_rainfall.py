@@ -12,6 +12,18 @@ import requests
 from io import BytesIO, TextIOWrapper
 
 
+class INDICES:
+    DURATION = 'duration'
+    RETURN_PERIOD = 'return period'
+    CALCULATION_METHOD = 'calculation method'
+
+
+class INDICES_GER:
+    DURATION = 'Dauerstufe'
+    RETURN_PERIOD = 'Jährlichkeit'
+    CALCULATION_METHOD = 'Berechnungstyp'
+
+
 def get_ehyd_file(grid_point_number=5214):
     url = 'https://ehyd.gv.at/eHYD/BemessungsniederschlagExtraData?id={no}'.format(no=grid_point_number)
     r = requests.get(url, allow_redirects=True)
@@ -51,13 +63,13 @@ def ehyd_design_rainfall_ascii_reader(filepath_or_buffer):
     # convert string column names to integers
     df.columns = [int(c.replace('T', '')) for c in df.columns]
     # df.columns.name = 'Jährlichkeit'
-    df.columns.name = 'return period'
+    df.columns.name = INDICES.RETURN_PERIOD
 
     # index "0" (="DAUER") is just the string representative of the index "duration"
     df.index = df.index.droplevel(0)
     # originally named ["DAUERMIN", "TYP"]
     # df.index.names = ['Dauerstufe', 'Berechnungstyp']
-    df.index.names = ['duration', 'calculation method']
+    df.index.names = [INDICES.DURATION, INDICES.CALCULATION_METHOD]
 
     # set duration index as integer
     df.index = df.index.set_levels([df.index.levels[0].astype(int), df.index.levels[1]])
@@ -73,7 +85,7 @@ def get_max_calculation_method(df, methods=None):
 
 
 def get_calculation_method(df, method='Bemessung'):
-    return df.xs(method, axis=0, level='calculation method', drop_level=True).copy()
+    return df.xs(method, axis=0, level=INDICES.CALCULATION_METHOD, drop_level=True).copy()
 
 
 if __name__ == '__main__':
