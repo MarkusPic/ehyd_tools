@@ -120,23 +120,23 @@ ehyd_stations = json.load(open(path.join(path.dirname(__file__), 'ehyd_stations.
 
 class DATA_KIND:
     MEASUREMENT = 'MessstellenExtraData'
-    DESIGN = 'BemessungsniederschlagExtraData'
+    DESIGN_PRECIPITATION = 'BemessungsniederschlagExtraData'
 
 
 class FIELDS:
-    NIEDERSCHLAG = 'MessstellenExtraData/nlv'
-    QUELLEN = 'MessstellenExtraData/qu'
-    GRUNDWASSER = 'MessstellenExtraData/gw'
-    OBERFLAECHENWASSER = 'MessstellenExtraData/ofw'
-    BEMESSUNGSNIEDERSCHLAG = 'BemessungsniederschlagExtraData'
+    NIEDERSCHLAG = 'nlv'
+    QUELLEN = 'qu'
+    GRUNDWASSER = 'gw'
+    OBERFLAECHENWASSER = 'ofw'
+    PDF = 'pdf'
 
 
-def get_url(identifier, field=FIELDS.NIEDERSCHLAG, file_number=2, data_kind=DATA_KIND.MEASUREMENT):
-    # data_kind = MessstellenExtraData; BemessungsniederschlagExtraData
-    # field = nlv; qu; gw; owf
-    # file_number = 1
-
+def get_url(identifier, data_kind=DATA_KIND.MEASUREMENT, field=FIELDS.NIEDERSCHLAG, file_number=2):
     """
+    data_kind = MessstellenExtraData; BemessungsniederschlagExtraData
+    field = nlv; qu; gw; owf
+    file_number = 1
+
     https://ehyd.gv.at/eHYD/MessstellenExtraData/qu?id=395293&file=1
     https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id=101063&file=1
     https://ehyd.gv.at/eHYD/MessstellenExtraData/gw?id=325274&file=1
@@ -144,11 +144,13 @@ def get_url(identifier, field=FIELDS.NIEDERSCHLAG, file_number=2, data_kind=DATA
     https://ehyd.gv.at/eHYD/BemessungsniederschlagExtraData?id=4108
     https://ehyd.gv.at/eHYD/BemessungsniederschlagExtraData/pdf?id=3499
     """
-
-    return 'https://ehyd.gv.at/eHYD/{kind}/{field}?id={id}&file={no}'.format(kind=data_kind,
-                                                                             field=field,
-                                                                             id=identifier,
-                                                                             no=file_number)
+    url = f'https://ehyd.gv.at/eHYD/{data_kind}'
+    if field:
+        url += f'/{field}'
+    url += f'?id={identifier}'
+    if file_number:
+        url += f'&file={file_number}'
+    return url
 
 
 def _get_file(id_):
@@ -161,7 +163,7 @@ def _get_file(id_):
     Returns:
         TextIOWrapper | IOBase:
     """
-    url = get_url(identifier=id_, field='nlv', file_number=2, data_kind='MessstellenExtraData')
+    url = get_url(identifier=id_, field=FIELDS.NIEDERSCHLAG, file_number=2, data_kind=DATA_KIND.MEASUREMENT)
     # url = 'https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id={id}&file=2'.format(id=id_)
     r = requests.get(url, allow_redirects=True)
     h = r.headers
@@ -325,7 +327,7 @@ def get_station_meta(id_):
     Returns:
         str:
     """
-    url = get_url(identifier=id_, field='nlv', file_number=1, data_kind='MessstellenExtraData')
+    url = get_url(identifier=id_, field=FIELDS.NIEDERSCHLAG, file_number=1, data_kind=DATA_KIND.MEASUREMENT)
     # url = 'https://ehyd.gv.at/eHYD/MessstellenExtraData/nlv?id={id}&file=1'.format(id=id_)
     r = requests.get(url, allow_redirects=True)
     c = r.content

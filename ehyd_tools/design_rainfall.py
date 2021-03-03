@@ -7,9 +7,13 @@ __maintainer__ = "Markus Pichler"
 
 from pandas import read_fwf, IndexSlice as idx
 import os
-
+from os import path
 import requests
 from io import BytesIO, TextIOWrapper
+
+from scipy.interpolate import interp2d
+
+from ehyd_tools.in_out import get_url, FIELDS, DATA_KIND
 
 
 class INDICES:
@@ -25,22 +29,20 @@ class INDICES_GER:
 
 
 def get_ehyd_file(grid_point_number=5214):
-    url = 'https://ehyd.gv.at/eHYD/BemessungsniederschlagExtraData?id={no}'.format(no=grid_point_number)
+    url = get_url(grid_point_number, data_kind=DATA_KIND.DESIGN_PRECIPITATION, field=None, file_number=None)
     r = requests.get(url, allow_redirects=True)
     fwf_file = TextIOWrapper(BytesIO(r.content), encoding='ISO-8859-1')
     return fwf_file
 
 
 def save_ehyd_pdf_file(grid_point_number, fn):
-    from os import path
     fn = path.join(fn, 'Bemessungsniederschlag_Gitterpunkt_{no}.pdf'.format(no=grid_point_number))
     if not path.isfile(fn):
-        url = 'https://ehyd.gv.at/eHYD/BemessungsniederschlagExtraData/pdf?id={no}'.format(no=grid_point_number)
+        url = get_url(grid_point_number, data_kind=DATA_KIND.DESIGN_PRECIPITATION, field=FIELDS.PDF, file_number=None)
         r = requests.get(url, allow_redirects=True)
         open(fn, 'wb').write(r.content)
 
 
-# https://ehyd.gv.at/#
 def ehyd_design_rainfall_ascii_reader(filepath_or_buffer):
     if isinstance(filepath_or_buffer, str):
         txt_file = open(filepath_or_buffer, 'r', encoding='ISO-8859-1')
@@ -86,6 +88,11 @@ def get_max_calculation_method(df, methods=None):
 
 def get_calculation_method(df, method='Bemessung'):
     return df.xs(method, axis=0, level=INDICES.CALCULATION_METHOD, drop_level=True).copy()
+
+
+def get_rainfall_height(table, return_period, duration):
+    f = interp2d(x=table.columns.values, y=table.index.values, z=table.values, kind='linear')
+    return float(f(return_period, duration)[0])
 
 
 if __name__ == '__main__':
