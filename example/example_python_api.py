@@ -5,7 +5,8 @@ from ehyd_tools.sww_utils import span_table
 
 id_number = 112086
 
-series = get_series(id_number)
+# series = get_series(id_number)
+
 
 start = '2007-01-01'
 end = '2016-12-31'
@@ -19,6 +20,9 @@ label = 'ehyd_{}'.format(id_number)
 # exit()
 # __________________________________________________________________________________________________________________
 series = import_series(label + '.parquet')
+# series = import_series(r'C:\Users\mp\PycharmProjects\ehyd_tools\example\112086_graz\N-Minutensummen-112086.csv')
+# export_series(series, 'test', export_path=None, save_as='parquet', unix=False)
+
 
 # __________________________________________________________________________________________________________________
 tags = data_validation(series)

@@ -59,6 +59,13 @@ def check_path(pth=None):
         raise UserWarning('Path is not available')
 
 
+PARQUET_ERROR = ModuleNotFoundError("""Error: Unable to find a usable engine to read or write parquet files.
+A suitable version of pyarrow (recommended) or fastparquet (alternative) is required for parquet support.
+Use pip or conda to install:
+- pyarrow (https://pypi.org/project/pyarrow/) or 
+- fastparquet (https://pypi.org/project/fastparquet/).""")
+
+
 def export_series(series, filename, export_path=None, save_as='csv', unix=False):
     """
     export the series to a given format
@@ -80,7 +87,10 @@ def export_series(series, filename, export_path=None, save_as='csv', unix=False)
         series.to_csv(fn, **csv_args(unix))
 
     elif save_as == 'parquet':
-        series.to_frame().to_parquet(fn)
+        try:
+            series.to_frame().to_parquet(fn)
+        except ImportError:
+            raise PARQUET_ERROR
 
     else:
         raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
@@ -110,7 +120,10 @@ def import_series(filename, series_label='precipitation', index_label='datetime'
         except (ParserError, UnicodeDecodeError):
             return _parse(filename)
     elif filename.endswith('parquet'):
-        return pd.read_parquet(filename).iloc[:, 0].asfreq('T').copy()
+        try:
+            return pd.read_parquet(filename).iloc[:, 0].asfreq('T').copy()
+        except ImportError:
+            raise PARQUET_ERROR
     else:
         raise NotImplementedError('Sorry, but only csv files are implemented. Maybe there will be more options soon.')
 

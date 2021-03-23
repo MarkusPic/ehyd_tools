@@ -2,5 +2,5 @@ numpy>=1.14
 pandas>=1
 matplotlib>=3
 requests
-fastparquet
-pyarrow
+# pyarrow # recommended package for parquet-export
+# fastparquet # another package for parquet-export
