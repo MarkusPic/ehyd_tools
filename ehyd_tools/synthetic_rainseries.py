@@ -49,14 +49,14 @@ def euler_model_rain(idf_table, return_period, duration, interval=5, occurrence_
     r = r.append(pd.Series({0: 0})).sort_index()
 
     # ---------------
-    # if 0:
-    #     _res = pd.DataFrame(index=new_s.index)
-    #     _res['basis'] = s
-    #     _res['gefüllt'] = new_s
-    #     _res['diff'] = d
-    #     _res['spitze'] = False
-    #     _res.loc[max_index, 'spitze'] = True
-    #     _res['fertig'] = r
+    if 0:
+        _res = pd.DataFrame(index=filtered_series.index)
+        _res['basis'] = return_period_series
+        _res['gefüllt'] = filtered_series
+        _res['diff'] = d
+        _res['spitze'] = False
+        _res.loc[max_index, 'spitze'] = True
+        _res['fertig'] = r
     return r
 
 
