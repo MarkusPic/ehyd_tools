@@ -39,11 +39,21 @@ def data_validation(series):
         pandas.DataFrame: tags with columns 'nans', 'gaps', ...
     """
     ts = series.copy()
-    ts = ts.append(Series(index=[ts.index[0].replace(day=1, month=1, hour=0, minute=0),
-                                 ts.index[-1].replace(day=31, month=12, hour=23, minute=59)],
-                          data=[NaN, NaN]))
 
-    ts = ts[~ts.index.duplicated()].copy().sort_index()
+    first_index = ts.index[0].replace(day=1, month=1, hour=0, minute=0)
+    if first_index not in series.index:
+        ts = Series(index=[first_index]).append(ts)
+
+    last_index = ts.index[-1].replace(day=31, month=12, hour=23, minute=59)
+    if last_index not in ts.index:
+        ts = ts.append(Series(index=[last_index]))
+
+    if ts.index.has_duplicates:  # very slow an large data sets
+        ts = ts[~ts.index.duplicated()].copy()
+
+    if not ts.index.is_monotonic_increasing:
+        raise UserWarning('Series has not monotonic increasing of the timestamps.')
+        ts = ts.sort_index()
 
     tags = DataFrame(index=ts.index)
     tags['nans'] = isna(ts).astype(int)
@@ -96,7 +106,8 @@ def check_period(series):
         series (pandas.Series): time-series
     """
     if not is_longer(series, years=10):
-        print('WARNING: The Series is only {:.1f} < 10 years long!'.format((series.index[-1] - series.index[0]) / Timedelta(days=365)))
+        print('WARNING: The Series is only {:.1f} < 10 years long!'.format(
+            (series.index[-1] - series.index[0]) / Timedelta(days=365)))
 
 
 def is_longer(series, years):
@@ -114,7 +125,7 @@ def is_longer(series, years):
     # return (series.index[-1] - series.index[0]) > year_delta(years=years)
 
 
-def rain_figure(series, availability):
+def rain_figure(series, availability, freq=None, add_mean_line=False):
     """
     creates a monthly sum bar plot
 
@@ -123,42 +134,62 @@ def rain_figure(series, availability):
         availability (pandas.Series): availability
         fn (str): path + filename of the resulting plot
     """
-    if is_longer(series, years=15):
-        freq = 'Y'
-        freq_long = 'Jahr'
-        # base_delta = year_delta(1)
-    else:
-        freq = 'M'
-        freq_long = 'Monat'
-        # base_delta = year_delta(1) / 12
+
+    freq_long = {
+        'Y': 'Jahr',
+        'M': 'Monat'
+    }
+
+    if freq is None:
+        if is_longer(series, years=15):
+            freq = 'Y'
+            # base_delta = year_delta(1)
+        else:
+            freq = 'M'
+            # base_delta = year_delta(1) / 12
 
     sums = series.resample(freq).sum()
-    index = series.index.to_series().resample(freq).apply(lambda s: s.min() + abs(s.min() - s.max()) / 2).dt.date.values
-    freq_avail = availability.resample(freq)
-    avail = (freq_avail.sum()/ freq_avail.count())[sums.index]
 
-    dummy = sums.rename('dummy').copy()
-    dummy.loc[:] = 0
+    if freq == 'Y':
+        index = sums.index.year.values
+    else:
+        # monthly
+        index = sums.index.year.values + sums.index.month.values / 12
+
+    # index = series.index.to_series().resample(freq).apply(lambda s: s.min() + abs(s.min() - s.max()) / 2).dt.date.values
+    freq_avail = availability.resample(freq)
+    avail = (freq_avail.sum() / freq_avail.count())[sums.index]
+
+    # dummy = sums.rename('dummy').copy()
+    # dummy.loc[:] = 0
 
     height_ratios = [1, 10]
 
     fig, (ax1, ax) = subplots(2, gridspec_kw=dict(height_ratios=height_ratios), sharex=True)
 
-    ax = dummy.plot(ax=ax, lw=0)
+    # ax = dummy.plot(ax=ax, lw=0)
     fig.set_size_inches(w=29.7 / 2.54, h=21. / 2.54)
 
     ax1.set_ylim(0, 100)
     ax1.set_ylabel('% Verfügbar')
-    ax1.set_yticks(range(0,110,10), minor=True)
+    ax1.set_yticks(range(0, 110, 10), minor=True)
     ax1.grid(axis='y', which='minor', color='lightgrey', linestyle=':', linewidth=0.5)  # , zorder=-10000000)
-    ax1 = dummy.plot(ax=ax1, lw=0)
+    # ax1 = dummy.plot(ax=ax1, lw=0)
     # ax1.scatter(x=index, y=avail.values * 100, color='grey', clip_on=False, marker='_')
-    ax1.bar(x=index, height=avail.values*100, color='grey')
+    ax1.bar(x=index, height=avail.values * 100, color='grey')
     ax1.set_axisbelow(True)
 
+    if add_mean_line:
+        mean = sums[avail > 0.5].mean()
+        ax.text(ax.get_xlim()[0] + 1, mean + 15, f'Mittelwert: {mean:0.0f} (mm/{freq_long[freq]})',
+                bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 2, 'linewidth': '0'})
+        ax.axhline(mean, ls='--', color='darkgray', linewidth=0.7)
+
     ax.bar(x=index, height=sums.values, color='k')
-    ax.set_ylabel('Niederschlag (mm/{})'.format(freq_long))
+    ax.set_ylabel('Niederschlag (mm/{})'.format(freq_long[freq]))
     ax.set_xlabel('Zeit')
+    # ax.set_xlim(left=ax.get_xlim()[0] - 0.5)
+    # ax.set_xlim(right=ax.get_xlim()[1] + 0.5)
     fig.tight_layout()
     fig.subplots_adjust(hspace=0)
     return fig, ax

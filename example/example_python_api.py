@@ -65,6 +65,6 @@ print(
     )
 
 # __________________________________________________________________________________________________________________
-fig, ax = rain_figure(series, availability)
+fig, ax = rain_figure(series, availability, freq='Y')
 fig.show()
 

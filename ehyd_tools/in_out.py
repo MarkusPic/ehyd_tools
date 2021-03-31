@@ -12,14 +12,14 @@ from io import BytesIO, TextIOWrapper, IOBase, StringIO
 from os import path
 from zipfile import ZipFile
 
-import numba
 import pandas as pd
 import requests
 from pandas.errors import ParserError
 
 from .sww_utils import guess_freq
 
-warnings.filterwarnings("ignore", category=numba.NumbaDeprecationWarning)
+# import numba
+# warnings.filterwarnings("ignore", category=numba.NumbaDeprecationWarning)
 
 
 def csv_args(unix=False):
