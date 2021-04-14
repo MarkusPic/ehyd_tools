@@ -18,29 +18,22 @@
 
 ## 0.1.dev9(Apr 24, 2020)
 
+Changes Including:
+- 0.1.dev8(Apr 18, 2020)
+- 0.1.dev7(Apr 14, 2020)
+- 0.1.dev6(Apr 13, 2020)
+- 0.1.dev5(Apr 13, 2020)
 
-## 0.1.dev8(Apr 18, 2020)
-
-
-## 0.1.dev7(Apr 14, 2020)
-
-
-## 0.1.dev6(Apr 13, 2020)
-
-
-## 0.1.dev5(Apr 13, 2020)
-
+Third Fixes ...
 
 ## 0.1.dev4(Aug 21, 2019)
 
+Changes Including:
+- 0.1.dev3(Aug 20, 2019)
+- 0.1.dev2(Aug 20, 2019)
 
-## 0.1.dev3(Aug 20, 2019)
-
-
-## 0.1.dev2(Aug 20, 2019)
-
+Second Fixes ...
 
 ## 0.1.dev1(May 30, 2019)
 
-
-## 0.1.dev0(May 30, 2019)
+First Fixes ...
