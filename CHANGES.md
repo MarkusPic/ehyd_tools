@@ -1,8 +1,9 @@
 # Changelog
 
-## 0.1.dev13 (Apr 14, 2021)
+## 0.1.dev14 (Apr 14, 2021)
 
 Changes Including:
+- 0.1.dev13 (Apr 14, 2021)
 - 0.1.dev12 (Apr 14, 2021)
 - 0.1.dev11 (Apr 14, 2021)
 
