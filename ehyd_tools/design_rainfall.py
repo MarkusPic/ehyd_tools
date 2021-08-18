@@ -83,7 +83,7 @@ def get_max_calculation_method(df, methods=None):
     if methods is None:
         methods = ['ÖKOSTRA', 'Bemessung']
 
-    return df.loc[idx[:, methods], :].max(axis=0, level=0).copy()
+    return df.loc[idx[:, methods], :].groupby(axis=0, level=0).max().copy()
 
 
 def get_calculation_method(df, method='Bemessung'):
