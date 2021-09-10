@@ -1,8 +1,13 @@
 # Changelog
 
+## 0.1dev15  (Sep 10, 2021)
+
+- finalized model rain script
+- added model rain example notebook
+
 ## 0.1dev15  (May 27, 2021)
 
-- finalized model rain skript
+- changed model rain script
 
 ## 0.1.dev14 (Apr 14, 2021)
 

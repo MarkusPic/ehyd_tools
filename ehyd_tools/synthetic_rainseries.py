@@ -10,82 +10,66 @@ from ehyd_tools.design_rainfall import (get_ehyd_file, ehyd_design_rainfall_asci
 
 
 class _AbstractModelRain(ABC):
-    def __init__(self, return_period, duration, interval=5, idf_table=None):
-        self.return_period = return_period
-        self.duration = duration
-        self.interval = interval
+    def __init__(self, idf_table=None):
         self.idf_table = idf_table
 
-    @property
-    def index(self):
-        return range(self.interval, self.duration + self.interval, self.interval)
+    def _get_index(self, duration, interval=5):
+        return range(interval, duration + interval, interval)
 
-    def get_idf_value(self, duration, return_period):
+    def _get_idf_value(self, duration, return_period):
         f = interp2d(x=self.idf_table.columns.values, y=self.idf_table.index.values, z=self.idf_table.values,
                      kind='linear')
         return float(f(return_period, duration)[0])
 
     @abstractmethod
-    def get_series(self):
+    def _get_series(self, return_period, duration, interval=5, **kwargs):
         pass
 
-    def get_time_series(self, start_time):
-        if isinstance(start_time, str):
-            start_time = pd.to_datetime(start_time)
-        rain = self.get_series()
-        rain.index = start_time + pd.to_timedelta(rain.index, unit='m')
+    def get_time_series(self, return_period, duration, interval=5, start_time=None, **kwargs):
+        rain = self._get_series(return_period, duration, interval, **kwargs)
+        if start_time is not None:
+            if isinstance(start_time, str):
+                start_time = pd.to_datetime(start_time)
+            rain.index = start_time + pd.to_timedelta(rain.index, unit='m')
         return rain
 
-    def set_idf_table(self, grid_point, kind='maxBemessung'):
-        """
-        set idf table of ehyd database
 
-        Args:
-            grid_point (int): 4 digit id number (Gitterpunktnummer)
-            kind (str): which row to use. one of ['ÖKOSTRA', 'Bemessung', 'maxBemessung']
-        """
-        self.idf_table = ehyd_design_rainfall_ascii_reader(get_ehyd_file(grid_point_number=grid_point))
-        if kind == 'maxBemessung':
-            self.idf_table = get_max_calculation_method(self.idf_table)
-        else:
-            self.idf_table = get_calculation_method(self.idf_table, method=kind)
+class _BlockRain(_AbstractModelRain):
+    def __init__(self, idf_table=None):
+        _AbstractModelRain.__init__(self, idf_table)
 
-
-class BlockRain(_AbstractModelRain):
-    def __init__(self, return_period, duration, interval=5, idf_table=None):
-        _AbstractModelRain.__init__(self, return_period, duration, interval, idf_table)
-
-    def get_series(self):
-        height = self.get_idf_value(self.duration, self.return_period)
-        intensity = height / len(self.index)
-        r = pd.Series(index=self.index, data=intensity)
+    def _get_series(self, return_period, duration, interval=5, **kwargs):
+        height = self._get_idf_value(duration, return_period)
+        index = self._get_index(duration, interval)
+        intensity = height / len(index)
+        r = pd.Series(index=index, data=intensity)
         r = r.append(pd.Series({0: 0})).sort_index()
         return r
 
 
-class EulerRain(_AbstractModelRain):
-    def __init__(self, return_period, duration, interval=5, idf_table=None, kind=2):
-        _AbstractModelRain.__init__(self, return_period, duration, interval, idf_table)
-        self.kind = kind
+class _EulerRain(_AbstractModelRain):
+    def __init__(self, idf_table=None):
+        _AbstractModelRain.__init__(self, idf_table)
 
-    @property
-    def occurrence_highest_intensity(self):
-        if self.kind == 1:
+    @staticmethod
+    def _get_occurrence_highest_intensity(kind=2):
+        if kind == 1:
             return 0
-        elif self.kind == 2:
+        elif kind == 2:
             return 1 / 3
 
-    def get_series(self):
-        return_period_series = self.idf_table[self.return_period]
+    def _get_series(self, return_period, duration, interval=5, kind=2):
+        return_period_series = self.idf_table[return_period]
 
-        filtered_series = pd.Series(data=np.interp(self.index, return_period_series.index, return_period_series),
-                                    index=self.index)
+        index = self._get_index(duration, interval)
+        filtered_series = pd.Series(data=np.interp(index, return_period_series.index, return_period_series),
+                                    index=index)
 
         d = filtered_series.diff()
         d.iloc[0] = filtered_series.iloc[0]
 
         # max_index = floor((occurrence_highest_intensity * duration) / interval) * interval
-        max_index = floor(round((self.occurrence_highest_intensity * self.duration) / self.interval, 3)) * self.interval
+        max_index = floor(round((self._get_occurrence_highest_intensity(kind) * duration) / interval, 3)) * interval
 
         # sort differences and reset index
         r = d.sort_values(ascending=False)
@@ -110,7 +94,7 @@ class EulerRain(_AbstractModelRain):
 
 
 class RainModeller:
-    def __init__(self, grid_point, return_period, duration, interval=5, kind='maxBemessung'):
+    def __init__(self, idf_table=None):
         """
         object to create block and euler model rain series
 
@@ -121,41 +105,38 @@ class RainModeller:
             interval (int): in minutes
             kind (str): which row to use of the idf table. one of ['ÖKOSTRA', 'Bemessung', 'maxBemessung']
         """
-        self.return_period = return_period
-        self.duration = duration
-        self.interval = interval
-        self.grid_point = grid_point
-        self.idf_table = None
-        self.set_idf_table(kind)
+        self.idf_table = idf_table
 
-    def set_idf_table(self, kind='maxBemessung'):
+    def set_idf_table_okostra(self, grid_point, kind='maxBemessung'):
         """
         set idf table of ehyd database
 
         Args:
+            grid_point (int): 4 digit id number (Gitterpunktnummer)
             kind (str): which row to use. one of ['ÖKOSTRA', 'Bemessung', 'maxBemessung']
         """
-        self.idf_table = ehyd_design_rainfall_ascii_reader(get_ehyd_file(grid_point_number=self.grid_point))
+        self.idf_table = ehyd_design_rainfall_ascii_reader(get_ehyd_file(grid_point_number=grid_point))
         if kind == 'maxBemessung':
             self.idf_table = get_max_calculation_method(self.idf_table)
         else:
             self.idf_table = get_calculation_method(self.idf_table, method=kind)
 
-    def block(self) -> BlockRain:
-        return BlockRain(return_period=self.return_period, duration=self.duration, interval=self.interval,
-                         idf_table=self.idf_table)
+    @property
+    def block(self) -> _BlockRain:
+        return _BlockRain(idf_table=self.idf_table)
 
-    def euler(self, kind=2) -> EulerRain:
-        return EulerRain(return_period=self.return_period, duration=self.duration, interval=self.interval,
-                         idf_table=self.idf_table, kind=kind)
+    @property
+    def euler(self, ) -> _EulerRain:
+        return _EulerRain(idf_table=self.idf_table)
 
 
 if __name__ == '__main__':
-    model_rain = BlockRain(return_period=2, duration=60, interval=5)
-    model_rain.set_idf_table(5214, kind='Bemessung')
-    print(model_rain.get_series())
+    model_rain = RainModeller()
+    model_rain.set_idf_table_okostra(5214, kind='Bemessung')
+    print(model_rain.block.get_time_series(return_period=2, duration=60, interval=5))
 
-    model_rain = RainModeller(grid_point=5214, return_period=2, duration=60, interval=5, kind='maxBemessung')
-    print(model_rain.block().get_series())
-    print(model_rain.euler(2).get_series())
-    print(model_rain.euler(2).get_time_series('2021-05-27 16:00'))
+    model_rain2 = RainModeller()
+    model_rain2.set_idf_table_okostra(5214, kind='maxBemessung')
+    print(model_rain2.block.get_time_series(return_period=2, duration=60, interval=5))
+    print(model_rain2.euler.get_time_series(return_period=2, duration=60, interval=5, kind=2))
+    print(model_rain2.euler.get_time_series(return_period=2, duration=60, interval=5, kind=2, start_time='2021-05-27 16:00'))
