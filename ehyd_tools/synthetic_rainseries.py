@@ -132,6 +132,11 @@ class RainModeller:
 
 if __name__ == '__main__':
     model_rain = RainModeller()
+    model_rain.idf_table = pd.read_csv('/home/markus/PycharmProjects/ehyd_tools/example/kostra_s24z70.csv', index_col=0)
+    model_rain.idf_table.columns = model_rain.idf_table.columns.astype(int)
+    print(model_rain.block.get_time_series(return_period=2, duration=60, interval=5))
+    exit()
+    model_rain = RainModeller()
     model_rain.set_idf_table_okostra(5214, kind='Bemessung')
     print(model_rain.block.get_time_series(return_period=2, duration=60, interval=5))
 
