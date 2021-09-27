@@ -115,8 +115,8 @@ ehyd_tools -h
 ![Regenhöhenlinien](example/ehyd_112086_plot.png)
 
 
-### Examples Extended API
+### Examples Jupyter notebooks for Extended python API
 
-[Example Jupyter notebook for the design rainfall python api](example/example_design_rainfall.ipynb)
-
-[Example Jupyter notebook for the moe general python api](example/example_python_api_general.ipynb)
+- [the design rainfall](example/example_design_rainfall.ipynb)
+- [model rain creator](example/example_synthetic_rain.ipynb)
+- [the general datareader](example/example_python_api_general.ipynb)
