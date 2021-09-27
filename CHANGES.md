@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1dev17  (Sep 27, 2021)
+
+- general ehyd data reader
+- design rainfall docs
+
 ## 0.1dev15  (Sep 10, 2021)
 
 - finalized model rain script
