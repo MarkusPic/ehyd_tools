@@ -7,11 +7,12 @@ __license__ = "MIT"
 
 from pandas import to_datetime, DataFrame, Series
 from os import path
+import json
 from webbrowser import open as show_file
 from .data_processing import (data_validation, data_availability, max_10a, check_period, rain_plot, create_statistics,
                               start_end_date, )
 from .arg_parser import ehyd_arg_parser
-from .in_out import get_series, import_series, export_series, csv_args, get_station_meta
+from .in_out import get_ehyd_data, import_series, export_series, csv_args, get_meta_data
 from .sww_utils import span_table
 
 
@@ -61,11 +62,11 @@ def get_data(id_=None, input_=None, meta=False, unix=False):
         name = 'ehyd_{}'.format(id_number)
 
         if meta:
-            with open('{}_meta.txt'.format(name), 'w') as f:
-                f.write(get_station_meta(id_number))
+            with open('{}_meta.json'.format(name), 'w') as f:
+                json.dump(get_meta_data(id_number), f, indent=4)
                 print('The meta-data are saved in {}.'.format(output_filename(f.name)))
 
-        series = get_series(id_number)
+        series = get_ehyd_data(id_number)
 
     # __________________________________________________________________________________________________________________
     elif input_ is not None:

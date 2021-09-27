@@ -1,12 +1,11 @@
-from ehyd_tools.design_rainfall import (ehyd_design_rainfall_ascii_reader, get_ehyd_file, get_max_calculation_method,
-                                        get_rainfall_height, )
+from ehyd_tools.design_rainfall import get_max_calculation_method, get_ehyd_design_rainfall
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
 if __name__ == '__main__':
-    df = ehyd_design_rainfall_ascii_reader(get_ehyd_file(grid_point_number=5214))
+    df = get_ehyd_design_rainfall(grid_point_number=5214)
     rain_height = get_max_calculation_method(df)
 
     fig, (ax1, ax2) = plt.subplots(2, sharex=True)  # type: plt.Figure, (plt.Axes, plt.Axes)

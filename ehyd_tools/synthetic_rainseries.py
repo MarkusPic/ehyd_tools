@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 
 from scipy.interpolate import interp2d
 
-from ehyd_tools.design_rainfall import (get_ehyd_file, ehyd_design_rainfall_ascii_reader,
+from ehyd_tools.design_rainfall import (get_ehyd_design_rainfall_file, read_ehyd_design_rainfall,
                                         get_max_calculation_method, get_calculation_method, )
 
 
@@ -115,7 +115,7 @@ class RainModeller:
             grid_point (int): 4 digit id number (Gitterpunktnummer)
             kind (str): which row to use. one of ['ÖKOSTRA', 'Bemessung', 'maxBemessung']
         """
-        self.idf_table = ehyd_design_rainfall_ascii_reader(get_ehyd_file(grid_point_number=grid_point))
+        self.idf_table = read_ehyd_design_rainfall(get_ehyd_design_rainfall_file(grid_point_number=grid_point))
         if kind == 'maxBemessung':
             self.idf_table = get_max_calculation_method(self.idf_table)
         else:

@@ -1,0 +1,788 @@
+﻿Mst. ID,Messstellen Name,Jahr,Bundesland,Flussgebiet,Gewässername,Einzugsgebietsgröße (km²)
+201996,NeukaserDURCHFLUSS,2017,Tirol,Inngebiet oberhalb der Salzach,Zamserbach,24.2
+201715,SausteinasteDURCHFLUSS,2017,Tirol,Inngebiet oberhalb der Salzach,Zemmbach,225
+201723,PersalDURCHFLUSS,2017,Tirol,Inngebiet oberhalb der Salzach,Tuxbach,129.2
+201749,MayrhofenDURCHFLUSS_TEMPERATUR,2017,Tirol,Inngebiet oberhalb der Salzach,Ziller,610.9
+230755,Schwendberg-Aue,2017,Tirol,Inngebiet oberhalb der Salzach,Sidanbach,16
+201756,Zell am Ziller-Zellbergeben,2017,Tirol,Inngebiet oberhalb der Salzach,Ziller,696.3
+201970,EW-Gmünd,2017,Tirol,Inngebiet oberhalb der Salzach,Gerlosbach,141
+201772,Rohr,2017,Tirol,Inngebiet oberhalb der Salzach,Gerlosbach,196.8
+201780,Hart im Zillertal,2017,Tirol,Inngebiet oberhalb der Salzach,Ziller,1094.7
+201806,Brixlegg,2017,Tirol,Inngebiet oberhalb der Salzach,Inn,8503.6
+201814,Rattenberg,2017,Tirol,Inngebiet oberhalb der Salzach,Inn,8508.7
+230896,Steinberg am Rofan-Außersteinberg,2017,Tirol,Inngebiet oberhalb der Salzach,Grundache,15
+230904,Steinberg am Rofan-Untersteinberg,2017,Tirol,Inngebiet oberhalb der Salzach,Mühlbach,13
+201822,Mariathal,2017,Tirol,Inngebiet oberhalb der Salzach,Brandenberger Ache,272.6
+202697,Niederau,2017,Tirol,Inngebiet oberhalb der Salzach,Wildenbach,9.7
+202218,Unterwindau,2017,Tirol,Inngebiet oberhalb der Salzach,Windauer Ache,82.1
+201848,Hörbrunn,2017,Tirol,Inngebiet oberhalb der Salzach,Kelchsauer Ache,134.5
+201863,Bruckhäusl,2017,Tirol,Inngebiet oberhalb der Salzach,Brixentaler Ache,322.3
+201889,Kirchbichl - Bichlwang,2017,Tirol,Inngebiet oberhalb der Salzach,Inn,9310
+202788,Scheffau a. Wilden Kaiser,2017,Tirol,Inngebiet oberhalb der Salzach,Hintersteiner See,2.3
+202135,Söll,2017,Tirol,Inngebiet oberhalb der Salzach,Stampfangerbach,20.9
+201897,Kaiserwerk,2017,Tirol,Inngebiet oberhalb der Salzach,Weißache,94
+201905,Kufstein (Bahnhofsbrücke),2017,Tirol,Inngebiet oberhalb der Salzach,Inn,9502.7
+230938,Kufstein (ÖBK),2017,Tirol,Inngebiet oberhalb der Salzach,Sparchenbach,34
+202242,Thiersee (Seepegel),2017,Tirol,Inngebiet oberhalb der Salzach,Thiersee,6
+202259,Thiersee,2017,Tirol,Inngebiet oberhalb der Salzach,Thierseebach,6.2
+201830,Rettenschöß,2017,Tirol,Inngebiet oberhalb der Salzach,Walchentaler Bach,3.9
+230912,Niederndorf (ÖBK),2017,Tirol,Inngebiet oberhalb der Salzach,Jennbach,37.6
+230102,Oberaudorf,2017,Deutschland,Inngebiet oberhalb der Salzach,Inn,9712
+201913,Kitzbühel (Bahnhofsbrücke),2017,Tirol,Inngebiet oberhalb der Salzach,Kitzbüheler Ache,153
+202622,Kirchberg i.T.,2017,Tirol,Inngebiet oberhalb der Salzach,Aschauer Ache,79.2
+202556,Kitzbühel (Seepegel),2017,Tirol,Inngebiet oberhalb der Salzach,Schwarzsee,1.8
+201921,Sperten,2017,Tirol,Inngebiet oberhalb der Salzach,Aschauer Ache,147.4
+206086,Furth (Ort),2017,Oberösterreich,Inngebiet unterhalb der Salzach,Schalchener Brunnbach,31.2
+204677,Jahrsdorf,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Mattig,446.9
+204685,Waldzell,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Waldzeller Ache,24
+204693,Mettmach,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Mettmach,30.4
+206748,Altheim,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Mühlheimer Ache,193
+206722,Lindlau,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Moosbach,39.1
+204701,Bauerding,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Lochbach,74.6
+204719,Mamling,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Ach,314.9
+206805,Danner,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Antiesen,55.6
+204727,Pramet,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Oberach,13.2
+204735,Ried im Innkreis (Ort),2017,Oberösterreich,Inngebiet unterhalb der Salzach,Rieder Bach,69.3
+204750,Haging,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Antiesen,164.9
+204768,Osternach,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Osternach,68.6
+206201,Schärding (Schreibpegel),2017,Oberösterreich,Inngebiet unterhalb der Salzach,Inn,25520
+206102,Pram,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Pram,14.2
+204784,Riedau,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Pram,60.2
+206326,Winertsham (Steg),2017,Oberösterreich,Inngebiet unterhalb der Salzach,Pram,128.1
+206268,Lohstampf,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Messenbach,39.3
+204826,Angsüß,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Pfudabach,64.1
+204834,Alfersham,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Pfudabach,81.3
+204842,Diersbach,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Diersbach,10.6
+204867,Pramerdorf,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Pram,340.9
+207019,Achleiten,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Donau,76653.3
+207027,Engelhartszell,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Donau,77089.7
+204875,Oberkappel,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Ranna,132.5
+206771,Koblmühle,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Kleine Mühl,43.7
+204883,Obermühl,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Kleine Mühl,200.2
+204891,Vorderanger,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Große Mühl,125.3
+204909,Pfaffetschlag,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Klafferbach,17.1
+204917,Furtmühle,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Große Mühl,256.4
+204925,Hartmannsdorf,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Steinerne Mühl,137.9
+201939,St. Johann in Tirol,2017,Tirol,Inngebiet oberhalb der Salzach,Kitzbüheler Ache,332.4
+201947,Almdorf,2017,Tirol,Inngebiet oberhalb der Salzach,Fieberbrunner Ache,165.9
+201954,Wohlmuting,2017,Tirol,Inngebiet oberhalb der Salzach,Großache,527.6
+202382,Kössen-Hütte,2017,Tirol,Inngebiet oberhalb der Salzach,Großache,701.4
+202549,Schwendt-Unterbichl,2017,Tirol,Inngebiet oberhalb der Salzach,Kohlenbach,47.9
+202234,Walchsee (Seepegel),2017,Tirol,Inngebiet oberhalb der Salzach,Walchsee,28.5
+202630,Kössen-Waidach,2017,Tirol,Inngebiet oberhalb der Salzach,Kohlenbach,100
+204107,Krimml,2017,Salzburg,Salzachgebiet,Krimmlerache,110.7
+203026,Wald i. Pzg.,2017,Salzburg,Salzachgebiet,Salzach,206.8
+203893,Kees,2017,Salzburg,Salzachgebiet,Obersulzbach,19.2
+203034,Sulzau,2017,Salzburg,Salzachgebiet,Obersulzbach,80.7
+203042,Neukirchen,2017,Salzburg,Salzachgebiet,Untersulzbach,40.5
+203596,Habach,2017,Salzburg,Salzachgebiet,Habach,45.3
+203067,Mühlbach (Pinzgau),2017,Salzburg,Salzachgebiet,Mühlbach,32.3
+203075,Mittersill,2017,Salzburg,Salzachgebiet,Salzach,582.6
+203083,Haidbach,2017,Salzburg,Salzachgebiet,Felber Ache,74.5
+203984,Stuhlfelden,2017,Salzburg,Salzachgebiet,Stuhlfeldnerbach,11.4
+203554,Uttendorf,2017,Salzburg,Salzachgebiet,Kraftwerk mit Stubache,127.9
+203109,Kaprun,2017,Salzburg,Salzachgebiet,Kapruner Ache,88.6
+203117,Zell am See (Seepegel),2017,Salzburg,Salzachgebiet,Zeller See,53.3
+203125,Bruck (Salzach),2017,Salzburg,Salzachgebiet,Salzach,1168.7
+203133,Ferleiten,2017,Salzburg,Salzachgebiet,Fuscher Ache,60.7
+203141,Bruck (Fuscher Ache),2017,Salzburg,Salzachgebiet,Fuscher Ache,161
+203158,Bucheben,2017,Salzburg,Salzachgebiet,Hüttwinkelache,96.1
+203166,Rauris (Unterland),2017,Salzburg,Salzachgebiet,Rauriser Ache,242.2
+203190,Böckstein,2017,Salzburg,Salzachgebiet,Naßfelder Bach,57.4
+203851,Böckstein (Summenpegel),2017,Salzburg,Salzachgebiet,Naßfelder Bach m.Werksk.,57.4
+203208,Bad Hofgastein,2017,Salzburg,Salzachgebiet,Gasteiner Ache,220.7
+203901,Wallnerau (Pegel),2017,Salzburg,Salzachgebiet,Salzach,2143
+203968,Wallnerau (Summenpegel),2017,Salzburg,Salzachgebiet,Salzach m. KW-Schwarzach,2143
+203224,Großarl,2017,Salzburg,Salzachgebiet,Großarler Ache,144.6
+204099,Tenneck,2017,Salzburg,Salzachgebiet,Blühnbach,71.7
+203265,Schwaighofbrücke,2017,Salzburg,Salzachgebiet,Lammer,171.7
+203927,Abtenau Au,2017,Salzburg,Salzachgebiet,Schwarzbach,26.9
+203307,Obergäu,2017,Salzburg,Salzachgebiet,Lammer,394.5
+203315,Torren,2017,Salzburg,Salzachgebiet,Torrener Bach,65.5
+203323,Golling,2017,Salzburg,Salzachgebiet,Salzach,3555.7
+203943,St. Nikolaus,2017,Salzburg,Salzachgebiet,Schwarzbach,3.1
+203364,St.Leonhard (Summenpegel),2017,Salzburg,Salzachgebiet,Berchtesgad.Ache m.Almk.,428.2
+203380,Salzburg (Staatsbrücke),2017,Salzburg,Salzachgebiet,Salzach,4402.2
+204297,Salzburg (Summenpegel),2017,Salzburg,Salzachgebiet,Salzach,4425.7
+203430,Itzling,2017,Salzburg,Salzachgebiet,Alterbach,29.7
+203422,Moos,2017,Salzburg,Salzachgebiet,Glanbach,26.5
+203448,Wallersee (Haltestelle),2017,Salzburg,Salzachgebiet,Wallersee,109.8
+203588,Wallersee,2017,Salzburg,Salzachgebiet,Wallersee,109.8
+204057,Seekirchen (Kläranlage),2017,Salzburg,Salzachgebiet,Fischach,119.4
+203455,Lengfelden,2017,Salzburg,Salzachgebiet,Fischach,159.4
+203463,Viehhofen,2017,Salzburg,Salzachgebiet,Saalach,150.8
+203471,Saalfelden,2017,Salzburg,Salzachgebiet,Urslaubach,119.5
+203489,Uttenhofen,2017,Salzburg,Salzachgebiet,Leogangbach,112.3
+203497,Weißbach,2017,Salzburg,Salzachgebiet,Saalach,543.2
+202267,St. Ulrich am Pillersee (Seepegel),2017,Tirol,Salzachgebiet,Pillersee,49.2
+203505,Lofer (Loferbach),2017,Salzburg,Salzachgebiet,Loferbach,107.4
+203570,Siezenheim,2017,Salzburg,Salzachgebiet,Saalach,1139.1
+203521,Siezenheim (Summenpegel),2017,Salzburg,Salzachgebiet,Saalach mit Werkskanälen,1139.1
+203844,Nußdorf,2017,Salzburg,Salzachgebiet,Oichtenbach,40.5
+203539,Oberndorf,2017,Salzburg,Salzachgebiet,Salzach,6120
+204537,Holzöster,2017,Oberösterreich,Salzachgebiet,Holzöstersee,1.3
+204545,Steinwag,2017,Oberösterreich,Salzachgebiet,Moosache,69.9
+203547,Au-St.Georgen bei Salzburg,2017,Salzburg,Salzachgebiet,Moosache,88.1
+203836,Untereching,2017,Salzburg,Salzachgebiet,Pladenbach,23.4
+204560,Ettenau,2017,Oberösterreich,Salzachgebiet,Salzach,6627.6
+206847,Ach,2017,Oberösterreich,Salzachgebiet,Salzach,6690.5
+206623,Österlehen,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Enknach,113.5
+203604,Mattsee (Seepegel),2017,Salzburg,Inngebiet unterhalb der Salzach,Niedertrumer See,10.4
+203612,Obertrum (Seepegel),2017,Salzburg,Inngebiet unterhalb der Salzach,Obertrumer See,58.4
+203620,Zellhof,2017,Salzburg,Inngebiet unterhalb der Salzach,Grabensee,64.8
+204131,Perwang Strandbad,2017,Salzburg,Inngebiet unterhalb der Salzach,Grabensee,64.5
+204586,Laimhausmühle,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Mattig,66.6
+206698,Elexlochen,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Berndorfer Bach,12
+204602,Lochen,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Mühlberger Bach,14.1
+204610,Pfaffstätt,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Mattig,136
+206052,Hocheck (Forsthaus),2017,Oberösterreich,Inngebiet unterhalb der Salzach,Schwemmbach,13.1
+204636,Friedburg,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Schwemmbach,82.2
+203638,Straßwalchen,2017,Salzburg,Inngebiet unterhalb der Salzach,Hainbach,40.6
+206730,Lengau,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Hainbach,48.1
+206250,Lengau (Basisableitung),2017,Oberösterreich,Inngebiet unterhalb der Salzach,Hainbach,58.9
+206839,Kolming,2017,Oberösterreich,Inngebiet unterhalb der Salzach,Schwemmbach,151.7
+206078,Furth (Bundesstraße),2017,Oberösterreich,Inngebiet unterhalb der Salzach,Schwemmbach,188.8
+200014,Bangs,2017,Vorarlberg,Rheingebiet,Rhein,4647.9
+200022,Gaschurn (VIW),2017,Vorarlberg,Rheingebiet,Ill,144.9
+200030,Gargellen,2017,Vorarlberg,Rheingebiet,Suggadinbach,39.3
+200048,Schruns (Vonbunweg),2017,Vorarlberg,Rheingebiet,Litz,102
+200055,Vandans (VIW),2017,Vorarlberg,Rheingebiet,Ill,511.5
+231662,Lorüns-Äule,2017,Vorarlberg,Rheingebiet,Ill,535.2
+200592,Klösterle (ÖBB),2017,Vorarlberg,Rheingebiet,Alfenz,66.6
+200097,Bürs (Brücke L82),2017,Vorarlberg,Rheingebiet,Alvier,72.2
+231670,Nenzing,2017,Vorarlberg,Rheingebiet,Ill,854.6
+200105,Garsella,2017,Vorarlberg,Rheingebiet,Lutz,95.5
+231688,Beschling,2017,Vorarlberg,Rheingebiet,Ill,1118.6
+200501,Amerlügen,2017,Vorarlberg,Rheingebiet,Samina,70
+200121,Frastanz,2017,Vorarlberg,Rheingebiet,Ill,1268.7
+200147,Gisingen,2017,Vorarlberg,Rheingebiet,Ill,1281
+200154,Laterns,2017,Vorarlberg,Rheingebiet,Frutz,33.4
+200642,Sulz,2017,Vorarlberg,Rheingebiet,Frutz,87
+200527,Brederis,2017,Vorarlberg,Rheingebiet,Ehbach,25.2
+200162,Meiningen (Güfel),2017,Vorarlberg,Rheingebiet,Ehbach,39.1
+200196,Lustenau (Höchster Brücke),2017,Vorarlberg,Rheingebiet,Rhein,6301.1
+200204,Enz,2017,Vorarlberg,Rheingebiet,Dornbirnerach,51.1
+200428,Schwarzach,2017,Vorarlberg,Rheingebiet,Schwarzach,17.7
+200212,Hoher Steg,2017,Vorarlberg,Rheingebiet,Dornbirnerach,112.9
+200576,Hohenems,2017,Vorarlberg,Rheingebiet,Emsbach,8.2
+200220,Lustenau (Hofsteig),2017,Vorarlberg,Rheingebiet,Rheintalbinnenkanal,77.5
+200410,Lauterach,2017,Vorarlberg,Rheingebiet,Dornbirnerach,195.6
+200246,Hopfreben,2017,Vorarlberg,Rheingebiet,Bregenzerach,41.7
+200253,Au,2017,Vorarlberg,Rheingebiet,Bregenzerach,149.3
+200261,Mellau,2017,Vorarlberg,Rheingebiet,Bregenzerach,228.6
+200493,Reuthe,2017,Vorarlberg,Rheingebiet,Bizauerbach,14.1
+200568,Reuthe (Wehr),2017,Vorarlberg,Rheingebiet,Bregenzerach,276.2
+200550,Bersbuch,2017,Vorarlberg,Rheingebiet,Bregenzerach,295.7
+200287,Schönenbach (Hengstig),2017,Vorarlberg,Rheingebiet,Subersach,31.1
+200295,Lingenau,2017,Vorarlberg,Rheingebiet,Subersach,111.6
+200584,Kälberweide,2017,Vorarlberg,Rheingebiet,Leckenbach,13.7
+200451,Hittisau (VKW),2017,Vorarlberg,Rheingebiet,Bolgenach,81.5
+200303,Krumbach-Zwing,2017,Vorarlberg,Rheingebiet,Weißach,199.3
+200311,Thal (Martinsbrücke),2017,Vorarlberg,Rheingebiet,Rotach,83.8
+200329,Kennelbach,2017,Vorarlberg,Rheingebiet,Bregenzerach,826.3
+200337,Bregenz (Hafen),2017,Vorarlberg,Rheingebiet,Bodensee,10907
+200345,Lochau,2017,Vorarlberg,Rheingebiet,Ruggbach,6.79
+200352,Unterhochsteg,2017,Vorarlberg,Rheingebiet,Leiblach,102.4
+200394,Unterhochsteg (Summenpegel),2017,Vorarlberg,Rheingebiet,Leiblach mit Werkskanal,102.4
+200360,Lech,2017,Vorarlberg,Donaugebiet oberhalb des Inn,Zürsbach,25.2
+200378,Lech (Tannbergbrücke),2017,Vorarlberg,Donaugebiet oberhalb des Inn,Lech,84.3
+201012,Steeg,2017,Tirol,Donaugebiet oberhalb des Inn,Lech,247.9
+201038,Grießau,2017,Tirol,Donaugebiet oberhalb des Inn,Lech,459.8
+201053,Vorderhornbach (Brücke),2017,Tirol,Donaugebiet oberhalb des Inn,Hornbach,64
+202226,Stanzach,2017,Tirol,Donaugebiet oberhalb des Inn,Namlosbach,66.4
+201087,Lechaschau,2017,Tirol,Donaugebiet oberhalb des Inn,Lech,1012.2
+202184,Seespitze,2017,Tirol,Donaugebiet oberhalb des Inn,Plansee,115.5
+202713,Tannheim (Seepegel),2017,Tirol,Donaugebiet oberhalb des Inn,Vilsalpsee,14.9
+202192,Grän (Seepegel),2017,Tirol,Donaugebiet oberhalb des Inn,Haldensee-Ausfluß,12
+201111,Vils (Lände),2017,Tirol,Donaugebiet oberhalb des Inn,Vils,198.1
+201129,Scharnitz (Karwendelbrücke),2017,Tirol,Donaugebiet oberhalb des Inn,Karwendelbach,48.1
+201095,Scharnitz (Weidach),2017,Tirol,Donaugebiet oberhalb des Inn,Isar,203.6
+202176,Seefeld (Seepegel),2017,Tirol,Donaugebiet oberhalb des Inn,Wildsee,6.9
+202143,Scharnitz (Gießenbach),2017,Tirol,Donaugebiet oberhalb des Inn,Gießenbach,65.1
+202127,Klamm,2017,Tirol,Donaugebiet oberhalb des Inn,Leutascher Ache,45
+201145,Pertisau (Seepegel),2017,Tirol,Donaugebiet oberhalb des Inn,Achensee,105.5
+202507,Biberwier (Seepegel),2017,Tirol,Donaugebiet oberhalb des Inn,Blindsee,6
+201152,Ehrwald (Viadukt),2017,Tirol,Donaugebiet oberhalb des Inn,Loisach,88.4
+201160,Schalklhof,2017,Tirol,Inngebiet oberhalb der Salzach,Schalklbach,107.8
+201178,Kajetansbrücke,2017,Tirol,Inngebiet oberhalb der Salzach,Inn,2162
+201194,Prutz,2017,Tirol,Inngebiet oberhalb der Salzach,Inn,2461.5
+230300,Gepatschalm,2017,Tirol,Inngebiet oberhalb der Salzach,Fagge,55
+202119,Platz-Loch,2017,Tirol,Inngebiet oberhalb der Salzach,Fagge,191.5
+201251,St. Anton am Arlberg-Moos,2017,Tirol,Inngebiet oberhalb der Salzach,Rosanna,130.6
+201210,Galtür-Au,2017,Tirol,Inngebiet oberhalb der Salzach,Trisanna,97.6
+201236,See i. P.,2017,Tirol,Inngebiet oberhalb der Salzach,Trisanna,385.4
+202036,Landeck-Bruggen,2017,Tirol,Inngebiet oberhalb der Salzach,Sanna,727
+201293,Landeck-Perjen,2017,Tirol,Inngebiet oberhalb der Salzach,Inn,3503.1
+202101,Nassereith (Wiesenmühle),2017,Tirol,Inngebiet oberhalb der Salzach,Gurglbach,78.3
+201319,Imst (Bahnhof),2017,Tirol,Inngebiet oberhalb der Salzach,Inn,3842
+201335,St. Leonhard im Pitztal,2017,Tirol,Inngebiet oberhalb der Salzach,Pitze,165.4
+202689,Vernagt,2017,Tirol,Inngebiet oberhalb der Salzach,Vernagtbach,11.4
+201350,Vent (oberh. Niedertalbach),2017,Tirol,Inngebiet oberhalb der Salzach,Rofenache,98.1
+201376,Obergurgl,2017,Tirol,Inngebiet oberhalb der Salzach,Gurgler Ache,72.5
+201392,Huben,2017,Tirol,Inngebiet oberhalb der Salzach,Ötztaler Ache,517.2
+230383,Fundusalm,2017,Tirol,Inngebiet oberhalb der Salzach,Fundusbach,13.1
+201434,Tumpen,2017,Tirol,Inngebiet oberhalb der Salzach,Ötztaler Ache,785.5
+202358,Oetz-Badeanstalt,2017,Tirol,Inngebiet oberhalb der Salzach,Piburger See,1.3
+202093,Kühtai,2017,Tirol,Inngebiet oberhalb der Salzach,Längentalbach,9.2
+230342,Brunau,2017,Tirol,Inngebiet oberhalb der Salzach,Ötztaler Ache,890
+201459,Magerbach,2017,Tirol,Inngebiet oberhalb der Salzach,Inn,5118.8
+230078,Telfs (Fußgängersteg),2017,Tirol,Inngebiet oberhalb der Salzach,Inn,5289.7
+201475,Zirl,2017,Tirol,Inngebiet oberhalb der Salzach,Inn,5420.2
+202069,Kniepiß,2017,Tirol,Inngebiet oberhalb der Salzach,Melach,52
+202077,Koflerkreuz,2017,Tirol,Inngebiet oberhalb der Salzach,Zirmbach,64.4
+230706,In der Au,2017,Tirol,Inngebiet oberhalb der Salzach,Melach,204.7
+201525,Innsbruck (oberh. Sill),2017,Tirol,Inngebiet oberhalb der Salzach,Inn,5771.6
+202200,Gries am Brenner (Seepegel),2017,Tirol,Inngebiet oberhalb der Salzach,Brennersee,18.3
+202275,Lueg,2017,Tirol,Inngebiet oberhalb der Salzach,Sill,22.2
+201533,Gries am Brenner,2017,Tirol,Inngebiet oberhalb der Salzach,Obernberger Seebach,58.3
+201640,Gries am Brenner (mit UW-Kanal),2017,Tirol,Inngebiet oberhalb der Salzach,Obernberger Seebach,58.3
+201558,St. Jodok am Brenner,2017,Tirol,Inngebiet oberhalb der Salzach,Valserbach,108.8
+201566,Steinach am Brenner,2017,Tirol,Inngebiet oberhalb der Salzach,Gschnitzbach,111.4
+201574,Puig,2017,Tirol,Inngebiet oberhalb der Salzach,Sill,341.8
+201582,Mühlen,2017,Tirol,Inngebiet oberhalb der Salzach,Navisbach,61.5
+202283,Krössbach,2017,Tirol,Inngebiet oberhalb der Salzach,Ruetz,127.5
+230714,Fulpmes,2017,Tirol,Inngebiet oberhalb der Salzach,Ruetz,280.9
+201624,Innsbruck-Reichenau,2017,Tirol,Inngebiet oberhalb der Salzach,Sill,854.4
+202572,Hall-West,2017,Tirol,Inngebiet oberhalb der Salzach,Inn,6685
+201657,Wattens,2017,Tirol,Inngebiet oberhalb der Salzach,Wattenbach,73.9
+201665,Weer,2017,Tirol,Inngebiet oberhalb der Salzach,Weerbach,72.8
+201673,Schwaz (Steinbrücke),2017,Tirol,Inngebiet oberhalb der Salzach,Inn,7129.8
+201681,Jenbach-Rotholz,2017,Tirol,Inngebiet oberhalb der Salzach,Inn,7230.7
+201699,Klaushof (Brücke),2017,Tirol,Inngebiet oberhalb der Salzach,Ziller,135.3
+202671,Tristach (Seepegel),2017,Tirol,Draugebiet,Tristacher See,1.73
+207811,Weitenegg,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Weitenbach,216.9
+205286,Mondsee (Limnolog.Institut),2017,Oberösterreich,Traungebiet,Mondsee,246.8
+203653,Fuschl,2017,Salzburg,Traungebiet,Fuschlsee,29.5
+203661,Hof bei Salzburg,2017,Salzburg,Traungebiet,Fuschler (Griesler) Ache,34.9
+205294,St. Lorenz,2017,Oberösterreich,Traungebiet,Griesler Ache,109
+205302,See am Mondsee,2017,Oberösterreich,Traungebiet,Mondsee,246.8
+206185,See am Mondsee (Au),2017,Oberösterreich,Traungebiet,Seeache,247.4
+205328,Unterach am Attersee,2017,Oberösterreich,Traungebiet,Attersee,459.7
+205336,Weißenbach am Attersee,2017,Oberösterreich,Traungebiet,Äusserer Weißenbach,31.2
+205344,Weißenbach am Attersee (Seepegel),2017,Oberösterreich,Traungebiet,Attersee,459.7
+205351,Kammer,2017,Oberösterreich,Traungebiet,Attersee,459.7
+205369,Raudaschlsäge,2017,Oberösterreich,Traungebiet,Ager,462.9
+206276,Dürnau,2017,Oberösterreich,Traungebiet,Ager,497.2
+205377,Stauf,2017,Oberösterreich,Traungebiet,Vöckla,99.7
+205385,Redl,2017,Oberösterreich,Traungebiet,Frankenburger Redl,58.1
+205393,Timelkam,2017,Oberösterreich,Traungebiet,Vöckla,331.5
+205401,St. Georgen im Attergau,2017,Oberösterreich,Traungebiet,Dürre Ager,51.4
+206383,Timelkam (Fußgängersteg),2017,Oberösterreich,Traungebiet,Dürre Ager,103.5
+209544,Scheiblingkirchen,2017,Niederösterreich,Leithagebiet,Schlattenbach,69.5
+208843,Bad Erlach,2017,Niederösterreich,Leithagebiet,Pitten,412.9
+208884,Wiener Neustadt (Straßenbrücke),2017,Niederösterreich,Leithagebiet,Leitha,1220.6
+209288,Zillingdorf,2017,Niederösterreich,Leithagebiet,Leitha,1242.2
+208900,Bad Fischau (Thermalbad),2017,Niederösterreich,Leithagebiet,Warme Fischa,1.6
+209593,Winzendorf (Siedlerstr.),2017,Niederösterreich,Leithagebiet,Prossetbach,33.4
+209585,Winzendorf (Frauenbachgasse),2017,Niederösterreich,Leithagebiet,Frauenbach,14.4
+208918,Wiener Neustadt (Reitweg),2017,Niederösterreich,Leithagebiet,Warme Fischa,92.5
+208926,Wiener Neustadt (Ostende),2017,Niederösterreich,Leithagebiet,Warme Fischa,196.5
+208934,Peisching (Brücke),2017,Niederösterreich,Leithagebiet,Kehrbach,0
+208942,Peisching,2017,Niederösterreich,Leithagebiet,Mühlbach,0
+208967,Katzelsdorf (EVN),2017,Niederösterreich,Leithagebiet,Katzelsdorfer Werkskanal,0
+208975,Wiener Neustadt (Flußbauhof),2017,Niederösterreich,Leithagebiet,Wiener Neustädter Kanal,0
+208983,Wiener Neustadt (J. Straußg.),2017,Niederösterreich,Leithagebiet,Kehrbach,0
+214031,Deutsch Brodersdorf (Messseilbahn),2017,Niederösterreich,Leithagebiet,Leitha,1598.9
+205419,Vöcklabruck,2017,Oberösterreich,Traungebiet,Vöckla,447.1
+205427,Schalchham,2017,Oberösterreich,Traungebiet,Ager,949.9
+205435,Aurachkirchen,2017,Oberösterreich,Traungebiet,Aurach,81
+205443,Pitzenberg,2017,Oberösterreich,Traungebiet,Staiger Bach,22.3
+205450,Fischerau,2017,Oberösterreich,Traungebiet,Ager,1256.1
+205468,Lambach (Traunbrücke),2017,Oberösterreich,Traungebiet,Traun,2740.9
+205476,Oberschwaig,2017,Oberösterreich,Traungebiet,Schwaiger Bach,45.8
+205484,Almsee,2017,Oberösterreich,Traungebiet,Almsee,41.4
+206508,Grünau,2017,Oberösterreich,Traungebiet,Alm,181.9
+205500,Friedlmühle,2017,Oberösterreich,Traungebiet,Alm,326.1
+206292,Au (Mittlere Au),2017,Oberösterreich,Traungebiet,Laudach,72.2
+205518,Penningersteg,2017,Oberösterreich,Traungebiet,Alm,445
+205526,Hafeld,2017,Oberösterreich,Traungebiet,Traun,3300
+206391,Wels-Lichtenegg,2017,Oberösterreich,Traungebiet,Traun,3387.1
+206516,Au bei der Traun,2017,Oberösterreich,Traungebiet,Welser Mühlbach,0
+206409,Wels-Lichtenegg (Summenstation),2017,Oberösterreich,Traungebiet,Traun m.Welser Mühlbach,3387.1
+205534,Oberschauersberg,2017,Oberösterreich,Traungebiet,Aiterbach,68.3
+209007,Deutsch Haslau,2017,Niederösterreich,Leithagebiet,Leitha,1982
+210443,Gattendorf (Schleuse),2017,Burgenland,Leithagebiet,Kleine Leitha,0
+210450,Deutsch-Jahrndorf (Albrechtmühle),2017,Burgenland,Leithagebiet,Kleine Leitha,0
+210013,Nickelsdorf (Kläranlage),2017,Burgenland,Leithagebiet,Leitha,2131.3
+210021,Nickelsdorf (Pötschring),2017,Burgenland,Leithagebiet,Komitatskanal,0
+210039,Piringsdorf (Pfarrbrücke),2017,Burgenland,Rabnitzgebiet,Rabnitz,117.7
+210054,Mannersdorf a. d. Rabnitz (Hansäcker),2017,Burgenland,Rabnitzgebiet,Rabnitz,224.3
+210062,Oberpullendorf (Fußgeherbrücke),2017,Burgenland,Rabnitzgebiet,Stoob,149
+210500,Lutzmannsburg (Weingartenbrücke),2017,Burgenland,Rabnitzgebiet,Rabnitz,554.8
+210070,Walbersdorf,2017,Burgenland,Rabnitzgebiet,Wulka,78.1
+210088,Wulkaprodersdorf (Bundesstraße B16),2017,Burgenland,Rabnitzgebiet,Wulka,220.1
+210328,Trausdorf an der Wulka,2017,Burgenland,Rabnitzgebiet,Wulka,235.9
+210393,Oslip,2017,Burgenland,Rabnitzgebiet,Eisbach,63.3
+210096,Schützen am Gebirge,2017,Burgenland,Rabnitzgebiet,Wulka,383.7
+210351,Breitenbrunn (Schilfzone),2017,Burgenland,Rabnitzgebiet,Neusiedler See,1230
+210138,Breitenbrunn (Seebad),2017,Burgenland,Rabnitzgebiet,Neusiedler See,1230
+205609,Holzermühle,2017,Oberösterreich,Traungebiet,Sipbach,22.4
+206607,Hörsching (Ort),2017,Oberösterreich,Traungebiet,Hörschinger Bach,20.5
+205633,Kirchdorf an der Krems,2017,Oberösterreich,Traungebiet,Krems,40.5
+205641,Kremsmünster (Ort),2017,Oberösterreich,Traungebiet,Krems,147.2
+206813,Unterrohr,2017,Oberösterreich,Traungebiet,Sulzbach,74.8
+205658,Kremsdorf,2017,Oberösterreich,Traungebiet,Krems,365.3
+205682,Ebelsberg,2017,Oberösterreich,Traungebiet,Traun,3985
+206573,Engerwitzdorf,2017,Oberösterreich,Donaugebiet zwischen Traun und Enns,Große Gusen,106.7
+206854,Unterweitersdorf,2017,Oberösterreich,Donaugebiet zwischen Traun und Enns,Kleine Gusen,76.6
+206375,St. Georgen an der Gusen (Bad),2017,Oberösterreich,Donaugebiet zwischen Traun und Enns,Gusen,257.7
+205690,St. Florian bei Linz,2017,Oberösterreich,Donaugebiet zwischen Traun und Enns,Ipfbach,86
+203703,Flachau,2017,Salzburg,Ennsgebiet,Enns,89.6
+203711,Altenmarkt im Pongau,2017,Salzburg,Ennsgebiet,Enns,134.5
+203729,Radstadt (Enns),2017,Salzburg,Ennsgebiet,Enns,189.7
+203737,Löbenau,2017,Salzburg,Ennsgebiet,Taurach,86.5
+203919,Forstau,2017,Salzburg,Ennsgebiet,Forstaubach,57.2
+210146,Neusiedl am See (Seebad),2017,Burgenland,Rabnitzgebiet,Neusiedler See,1230
+210369,Gols,2017,Burgenland,Rabnitzgebiet,Golser Kanal,34.1
+210153,Podersdorf am See (Badebucht),2017,Burgenland,Rabnitzgebiet,Neusiedler See,1230
+210179,Illmitz (Biologische Station),2017,Burgenland,Rabnitzgebiet,Neusiedler See,1230
+210112,Rust (Seebad),2017,Burgenland,Rabnitzgebiet,Neusiedler See,1230
+210120,Mörbisch am See (Zoll),2017,Burgenland,Rabnitzgebiet,Neusiedler See,1230
+210187,Apetlon Staatsgrenzpunkt (A79),2017,Burgenland,Rabnitzgebiet,Neusiedler See,1230
+215020,Deutschkreutz,2017,Burgenland,Rabnitzgebiet,Goldbach,16.7
+210955,Arzberg (Moderbach),2017,Steiermark,Raabgebiet,Moderbach,82.4
+211698,Arzberg (Raab),2017,Steiermark,Raabgebiet,Raab,119.1
+211599,Mitterdorf an der Raab,2017,Steiermark,Raabgebiet,Raab,183.7
+210963,Unterfladnitz,2017,Steiermark,Raabgebiet,Weizbach,93.7
+211706,St.Ruprecht a. d. R. (Raab),2017,Steiermark,Raabgebiet,Raab,300.8
+211888,Flöcking,2017,Steiermark,Raabgebiet,Rabnitzbach,94
+210971,Takern II,2017,Steiermark,Raabgebiet,Raab,498.9
+210989,Feldbach,2017,Steiermark,Raabgebiet,Raab,689.4
+210468,Neumarkt,2017,Burgenland,Raabgebiet,Raab,986.5
+210625,Tetter,2017,Steiermark,Ennsgebiet,Unterthaler Bach,65.2
+210641,Schladming,2017,Steiermark,Ennsgebiet,Enns,648.8
+210674,Aich,2017,Steiermark,Ennsgebiet,Enns,807.5
+210740,Trautenfels,2017,Steiermark,Ennsgebiet,Enns,1519
+210732,Irdning,2017,Steiermark,Ennsgebiet,Donnersbach (Irdningbach),194.3
+210773,Aigen im Ennstal-Ketten,2017,Steiermark,Ennsgebiet,Gulling,155.9
+210799,Liezen (Röthelbrücke),2017,Steiermark,Ennsgebiet,Enns,2132
+210815,Selzthal,2017,Steiermark,Ennsgebiet,Paltenbach,368.7
+210823,Admont (Enns),2017,Steiermark,Ennsgebiet,Enns,2651
+210856,Hieflau,2017,Steiermark,Ennsgebiet,Erzbach,245.3
+210864,Gußwerk,2017,Steiermark,Ennsgebiet,Salza,280
+210880,Weichselboden,2017,Steiermark,Ennsgebiet,Radmerbach (Buchbach),54.1
+210898,Wildalpen,2017,Steiermark,Ennsgebiet,Salza,592.3
+206763,Platzl,2017,Oberösterreich,Ennsgebiet,Laussabach,93.5
+205732,Weyer Markt,2017,Oberösterreich,Ennsgebiet,Gaflenzbach,87.3
+206540,Pechgraben,2017,Oberösterreich,Ennsgebiet,Pechgraben,24.6
+206367,Große Klause,2017,Oberösterreich,Ennsgebiet,Reichramingbach,78.1
+205740,Reichraming,2017,Oberösterreich,Ennsgebiet,Reichramingbach,168.6
+210997,Rohrbach an der Lafnitz,2017,Steiermark,Raabgebiet,Lafnitz,268.5
+211680,Hammerkastell,2017,Steiermark,Raabgebiet,Lafnitz,285.5
+210203,Markt Allhau (Musserbrücke),2017,Burgenland,Raabgebiet,Stögersbach,70.8
+211003,Wörth an der Lafnitz,2017,Steiermark,Raabgebiet,Lafnitz,439.4
+211623,Pöllau (Prätisbach-II),2017,Steiermark,Raabgebiet,Prätisbach,21.1
+211631,Pöllau (Saifenbach),2017,Steiermark,Raabgebiet,Saifenbach,57.5
+211011,Waltersdorf in Oststeiermark,2017,Steiermark,Raabgebiet,Safenbach,343.4
+210211,Dobersdorf,2017,Burgenland,Raabgebiet,Lafnitz,925.1
+211722,Rettenegg,2017,Steiermark,Raabgebiet,Feistritz,43
+211029,Anger,2017,Steiermark,Raabgebiet,Feistritz,408
+211037,Neudorf bei Ilz,2017,Steiermark,Raabgebiet,Ilzbach,190.1
+211912,Ottendorf,2017,Steiermark,Raabgebiet,Rittscheinbach,29
+210401,Eltendorf (Hackenwiesen),2017,Burgenland,Raabgebiet,Lafnitz,1956.3
+210419,Pinkafeld,2017,Burgenland,Raabgebiet,Pinka,134.1
+210229,Oberwart (Landeshauptstraße L382),2017,Burgenland,Raabgebiet,Pinka,171.7
+215012,Siget in der Wart,2017,Burgenland,Raabgebiet,Zickenbach,118.8
+210237,Woppendorf,2017,Burgenland,Raabgebiet,Pinka,416.9
+205757,Jägerberg,2017,Oberösterreich,Ennsgebiet,Enns,4996.1
+205765,Dietlgut,2017,Oberösterreich,Ennsgebiet,Steyr,25.2
+206425,Hinterstoder (Weißenbach),2017,Oberösterreich,Ennsgebiet,Weißenbach,16.6
+205773,Polsterlucke,2017,Oberösterreich,Ennsgebiet,Krumme Steyr,15.6
+205781,Hinterstoder,2017,Oberösterreich,Ennsgebiet,Steyr,81.8
+205799,Kniewas,2017,Oberösterreich,Ennsgebiet,Steyr,184.9
+205807,Spital am Pyhrn,2017,Oberösterreich,Ennsgebiet,Teichl,40.2
+205815,Windischgarsten,2017,Oberösterreich,Ennsgebiet,Dambach,67
+205823,Teichlbrücke,2017,Oberösterreich,Ennsgebiet,Teichl,148.6
+206482,Roßleithen,2017,Oberösterreich,Ennsgebiet,Pießling,9.5
+206821,Roßleithen (Klammstein),2017,Oberösterreich,Ennsgebiet,Hinterer Rettenbach,15.4
+205831,St. Pankraz,2017,Oberösterreich,Ennsgebiet,Teichl,232.8
+206524,Spering,2017,Oberösterreich,Ennsgebiet,Vorderer Rettenbach,15
+205856,Steyrling,2017,Oberösterreich,Ennsgebiet,Steyrling,72.4
+205864,Klaus an der Pyhrnbahn,2017,Oberösterreich,Ennsgebiet,Steyr,542.4
+205872,Dandelmühle,2017,Oberösterreich,Ennsgebiet,Paltenbach,43
+205880,Innerbreitenau,2017,Oberösterreich,Ennsgebiet,Krumme Steyrling,99.6
+210245,Altschlaining,2017,Burgenland,Raabgebiet,Tauchenbach,89.2
+210252,Hannersdorf,2017,Burgenland,Raabgebiet,Tauchenbach,175.4
+210260,Burg,2017,Burgenland,Raabgebiet,Pinka,664.1
+215038,Moschendorf,2017,Burgenland,Raabgebiet,Pinka,791
+210476,Bocksdorf,2017,Burgenland,Raabgebiet,Strem,89.2
+210484,Rauchwart,2017,Burgenland,Raabgebiet,Strem,94.4
+210286,Güssing (Kulturzentrum),2017,Burgenland,Raabgebiet,Strem,316.4
+210294,Heiligenbrunn,2017,Burgenland,Raabgebiet,Strem,400.4
+210302,Kirchschlag in der Buckl.Welt,2017,Niederösterreich,Raabgebiet,Zöbernbach,113.6
+210310,Rattersdorf,2017,Burgenland,Raabgebiet,Güns,265.3
+203745,Muhr,2017,Salzburg,Murgebiet,Mur,75.7
+203828,Unterweißburg,2017,Salzburg,Murgebiet,Zederhausbach,161.9
+203752,St.Michael i. Lg. (Mur),2017,Salzburg,Murgebiet,Mur,289.2
+203794,Mörtelsdorf,2017,Salzburg,Murgebiet,Mur,366.9
+203760,Mauterndorf,2017,Salzburg,Murgebiet,Taurach,102.1
+203778,Weißpriach,2017,Salzburg,Murgebiet,Weißpriach,77.1
+203992,St.Andrä,2017,Salzburg,Murgebiet,Göriachbach,48.4
+205898,Molln,2017,Oberösterreich,Ennsgebiet,Krumme Steyrling,129.4
+205583,Leonstein,2017,Oberösterreich,Ennsgebiet,Schmiedleitnerbach,20.9
+205914,Pergern,2017,Oberösterreich,Ennsgebiet,Steyr,898.1
+205922,Steyr (Ortskai),2017,Oberösterreich,Ennsgebiet,Enns,5915.4
+206599,Steyr (Zollamt),2017,Oberösterreich,Ennsgebiet,Ramingbach,71.1
+207084,Mauthausen (Strom-km 2110.98),2017,Oberösterreich,Donaugebiet zwischen Enns und March,Donau,90601.2
+205948,Freistadt (Hafnerzeile),2017,Oberösterreich,Donaugebiet zwischen Enns und March,Feldaist,63.9
+206581,Kefermarkt,2017,Oberösterreich,Donaugebiet zwischen Enns und March,Feldaist,189.2
+206680,Weitersfelden,2017,Oberösterreich,Donaugebiet zwischen Enns und March,Wald-(Schwarze) Aist,101.7
+205971,Pfahnlmühle,2017,Oberösterreich,Donaugebiet zwischen Enns und March,Waldaist,266.1
+205989,Schwertberg (Kaolinwerk),2017,Oberösterreich,Donaugebiet zwischen Enns und March,Aist,604.7
+209247,St. Pantaleon (Süd),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Erlabach,91.8
+207431,Wallsee,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,91461.3
+205997,Königswiesen (Ort),2017,Oberösterreich,Donaugebiet zwischen Enns und March,Große Naarn,80.4
+206003,Unterweißenbach,2017,Oberösterreich,Donaugebiet zwischen Enns und March,Kleine Naarn,36.9
+206029,Haid,2017,Oberösterreich,Donaugebiet zwischen Enns und March,Naarn,303.1
+204008,Lessach,2017,Salzburg,Murgebiet,Lessachbach,70.2
+203786,Tamsweg (Taurach),2017,Salzburg,Murgebiet,Taurach,377.9
+203802,Tamsweg (Mur),2017,Salzburg,Murgebiet,Mur,803.3
+203810,Madling,2017,Salzburg,Murgebiet,Thomatalbach,84.9
+203976,Kendlbruck,2017,Salzburg,Murgebiet,Mur,955
+211086,Gestüthof,2017,Steiermark,Murgebiet,Mur,1700.3
+211995,Katsch,2017,Steiermark,Murgebiet,Katschbach,176
+211102,St.Georgen ob Judenburg,2017,Steiermark,Murgebiet,Mur,2367.5
+214775,Hinterwinkel,2017,Steiermark,Murgebiet,Pusterwaldbach,25.3
+211128,Pöls,2017,Steiermark,Murgebiet,Pöls,422
+211136,Zeltweg,2017,Steiermark,Murgebiet,Mur,2957.5
+211730,Eppenstein,2017,Steiermark,Murgebiet,Granitzenbach,153.1
+211920,Hammerjäger,2017,Steiermark,Murgebiet,Ingeringbach,198.5
+211169,Kammern im Liesingtal,2017,Steiermark,Murgebiet,Liesingbach,265.6
+211193,St. Peter/Freienstein,2017,Steiermark,Murgebiet,Vordernberger Bach,167.3
+214536,Totes Weib,2017,Steiermark,Murgebiet,Mürz,103.7
+211227,Neuberg an der Mürz,2017,Steiermark,Murgebiet,Mürz,231.5
+206037,Sturmmühle,2017,Oberösterreich,Donaugebiet zwischen Enns und March,Klambach,87.6
+207100,Grein (Schiffsstation),2017,Oberösterreich,Donaugebiet zwischen Enns und March,Donau,92082.4
+206227,Waldhausen (Seeausfluß),2017,Oberösterreich,Donaugebiet zwischen Enns und March,Sarmingbach,42.5
+207613,Isperdorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Isper,164.7
+207126,Ybbs an der Donau,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,92464.2
+209551,Lunz am See (Seestraße),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Ois,117.9
+214262,Lunz am See (Wassercluster),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Lunzer See,24.7
+214445,Lunz am See (Wassercluster-Summe),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Lunzer See,24.7
+214254,Göstling (Weidenauer Brücke),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Ybbs,315.1
+207654,Opponitz (Mirenau),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Ybbs,506.9
+209130,Ybbsitz (Obergurhof),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kleine Ybbs,98.5
+207696,Krenstetten,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Urlbach,155.8
+207688,Greimpersdorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Ybbs,1116.6
+207704,Mitterbach (Brücke),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Große Erlauf,29.7
+207712,Wienerbruck,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Ötscherbach,36.1
+211243,Kindtal,2017,Steiermark,Murgebiet,Mürz,727.7
+211862,Edelsdorf,2017,Steiermark,Murgebiet,Stanzbach,78.9
+211250,Hansenhütte,2017,Steiermark,Murgebiet,Thörlbach,324.2
+211268,Kapfenberg-Diemlach,2017,Steiermark,Murgebiet,Mürz,1364.5
+211276,Arndorf,2017,Steiermark,Murgebiet,Lamingbach,153.4
+211292,Bruck an der Mur unter Mürz,2017,Steiermark,Murgebiet,Mur,6214
+211300,Frohnleiten,2017,Steiermark,Murgebiet,Mur,6548
+211649,Deutschfeistritz,2017,Steiermark,Murgebiet,Übelbach,117.8
+211763,Friesach,2017,Steiermark,Murgebiet,Mur,6791.5
+211326,Graz,2017,Steiermark,Murgebiet,Mur,6993.3
+211573,Graz m. MK,2017,Steiermark,Murgebiet,Mur mit Mühlkanal,6993.3
+211847,Mellach,2017,Steiermark,Murgebiet,Mur,7295.5
+211870,Mellach m. MK,2017,Steiermark,Murgebiet,Mur mit Mühlkanal,7295.5
+211334,Voitsberg,2017,Steiermark,Murgebiet,Kainach,210.5
+211953,Hitzendorf,2017,Steiermark,Murgebiet,Liebochbach,50
+211342,Lieboch,2017,Steiermark,Murgebiet,Kainach,756.2
+211896,Gerbersdorf,2017,Steiermark,Murgebiet,Stiefing,80
+211391,Wies,2017,Steiermark,Murgebiet,Weiße Sulm,69.9
+207720,Reith,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Großer Lassingbach,23.2
+208850,Erlaufboden (EVN),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Große Erlauf,135.7
+207738,Kienberg (Neuhaus),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Große Erlauf,203.3
+207746,Gaming,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Gamingbach,51.5
+207787,Neubruck,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Jeßnitz,32.2
+209882,Scheibbs (Kardinal König Brücke),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Große Erlauf,330.2
+209403,Schliefau,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Schliefaubach,17.7
+209817,Wang,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kleine Erlauf,127.6
+207795,Wieselburg (Messegelände),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kleine Erlauf,167.5
+207803,Niederndorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Erlauf,604.9
+209387,Laimbach,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Laimbach,10.6
+207134,Melk (Strom-km 2035.98),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,94813.3
+209197,Lachau,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Melk,95.2
+207829,Hörsdorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Mank,37.6
+207837,Matzleinsdorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Melk,284.6
+211383,Schwanberg,2017,Steiermark,Murgebiet,Schwarze Sulm,75.2
+211961,Hörmsdorf,2017,Steiermark,Murgebiet,Saggaubach,56
+211656,Gündorf,2017,Steiermark,Murgebiet,Saggaubach,201.9
+211664,Frauental (Laßnitz),2017,Steiermark,Murgebiet,Laßnitz,85.3
+211813,Frauental (Wildbach),2017,Steiermark,Murgebiet,Wildbach,50.5
+211797,Wettmannstätten,2017,Steiermark,Murgebiet,Laßnitz,216.4
+211854,Wieselsdorf,2017,Steiermark,Murgebiet,Stainzbach,144.8
+211805,Zehndorf,2017,Steiermark,Murgebiet,Gleinzbach,37.8
+211441,Tillmitsch,2017,Steiermark,Murgebiet,Laßnitz,480.4
+211458,Leibnitz,2017,Steiermark,Murgebiet,Sulm,1102.5
+211466,Spielfeld,2017,Steiermark,Murgebiet,Mur,9480
+211474,Lipsch,2017,Steiermark,Murgebiet,Schwarzaubach,124.2
+211490,Mureck (Schreibpegel),2017,Steiermark,Murgebiet,Mur,9769.9
+211516,Mureck mit Ausleitungsgerinne,2017,Steiermark,Murgebiet,Mur,9769.9
+211508,Fluttendorf,2017,Steiermark,Murgebiet,Gnasbach,119.3
+202523,Arnbach,2017,Tirol,Draugebiet,Drau,162.1
+207845,Schwarzenbach/Pielach (Guttenhof),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Pielach,42.2
+214312,Loich,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Pielach,144.5
+207852,Hofstetten (Bad),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Pielach,289.5
+207860,Großsierning,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Sierningbach,87.7
+209502,Elsarn,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Spitzer Bach,48.6
+207357,Kienstock,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,95970
+207142,Stein-Krems,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,96044.8
+207878,Imbach,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Krems,305.9
+214304,Furth (Feuerwehrhaus),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Fladnitz,162.4
+209361,Türnitz Markt,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Türnitztraisen,103
+209536,St. Aegyd am Neuwalde (Eisenwerk),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Unrechttraisen,53.9
+208868,Hohenberg (Süd),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Unrechttraisen,104
+207894,Lilienfeld-Marktl,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Traisen,345.2
+208793,Ramsau (Zentrum),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Ramsaubach,40.1
+212225,Ausservillgraten,2017,Tirol,Draugebiet,Winkeltalbach,62.2
+212027,Rabland,2017,Tirol,Draugebiet,Drau,374
+231092,Lienz-Falkensteinsteg,2017,Tirol,Draugebiet,Drau,668
+212043,Hinterbichl,2017,Tirol,Draugebiet,Isel,107
+212050,Hinterbichl (Mühle),2017,Tirol,Draugebiet,Dorferbach,35
+212233,Hinterbichl (Mühle. mit UW-Kanal),2017,Tirol,Draugebiet,Dorferbach,35
+212183,Waier,2017,Tirol,Draugebiet,Isel,285.3
+212068,Innergschlöß,2017,Tirol,Draugebiet,Gschlößbach,39.3
+212076,Matreier Tauernhaus,2017,Tirol,Draugebiet,Tauernbach,59.9
+212084,Prossegg,2017,Tirol,Draugebiet,Tauernbach,197.2
+212092,Brühl,2017,Tirol,Draugebiet,Isel,518.4
+212100,Hopfgarten i. Def.-Zwenewald,2017,Tirol,Draugebiet,Schwarzach,268.6
+212118,Spöttling,2017,Tirol,Draugebiet,Kalser Bach,47
+212126,Spöttling-Taurer,2017,Tirol,Draugebiet,Teischnitzbach,13.9
+212159,St. Johann im Walde (Brücke),2017,Tirol,Draugebiet,Isel,1077.8
+212167,Lienz,2017,Tirol,Draugebiet,Isel,1198.7
+212316,Lienz-Peggetz,2017,Tirol,Draugebiet,Drau,1876.2
+212217,Obernußdorf,2017,Tirol,Draugebiet,Debantbach,56.8
+209445,Haxenmühle,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Halbach,91.8
+207902,St. Veit an der Gölsen,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Gölsen,211.1
+207910,Windpassing,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Traisen,733.3
+208777,Herzogenburg (Straßenbrücke),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Traisen,823.7
+207951,Neustift,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kamp,76.7
+207936,Zwettl (Sportplatz),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Zwettl,269.1
+207944,Zwettl (Bahnbrücke),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kamp,621.8
+207969,Kaltenbrunn,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Purzelkamp,33.5
+207977,Rastenberg,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Purzelkamp,94.5
+207985,Rosenburg (EVN),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kamp,1150.2
+209338,Frauenhofen,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Taffa,140
+208520,Rosenburg,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Taffa,221.5
+207993,Stiefern,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kamp,1493.3
+207365,Bärndorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,99426.2
+209486,Böheimkirchen,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Perschling,55.3
+212324,Oberdrauburg-OWF,2017,Kärnten,Draugebiet,Drau,2112
+213660,Dellach-OWF,2017,Kärnten,Draugebiet,Drau,2197.3
+212357,Sachsenburg (Brücke),2017,Kärnten,Draugebiet,Drau,2561.4
+213926,Heiligenblut-OWF,2017,Kärnten,Draugebiet,Möll,142.1
+212373,Winklern,2017,Kärnten,Draugebiet,Möll,412.1
+213124,Flattach,2017,Kärnten,Draugebiet,Möll,705.3
+212381,Mallnitz,2017,Kärnten,Draugebiet,Mallnitzbach,85.3
+213447,Zandlacher Hütte,2017,Kärnten,Draugebiet,Riekenbach,12.6
+212399,Kolbnitz a. d. Tauernbahn VHP,2017,Kärnten,Draugebiet,Möll,1043.8
+212407,Möllbrücke,2017,Kärnten,Draugebiet,Möll,1096
+213199,Drauhofen,2017,Kärnten,Draugebiet,Drau,3674.4
+213207,Gries,2017,Kärnten,Draugebiet,Lieser,56.5
+212431,Gmünd-OWF,2017,Kärnten,Draugebiet,Lieser,360.1
+212456,Ochsenhütte-Hochalm,2017,Kärnten,Draugebiet,Hochalmbach,9.3
+212472,Pflüglhof,2017,Kärnten,Draugebiet,Malta,131.3
+212498,Sandriesen,2017,Kärnten,Draugebiet,Malta,266
+213686,Alte Schmiede,2017,Kärnten,Draugebiet,St.Oswalder Bach,13.5
+208009,Atzenbrugg (Bundesstraßenbrücke),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Perschling,268.3
+208017,Siegersdorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Große Tulln,202.3
+209569,Sieghartskirchen (Steg),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kleine Tulln,68.5
+209411,Unterkirchbach,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Hagenbach,5.7
+207175,Greifenstein,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,100343
+209643,Eggenburg (Kläranlage),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kleine Schmida,22.3
+208041,Hollenstein,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Schmida,212
+209635,Kleinstetteldorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kleiner Göllersbach,86.9
+208058,Obermallebarn,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Göllersbach,379.9
+207241,Korneuburg,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,101536
+209460,Klosterneuburg (Prägarten),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Weidlingbach,33.2
+207183,Wien (Nußdorf),2017,Wien,Donaugebiet zwischen Enns und March,Donau,101700
+207217,Wien (Kagraner Brücke),2017,Wien,Donaugebiet zwischen Enns und March,Alte Donau,0
+207209,Wien (Brigittenau),2017,Wien,Donaugebiet zwischen Enns und March,Donaukanal,0
+207225,Wien (Heiligenstädter Brücke),2017,Wien,Donaugebiet zwischen Enns und March,Donaukanal,0
+213181,Döbriach,2017,Kärnten,Draugebiet,Rieger Bach,188.8
+212514,Millstatt (See),2017,Kärnten,Draugebiet,Millstätter See,286.3
+212522,Seebrücke,2017,Kärnten,Draugebiet,Millstätter Seebach,286.6
+212530,Spittal (Fasan),2017,Kärnten,Draugebiet,Lieser,1035.5
+213215,Amlach,2017,Kärnten,Draugebiet,Drau,4789.6
+212563,Techendorf,2017,Kärnten,Draugebiet,Weißensee,48.4
+213454,Gassen,2017,Kärnten,Draugebiet,Stockenboier Weißenbach,153.4
+213462,Himmelberg,2017,Kärnten,Draugebiet,Tiebel,38.5
+213876,Feldkirchen (Tiebel),2017,Kärnten,Draugebiet,Tiebel,60.2
+213231,Sonnberg,2017,Kärnten,Draugebiet,Tiebel,86.9
+213272,St.Andrä-OWF,2017,Kärnten,Draugebiet,Ossiacher See,165.4
+212597,Urlaken-OWF,2017,Kärnten,Draugebiet,Ossiacher Seebach,169.7
+213116,Töbring,2017,Kärnten,Draugebiet,Treffner Bach,140.1
+212613,Maria Luggau (Moos),2017,Kärnten,Draugebiet,Gail,146.1
+212647,Mauthen,2017,Kärnten,Draugebiet,Gail,348.6
+212670,Rattendorf,2017,Kärnten,Draugebiet,Gail,594.9
+212704,Neudorf,2017,Kärnten,Draugebiet,Gösseringbach,75.2
+212746,Presseggen,2017,Kärnten,Draugebiet,Pressegger See,29.6
+209916,Hadersdorf-Weidlingau,2017,Wien,Donaugebiet zwischen Enns und March,Wien,110
+209890,Mauerbachstraße,2017,Wien,Donaugebiet zwischen Enns und March,Mauerbach,35.1
+209908,Großmarktstraße,2017,Wien,Donaugebiet zwischen Enns und March,Liesing,94.9
+209353,Oberlaa,2017,Wien,Donaugebiet zwischen Enns und March,Liesing,101.7
+214395,Petersbaumgarten,2017,Niederösterreich,Leithagebiet,Pitten,271.1
+213611,Bad Eisenkappel,2017,Kärnten,Draugebiet,Ebriacher Bach,69.5
+207233,Wien (Schwedenbrücke),2017,Wien,Donaugebiet zwischen Enns und March,Donaukanal,0
+208066,Tullnerbach (Hydro),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Wien,32
+209627,Purkersdorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Gablitzbach,23
+208082,Kennedybrücke,2017,Wien,Donaugebiet zwischen Enns und March,Wien,199.4
+209478,Klausenleopoldsdorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Schwechat,56.3
+208090,Cholerakapelle,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Schwechat,181
+209783,Baden (Schloßgasse),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Mühlbach,0
+209718,Traiskirchen,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Schwechat,265.7
+208108,Mödling,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Mödling,59
+208116,Fahrafeld,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Triesting,186
+208124,Hirtenberg,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Triesting,287.3
+209346,Hennersdorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Petersbach,20
+208132,Paul Katzbergergasse,2017,Wien,Donaugebiet zwischen Enns und March,Liesing,59
+208157,Schwechat (Hallenbad),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Schwechat,1028.9
+212753,Nötsch,2017,Kärnten,Draugebiet,Gail,908.5
+212761,Thörl,2017,Kärnten,Draugebiet,Gailitz,188
+212787,Federaun,2017,Kärnten,Draugebiet,Gail,1304.9
+212795,Faak (Bundessportheim),2017,Kärnten,Draugebiet,Faaker See,35.6
+212837,Tscheppaschlucht,2017,Kärnten,Draugebiet,Loiblbach,44
+212852,Miklauzhof,2017,Kärnten,Draugebiet,Vellach,194.3
+212860,Maitratten,2017,Kärnten,Draugebiet,Gurk,201.4
+212878,Urschwirtbrücke,2017,Kärnten,Draugebiet,Gurk,230.3
+213769,Deutsch Griffen,2017,Kärnten,Draugebiet,Griffenbach,29.5
+212886,Weitensfeld (Ost),2017,Kärnten,Draugebiet,Gurk,431.8
+213306,Grades,2017,Kärnten,Draugebiet,Metnitz,144.6
+213405,Guldendorf,2017,Kärnten,Draugebiet,Olsabach,161.8
+212894,Hirt,2017,Kärnten,Draugebiet,Metnitz,469.4
+213397,Mölbling,2017,Kärnten,Draugebiet,Gurk,1061
+213355,Passering,2017,Kärnten,Draugebiet,Silberbach,86.9
+213157,Launsdorf,2017,Kärnten,Draugebiet,Gurk,1243.1
+213777,Mühlen (Brücke),2017,Kärnten,Draugebiet,Steyerbach,37.5
+212928,Hüttenberg,2017,Kärnten,Draugebiet,Görtschitz,130.3
+208165,Ebreichsdorf (Golfplatz),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kalter Gang,11.6
+208199,Schwechat (Rathauspark),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Kalter Gang,112.8
+207258,Fischamend (Sporthafen),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,103312
+208231,Schranawand,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Fischa,66.7
+208272,Gutenstein (Kirche),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Piesting,50.3
+208140,Oed (Brücke),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Piesting,226
+208280,Wöllersdorf (Hydro),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Piesting,284.1
+208298,Wöllersdorf (Ausleitung),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Tiroler Bach,0
+208306,Tattendorf,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Piesting,315
+208397,Moosbrunn (Feuchtland),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Schlauchgraben,0
+208405,Gramatneusiedl,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Jesuitenbach,0
+208413,Marienthal (Bahnbrücke),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Fischa,417.3
+208421,Reisenberg,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Reisenbach,19
+208439,Fischamend (Rohrbrücke),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Fischa,534.9
+207423,Orth an der Donau,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,103934
+212936,Brückl,2017,Kärnten,Draugebiet,Görtschitz,315.6
+213801,St.Georgen,2017,Kärnten,Draugebiet,Längsee,5
+213322,Mauthbrücken-OWF,2017,Kärnten,Draugebiet,Glan,87.2
+213256,Breitenstein,2017,Kärnten,Draugebiet,Wimitz,106.5
+213827,St.Veit,2017,Kärnten,Draugebiet,Glan,380.7
+213330,Wölfnitz,2017,Kärnten,Draugebiet,Wölfnitzbach,57.4
+213934,Klagenfurt_OWF,2017,Kärnten,Draugebiet,Glan,554.5
+213488,Keutschach (See),2017,Kärnten,Draugebiet,Keutschacher See,29.8
+213496,Reifnitz,2017,Kärnten,Draugebiet,Reifnitzbach,33.2
+212985,Pörtschach am Wörther See,2017,Kärnten,Draugebiet,Wörther See,162.1
+213009,Viktring,2017,Kärnten,Draugebiet,Viktringer Bach,14.6
+213017,Stein,2017,Kärnten,Draugebiet,Steiner Bach,19.2
+213025,Weinländer,2017,Kärnten,Draugebiet,Glanfurt,201.3
+213033,Zell,2017,Kärnten,Draugebiet,Glan,817.9
+213041,Gumisch,2017,Kärnten,Draugebiet,Gurk,2555.4
+213348,Unterburg,2017,Kärnten,Draugebiet,Klopeiner See,4.1
+213504,Völkermarkt,2017,Kärnten,Draugebiet,Wurlabach,49.8
+204933,Teufelmühle,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Große Mühl,453.5
+207035,Wehrstelle KW Aschach,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Donau,78190
+207043,Aschach an der Donau (Agentie),2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Donau,78194.9
+205047,Neumarkt im Hausruckkreis,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Dürre Aschach,25.8
+206151,Edtmühle,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Faule Aschach,56.4
+206169,Niederspaching,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Aschach,101.9
+206177,Knotzberg,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Leitenbach,48.4
+205054,Kropfmühle,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Aschach,312.2
+205070,Pfaffing,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Aschach,351.7
+206565,HWR-Becken Leithen (Ausfluß),2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Trattnach,19.8
+204974,Strötting,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Trattnach,54
+204990,Still,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Stillbach,19.8
+205013,Grieskirchen,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Trattnach,135.9
+205021,Bad Schallerbach,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Trattnach,184
+205039,Fraham,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Innbach,375.2
+207373,Wildungsmauer,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,103992
+207266,Bad Deutsch Altenburg (Bauleitung),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,104043
+207480,Hainburg Straßenbrücke,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,104177
+207274,Hainburg an der Donau,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Donau,104727
+208769,Wolkersdorf (Rückhaltebecken),2017,Niederösterreich,Donaugebiet zwischen Enns und March,Rußbach,136.8
+208454,Leopoldsdorf im Marchfelde,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Rußbach,437.5
+209262,Engelhartstetten,2017,Niederösterreich,Donaugebiet zwischen Enns und March,Rußbach,497.8
+206557,Leopoldschlag,2017,Oberösterreich,Moldaugebiet,Maltsch,95.3
+208462,Ehrendorf,2017,Niederösterreich,Moldaugebiet,Lainsitz,267.6
+214296,Altmanns (Brücke),2017,Niederösterreich,Moldaugebiet,Braunaubach,59.1
+208892,Heidenreichstein (Kleinpertholz),2017,Niederösterreich,Moldaugebiet,Romaubach,51.8
+208579,Hoheneich,2017,Niederösterreich,Moldaugebiet,Braunaubach,291.5
+214338,Gopprechts (Brücke),2017,Niederösterreich,Moldaugebiet,Reißbach,102.5
+208611,Schwarzenau (Süd),2017,Niederösterreich,Marchgebiet,Deutsche Thaya,175.5
+213942,St. Stefan OWF,2017,Kärnten,Draugebiet,Globasnitzbach,21.1
+213389,Kaunz,2017,Kärnten,Draugebiet,Wölfnitzbach,28.1
+213173,Lavamünd Ort,2017,Kärnten,Draugebiet,Drau,11051.8
+213363,Bad St.Leonhard,2017,Kärnten,Draugebiet,Lavant,200.6
+213538,Waldenstein,2017,Kärnten,Draugebiet,Waldensteiner Bach,101
+213082,St.Gertraud,2017,Kärnten,Draugebiet,Lavant,380.2
+213314,St.Jakob,2017,Kärnten,Draugebiet,Weißenbach,55.9
+213371,Fischering,2017,Kärnten,Draugebiet,Lavant,715.6
+213819,St.Paul,2017,Kärnten,Draugebiet,Granitzbach,61.1
+213090,Krottendorf,2017,Kärnten,Draugebiet,Lavant,954.5
+205062,Bad Mühllacken,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Pesenbach,60
+206656,Zwettl an der Rodl,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Große Rodl,59.6
+206664,Zwettl an der Rodl (Gemeindeamt),2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Diestlbach,27.9
+205088,Rottenegg,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Große Rodl,227.4
+207340,Wilhering,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Donau,79446.1
+207068,Linz,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Donau,79490.1
+205096,Asberg,2017,Oberösterreich,Donaugebiet zwischen Inn und Traun,Großer Haselbach,27.9
+210526,Archkogl,2017,Steiermark,Traungebiet,Traun,114.4
+210534,Altaussee (Seeklause),2017,Steiermark,Traungebiet,Altausseer See,54.5
+210542,Altaussee (Traun),2017,Steiermark,Traungebiet,Altausseer Traun,54.5
+210559,Altaussee (Augstbach),2017,Steiermark,Traungebiet,Augstbach,10.5
+210583,Kainisch,2017,Steiermark,Traungebiet,Ödenseetraun,57.4
+205104,Obertraun,2017,Oberösterreich,Traungebiet,Traun,317.4
+205112,Lahn,2017,Oberösterreich,Traungebiet,Hallstätter See,614.4
+205120,Waldbachstrub,2017,Oberösterreich,Traungebiet,Waldbach,31.3
+205138,Steeg (Bootshütte),2017,Oberösterreich,Traungebiet,Hallstätter See,614.4
+205146,Steeg (Seeausfluss),2017,Oberösterreich,Traungebiet,Traun,615.2
+209775,Windigsteig,2017,Niederösterreich,Marchgebiet,Thauabach,107.1
+209734,Peigarten,2017,Niederösterreich,Marchgebiet,Taxenbach,154.7
+209742,Merkengersch,2017,Niederösterreich,Marchgebiet,Deutsche Thaya,586.8
+209601,Alberndorf,2017,Niederösterreich,Marchgebiet,Mährische Thaya,621.5
+208629,Raabs an der Thaya,2017,Niederösterreich,Marchgebiet,Thaya,1405.8
+209759,Aigen,2017,Niederösterreich,Marchgebiet,Seebsbach,114.1
+209171,Hardegg,2017,Niederösterreich,Marchgebiet,Thaya,2382.3
+209510,Pulkau,2017,Niederösterreich,Marchgebiet,Pulkau,87.6
+209155,Haugsdorf,2017,Niederösterreich,Marchgebiet,Pulkau,277
+208652,Blaustauden,2017,Niederösterreich,Marchgebiet,Thaya-Mühlbach,139.9
+207290,Bernhardsthal (Staatsgrenzpunkt IX),2017,Niederösterreich,Marchgebiet,Thaya,12623
+207498,Rabensburg,2017,Niederösterreich,Marchgebiet,Thaya,12767.2
+207308,Hohenau a. d. March (Fluss-km 66.92),2017,Niederösterreich,Marchgebiet,March,24137.8
+209452,Asparn an der Zaya,2017,Niederösterreich,Marchgebiet,Zaya,80.6
+209189,Niederabsdorf,2017,Niederösterreich,Marchgebiet,Zaya,515.6
+207316,Dürnkrut (Fluss-km 44.33),2017,Niederösterreich,Marchgebiet,March,25404.7
+206631,Bad Goisern,2017,Oberösterreich,Traungebiet,Stambach,5.5
+205153,Bad Ischl (Maxquelle),2017,Oberösterreich,Traungebiet,Traun,720.2
+203646,St.Gilgen,2017,Salzburg,Traungebiet,Wolfgangsee (Abersee),124.8
+205161,Strobl,2017,Oberösterreich,Traungebiet,Wolfgangsee (Abersee),125.2
+205179,Strobl (Bürglstein),2017,Oberösterreich,Traungebiet,Ischl,125.4
+205187,Bad Ischl (Giselabrücke),2017,Oberösterreich,Traungebiet,Ischl,251.8
+205955,Grabenbachbrücke,2017,Oberösterreich,Traungebiet,Rettenbach,49.9
+206615,Mitterweißenbach,2017,Oberösterreich,Traungebiet,Mitterweißenbach,35.1
+205203,Ebensee,2017,Oberösterreich,Traungebiet,Traun,1223.4
+205211,Jagdschloß Langbathsee,2017,Oberösterreich,Traungebiet,Vorderer Langbathsee,13.8
+205229,Ebensee (Unterlangbath),2017,Oberösterreich,Traungebiet,Langbathbach,40
+205237,Ebensee (Landungssteg),2017,Oberösterreich,Traungebiet,Traunsee,1395.3
+205245,Gmunden (Esplanade),2017,Oberösterreich,Traungebiet,Traunsee,1395.3
+206128,Theresienthal,2017,Oberösterreich,Traungebiet,Traun,1397.7
+205260,Zell am Moos,2017,Oberösterreich,Traungebiet,Zeller See (Irrsee),27.5
+205278,Mondsee (Armaturenwerk),2017,Oberösterreich,Traungebiet,Zeller Ache,37
+207324,Angern an der March,2017,Niederösterreich,Marchgebiet,March,25623.8
+208678,Bad Pirawarth,2017,Niederösterreich,Marchgebiet,Weidenbach,71
+207332,Marchegg (Fluss-km 14.98),2017,Niederösterreich,Marchgebiet,March,26135.6
+207407,Thebnerstraßl,2017,Niederösterreich,Donaugebiet zwischen March und Leitha,Donau,131384
+207282,Wolfsthal (Strom-km 1874.84),2017,Niederösterreich,Donaugebiet zwischen March und Leitha,Donau,131411
+210435,Deutsch-Jahrndorf (Neurießäcker),2017,Burgenland,Donaugebiet zwischen March und Leitha,Wiesgraben,0
+208686,Schwarzau im Gebirge (Bundesstraße),2017,Niederösterreich,Leithagebiet,Schwarza,128.4
+208694,Singerin,2017,Niederösterreich,Leithagebiet,Naßbach,80
+208702,Singerin (Höllental),2017,Niederösterreich,Leithagebiet,Schwarza,252.3
+208710,Gloggnitz (Adlerbrücke),2017,Niederösterreich,Leithagebiet,Schwarza,472.2
+208736,Stixenstein (Schloß),2017,Niederösterreich,Leithagebiet,Sierning,89.7
+208744,Ternitz (Straßenbrücke),2017,Niederösterreich,Leithagebiet,Sierning,114.1
+208785,Loipersbach,2017,Niederösterreich,Leithagebiet,Schwarza,716.6
+208819,Aspang-Höll,2017,Niederösterreich,Leithagebiet,Großer Pestingbach,96.5
+208827,Feistritz am Wechsel,2017,Niederösterreich,Leithagebiet,Feistritz,114.4
+214353,Feistritz am Wechsel (Summenstation),2017,Niederösterreich,Leithagebiet,Feistritz,114.4

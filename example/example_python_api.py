@@ -1,8 +1,32 @@
-from ehyd_tools.data_processing import (data_validation, data_availability, max_10a, check_period, rain_plot,
-                                        create_statistics, rain_figure, start_end_date, )
-from ehyd_tools.in_out import get_series, import_series, export_series, get_station_meta, ehyd_stations
+from ehyd_tools.data_processing import (start_end_date, data_validation, data_availability, max_10a, check_period,
+                                        rain_figure, create_statistics, )
+from ehyd_tools.in_out import (get_ehyd_data, import_series, FIELDS, DATA_KIND, available_files, get_basic_station_meta,
+                               get_ehyd_stations, get_ehyd_files, )
 from ehyd_tools.sww_utils import span_table
 
+# %%
+a = get_ehyd_files(identifier=106559, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT)
+
+b = get_ehyd_files(identifier=205641, field=FIELDS.OBERFLAECHENWASSER, data_kind=DATA_KIND.MEASUREMENT)
+
+c = get_ehyd_files(identifier=356980, field=FIELDS.GRUNDWASSER, data_kind=DATA_KIND.MEASUREMENT)
+
+d = get_ehyd_files(identifier=395855, field=FIELDS.QUELLEN, data_kind=DATA_KIND.MEASUREMENT)
+exit()
+
+field = FIELDS.NIEDERSCHLAG
+get_ehyd_stations(field)
+
+id_number = 106559
+# f = _get_files(id_number, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT)
+print(get_basic_station_meta(id_number, field=field))
+# print(available_files(id_number, field=field, data_kind=DATA_KIND.MEASUREMENT))
+
+# f = _get_files(210641, field=FIELDS.OBERFLAECHENWASSER, data_kind=DATA_KIND.MEASUREMENT)
+series = get_ehyd_data(id_number, field=field, file_number=2, data_kind=DATA_KIND.MEASUREMENT, with_meta=False)
+print(series)
+exit()
+# __________________________________________________________________________________________________________________
 id_number = 112086
 
 # series = get_series(id_number)

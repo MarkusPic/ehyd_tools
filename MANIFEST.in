@@ -1,1 +1,2 @@
 include ehyd_tools/*.json
+include ehyd_tools/*.csv

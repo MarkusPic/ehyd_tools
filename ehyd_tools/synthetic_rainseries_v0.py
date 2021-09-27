@@ -78,10 +78,10 @@ def rain_series(start_time, kind, idf_table, return_period, duration, interval=5
 
 
 if __name__ == '__main__':
-    from ehyd_tools.design_rainfall import get_ehyd_file, ehyd_design_rainfall_ascii_reader, get_max_calculation_method
+    from ehyd_tools.design_rainfall import get_ehyd_design_rainfall_file, read_ehyd_design_rainfall, get_max_calculation_method
 
     grid_point = 5214
-    idf_table = ehyd_design_rainfall_ascii_reader(get_ehyd_file(grid_point_number=grid_point))
+    idf_table = read_ehyd_design_rainfall(get_ehyd_design_rainfall_file(grid_point_number=grid_point))
     idf_table = get_max_calculation_method(idf_table)
     print(block_rain(idf_table, return_period=2, duration=60, interval=5))
     print(euler_model_rain_type2(idf_table, return_period=2, duration=60, interval=5))

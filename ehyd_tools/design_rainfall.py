@@ -1,19 +1,17 @@
 __author__ = "Markus Pichler"
-__copyright__ = "Copyright 2017, University of Technology Graz"
+__copyright__ = "Copyright 2021, University of Technology Graz"
 __credits__ = ["Markus Pichler"]
 __license__ = "MIT"
 __version__ = "1.0.0"
 __maintainer__ = "Markus Pichler"
 
 from pandas import read_fwf, IndexSlice as idx
-import os
 from os import path
-import requests
 from io import BytesIO, TextIOWrapper
 
 from scipy.interpolate import interp2d
 
-from ehyd_tools.in_out import get_url, FIELDS, DATA_KIND
+from ehyd_tools.in_out import FIELDS, DATA_KIND, _get_request
 
 
 class INDICES:
@@ -28,22 +26,19 @@ class INDICES_GER:
     CALCULATION_METHOD = 'Berechnungstyp'
 
 
-def get_ehyd_file(grid_point_number=5214):
-    url = get_url(grid_point_number, data_kind=DATA_KIND.DESIGN_PRECIPITATION, field=None, file_number=None)
-    r = requests.get(url, allow_redirects=True)
-    fwf_file = TextIOWrapper(BytesIO(r.content), encoding='ISO-8859-1')
-    return fwf_file
+def get_ehyd_design_rainfall_file(grid_point_number=5214):
+    r = _get_request(grid_point_number, data_kind=DATA_KIND.DESIGN_PRECIPITATION, field=None, file_number=None)
+    return TextIOWrapper(BytesIO(r.content), encoding='ISO-8859-1')
 
 
-def save_ehyd_pdf_file(grid_point_number, fn):
+def save_ehyd_design_rainfall_pdf(grid_point_number, fn):
     fn = path.join(fn, 'Bemessungsniederschlag_Gitterpunkt_{no}.pdf'.format(no=grid_point_number))
     if not path.isfile(fn):
-        url = get_url(grid_point_number, data_kind=DATA_KIND.DESIGN_PRECIPITATION, field=FIELDS.PDF, file_number=None)
-        r = requests.get(url, allow_redirects=True)
+        r = _get_request(grid_point_number, data_kind=DATA_KIND.DESIGN_PRECIPITATION, field=FIELDS.PDF, file_number=None)
         open(fn, 'wb').write(r.content)
 
 
-def ehyd_design_rainfall_ascii_reader(filepath_or_buffer):
+def read_ehyd_design_rainfall(filepath_or_buffer):
     if isinstance(filepath_or_buffer, str):
         txt_file = open(filepath_or_buffer, 'r', encoding='ISO-8859-1')
     else:
@@ -79,6 +74,10 @@ def ehyd_design_rainfall_ascii_reader(filepath_or_buffer):
     return df
 
 
+def get_ehyd_design_rainfall(grid_point_number):
+    return read_ehyd_design_rainfall(get_ehyd_design_rainfall_file(grid_point_number))
+
+
 def get_max_calculation_method(df, methods=None):
     if methods is None:
         methods = ['ÖKOSTRA', 'Bemessung']
@@ -91,23 +90,5 @@ def get_calculation_method(df, method='Bemessung'):
 
 
 def get_rainfall_height(table, return_period, duration):
-    f = interp2d(x=table.columns.values, y=table.index.values, z=table.values, kind='linear')
+    f = interp2d(x=table.columns.astype(float).values, y=table.index.astype(float).values, z=table.values, kind='linear')
     return float(f(return_period, duration)[0])
-
-
-if __name__ == '__main__':
-    df = ehyd_design_rainfall_ascii_reader(get_ehyd_file(grid_point_number=5214))
-
-    max_df = get_max_calculation_method(df)
-
-    # max_df.to_csv(os.path.join('V:', 'DATA', 'OPENSDM', 'INBOX', 'STRATUS', 'shared', 'hydras', 'events',
-    #                            'events_whole', 'ehyd_table.csv'))
-
-    df.loc[idx[1:100, 'Bemessung'], 5]
-
-    max_df.loc[1:100, 5]
-
-    print(get_max_calculation_method(df))
-    print(get_calculation_method(df))
-
-    print(df)
