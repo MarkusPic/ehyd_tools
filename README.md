@@ -59,6 +59,8 @@ Add the following tags to the command for special options:
 
 ### Examples Jupyter notebooks for Extended python API
 
+> links only work on GitHub!
+
 - [the design rainfall](example/example_design_rainfall.ipynb)
 - [model rain creator](example/example_synthetic_rain.ipynb)
 - [the general data-reader](example/example_python_api_general.ipynb)
@@ -108,9 +110,13 @@ ehyd_tools -h
 
 ## The high-res precipitation stations
 
+> links only work on GitHub!
+
 [List of ehyd-stations with the id-number and the label](ehyd_tools/ehyd_stations.json)
 
 ## Examples
+
+> links only work on GitHub!
 
 [Example Jupyter notebook for the commandline](example/example_commandline.ipynb)
 
@@ -120,11 +126,15 @@ ehyd_tools -h
 
 ### Example results files
 
+> links only work on GitHub!
+
 [Data-gaps in the series](example/ehyd_112086_gaps.csv)
 
 [Meta-data of the series](example/ehyd_112086_meta.txt)
 
 
 ### Example Plot
+
+> links only work on GitHub!
 
 ![Regenhöhenlinien](example/ehyd_112086_plot.png)
