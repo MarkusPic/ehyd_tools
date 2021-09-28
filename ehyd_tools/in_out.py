@@ -10,6 +10,7 @@ import json
 import warnings
 import io
 import os
+import re
 from zipfile import ZipFile
 
 import pandas as pd
@@ -17,7 +18,6 @@ import requests
 from pandas.errors import ParserError
 
 from .sww_utils import guess_freq
-from .deprecated import parse_meta_data
 
 ENCODING = 'iso8859'
 
@@ -118,7 +118,7 @@ def import_series(filename, series_label='precipitation', index_label='datetime'
             ts.index.name = index_label
             return ts
         except (ParserError, UnicodeDecodeError):
-            return _parse(filename)
+            return read_ehyd_file(filename)
     elif filename.endswith('parquet'):
         try:
             return pd.read_parquet(filename).iloc[:, 0].asfreq('T').copy()
@@ -164,7 +164,12 @@ _stations_files = {FIELDS.NIEDERSCHLAG: 'niederschl_lufttemp_verdunst.csv',
                    FIELDS.QUELLEN: 'unteririsches_wasser.csv',
                    FIELDS.OBERFLAECHENWASSER: 'oberflaechenwasser.csv'}
 
-EHYD_STATIONS = {k: pd.read_csv(os.path.join(_path_file, v), index_col=0, header=0).to_dict(orient='index') for k, v in _stations_files.items()}
+
+def get_ehyd_station_frame(field):
+    return pd.read_csv(os.path.join(_path_file, _stations_files[field]), index_col=0, header=0)
+
+
+EHYD_STATIONS = {k: get_ehyd_station_frame(k).to_dict(orient='index') for k, v in _stations_files.items()}
 
 
 def get_ehyd_stations(field=FIELDS.NIEDERSCHLAG):
@@ -268,17 +273,19 @@ def available_files(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.M
     return files
 
 
-def _get_file_from_request(r: requests.Response) -> (io.TextIOWrapper or io.IOBase):
+def _get_file_from_request(r: requests.Response) -> [str, (io.TextIOWrapper or io.IOBase)]:
     filename = _get_filename(r)
     if ('N-Minutensummen' in filename) and ('.zip' in filename):
         c = r.content
         z = ZipFile(io.BytesIO(c))
         filename = z.namelist()[0]
         csv_file = io.TextIOWrapper(z.open(filename), encoding=ENCODING)
-        return csv_file
+        return csv_file, filename.split('.')[0]
     elif ('.csv' in filename) or ('.txt' in filename):
         csv_file = io.TextIOWrapper(io.BytesIO(r.content), encoding=ENCODING)
-        return csv_file
+        return csv_file, filename.split('.')[0]
+    else:
+        return None, None
 
 
 def _get_file(identifier, field=FIELDS.NIEDERSCHLAG, file_number=1, data_kind=DATA_KIND.MEASUREMENT):
@@ -292,14 +299,14 @@ def _get_file(identifier, field=FIELDS.NIEDERSCHLAG, file_number=1, data_kind=DA
         file_number (int): file-number (>= 1)
 
     Returns:
-        io.TextIOWrapper | io.IOBase:
+        ((io.TextIOWrapper | io.IOBase), str): data file
     """
     r = _get_request(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind)
     if _file_available(r):
-        csv_file = _get_file_from_request(r)
+        csv_file, filename = _get_file_from_request(r)
         if csv_file is None:
-            raise NotImplementedError('This kind of request is not implemented yet. Sorry!')
-        return csv_file
+            raise NotImplementedError('This kind of request is not implemented (yet?). Sorry!')
+        return csv_file, filename
 
 
 def get_ehyd_files(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT):
@@ -317,16 +324,88 @@ def get_ehyd_files(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.ME
     files = dict()
     for file_number, filename in available_files(identifier, field=field, data_kind=data_kind).items():
         if file_number == 1:
-            files[filename] = get_meta_data(identifier, field=field, data_kind=data_kind)
+            files[filename] = get_station_reference_data(identifier, field=field, data_kind=data_kind)
         else:
             r = _get_request(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind)
-            files[filename] = read_ehyd_file(_get_file_from_request(r))
+            files[filename] = read_ehyd_file(*_get_file_from_request(r))
     return files
 
 
-def get_meta_data(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT):
+def _parse_meta_data(meta_str):
+    # print('#' * 100)
+    # print(meta_str)
+    meta = dict(_raw=meta_str)
+    currant_table = None
+    currant_header = None
+    table_key = None
+    is_table = False
+    sep = re.compile(r':\s+')
+    lines = iter(meta_str.split('\n'))
+    for line in lines:
+        if not is_table and line.endswith(':'):
+            # start first table
+            is_table = True
+            table_key = line[:-1].split(':  ')[0]
+            currant_header = re.split(sep, line.strip().strip(':'))
+            currant_table = list()
+
+        elif is_table and not line.startswith(' ') and line.endswith(':'):
+            # end table | start new table
+            meta[table_key] = currant_table
+            # ------------
+            table_key = line[:-1].split(':  ')[0]
+            currant_header = re.split(sep, line.strip().strip(':'))
+            currant_table = list()
+
+        elif is_table and line.startswith(' ') and line.endswith(':'):
+            # line is header
+            currant_header = re.split(sep, line.strip().strip(':'))
+
+        elif is_table and line.startswith(' '):
+            # values in table
+            values = re.split(r'\s\s+', line.strip())
+            currant_table.append(dict(zip(currant_header, values)))
+
+        elif ':' in line:
+            # simple key: value | end table here
+            key, *value = re.split(sep, line)
+            value = ': '.join(value)
+            if key in meta:
+                if isinstance(meta[key], str):
+                    meta[key] = [meta[key], value]
+                elif isinstance(meta[key], list):
+                    meta[key].append(value)
+            else:
+                meta[key] = value
+            if is_table:
+                meta[table_key] = currant_table
+                is_table = False
+
+        elif line.strip() == '':
+            # empty line | end table
+            pass
+
+        else:
+            value = line.strip()
+            if key in meta:
+                if isinstance(meta[key], str):
+                    meta[key] = [meta[key], value]
+                elif isinstance(meta[key], list):
+                    meta[key].append(value)
+            else:
+                meta[key] = value
+            # print('UNKOWN:', line)
+
+    if table_key not in meta:
+        meta[table_key] = currant_table
+
+    # print(json.dumps(meta, indent=4, ensure_ascii=False))
+    return meta
+
+
+def get_station_reference_data(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT):
     """
-    get the station meta data
+    get the station reference data (=Stammdaten der Station)
 
     Args:
         identifier (int): Gitterpunktnummer or HZBNR of the station
@@ -337,7 +416,7 @@ def get_meta_data(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEA
         dict: meta data of station
     """
     # parse_meta_data(_get_file(identifier=identifier, field=field, file_number=1, data_kind=data_kind).read())
-    return _get_file(identifier=identifier, field=field, file_number=1, data_kind=data_kind).read()
+    return _parse_meta_data(_get_file(identifier=identifier, field=field, file_number=1, data_kind=data_kind)[0].read())
 
 
 def _split_file(file):
@@ -353,15 +432,6 @@ def _split_file(file):
     lines = file.readlines()
     file.close()
 
-    # items = {':': [2, ],
-    #          '.': [2, ],
-    #          ';': [1, ],
-    #          ',': [0, 1]}
-    # i = 0
-    # for i, line in enumerate(lines):
-    #     if all([line.count(s) in n for s, n in items.items()]):
-    #         break
-
     i = lines.index('Werte:\n')
 
     meta = lines[:i]
@@ -369,17 +439,16 @@ def _split_file(file):
     return meta, data
 
 
-def read_ehyd_file(filepath_or_buffer, with_meta=False):
+def read_ehyd_file(filepath_or_buffer, series_label='data'):
     """
+    read ehyd data file
 
     Args:
         filepath_or_buffer (io.IOBase | str):
-        series_label (str):
-        index_label (str):
-        with_meta (bool): whether to return meta data or not
+        series_label (str): name of the series
 
     Returns:
-        (list, pandas.Series): meta-data and time-series
+        pandas.Series: time-series with meta-data ts.attrs
     """
     if isinstance(filepath_or_buffer, str):
         csv_file = codecs.open(filepath_or_buffer, 'r', encoding=ENCODING)
@@ -393,33 +462,35 @@ def read_ehyd_file(filepath_or_buffer, with_meta=False):
 
     # ___________________________
     ts = pd.read_csv(io.StringIO('\n'.join(data).replace(' ', '')), sep=';', decimal=',', index_col=0,
-                     na_values='Lücke', header=None, squeeze=True, # names=[series_label],
+                     na_values='Lücke', header=None, squeeze=True,  # names=[series_label],
                      date_parser=lambda s: pd.to_datetime(s, format='%d.%m.%Y%H:%M:%S')
                      )
 
     if isinstance(ts, pd.DataFrame):
         ts = ts.dropna(axis=1, how='all')
+
         if ts.columns.size == 1:
             ts = ts.iloc[:, 0].copy()
+
+    if isinstance(ts, pd.Series):
+        ts.name = series_label
 
     # ___________________________
     ts.index.name = 'datetime'
     # ts = ts.rename_axis(index_label, axis='index')
 
     freq = guess_freq(ts.index)
-    ts = ts.resample(freq).ffill()
+
+    if isinstance(freq, pd.tseries.offsets.MonthBegin) or (freq <= pd.Timedelta(days=7)):
+        ts = ts.resample(freq).ffill()
 
     # ___________________________
-    if with_meta:
-        # meta = '\n'.join(meta)
-        meta = pd.Series(meta).str.replace('\n', '').str.split(';', expand=True).fillna('').apply(lambda x: x.str.strip())
-        return ts, meta
-
-    else:
-        return ts
+    ts.attrs = _parse_meta_data(''.join(meta).replace(';', ''))
+    # meta = pd.Series(meta).str.replace('\n', '').str.split(';', expand=True).fillna('').apply(lambda x: x.str.strip())
+    return ts
 
 
-def get_ehyd_data(identifier, field=FIELDS.NIEDERSCHLAG, file_number=2, data_kind=DATA_KIND.MEASUREMENT, with_meta=False):
+def get_ehyd_data(identifier, field=FIELDS.NIEDERSCHLAG, file_number=2, data_kind=DATA_KIND.MEASUREMENT):
     """
     get the series from the ehyd platform
 
@@ -428,15 +499,11 @@ def get_ehyd_data(identifier, field=FIELDS.NIEDERSCHLAG, file_number=2, data_kin
         field (str): nlv; qu; gw; owf (use constant struct: `FIELDS`)
         data_kind (str): MessstellenExtraData; BemessungsniederschlagExtraData (use constant struct: `DATA_KIND`)
         file_number (int): file-number (>= 1)
-        with_meta (bool): whether to return meta data or not
 
     Returns:
-        pandas.Series | list[pandas.Series, str]: mata or data with the meta-data
+        pandas.Series: time-series with meta-data ts.attrs
     """
     if identifier not in get_ehyd_stations(field):
         raise ValueError(f'Identifier "{identifier}" not in ehyd!')
 
-    print(f'You choose the id: "{identifier}" with the meta-data: {get_basic_station_meta(identifier, field)}.')
-
-    return read_ehyd_file(_get_file(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind),
-                          with_meta=with_meta)
+    return read_ehyd_file(*_get_file(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind))

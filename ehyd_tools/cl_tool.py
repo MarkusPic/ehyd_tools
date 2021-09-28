@@ -12,7 +12,8 @@ from webbrowser import open as show_file
 from .data_processing import (data_validation, data_availability, max_10a, check_period, rain_plot, create_statistics,
                               start_end_date, )
 from .arg_parser import ehyd_arg_parser
-from .in_out import get_ehyd_data, import_series, export_series, csv_args, get_meta_data
+from .in_out import (get_ehyd_data, import_series, export_series, csv_args, get_station_reference_data, FIELDS,
+                     get_basic_station_meta, DATA_KIND, )
 from .sww_utils import span_table
 
 
@@ -47,6 +48,7 @@ def execute_cl_tool():
 
 def get_data(id_=None, input_=None, meta=False, unix=False):
     """
+    get time-series data with its name
 
     Args:
         id_ (str | int): ID-number of the series to be downloaded
@@ -61,12 +63,14 @@ def get_data(id_=None, input_=None, meta=False, unix=False):
         id_number = id_
         name = 'ehyd_{}'.format(id_number)
 
+        print(f'You choose the id: "{id_number}" with the meta-data: {get_basic_station_meta(id_number, field=FIELDS.NIEDERSCHLAG)}.')
+
         if meta:
             with open('{}_meta.json'.format(name), 'w') as f:
-                json.dump(get_meta_data(id_number), f, indent=4)
+                json.dump(get_station_reference_data(id_number, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT), f, indent=4)
                 print('The meta-data are saved in {}.'.format(output_filename(f.name)))
 
-        series = get_ehyd_data(id_number)
+        series = get_ehyd_data(id_number, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT)
 
     # __________________________________________________________________________________________________________________
     elif input_ is not None:

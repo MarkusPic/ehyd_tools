@@ -64,10 +64,10 @@ Add the following tags to the command for special options:
 
 ### Examples Jupyter notebooks for Extended python API
 
-- [the design rainfall](example/example_design_rainfall.ipynb)
-- [model rain creator](example/example_synthetic_rain.ipynb)
-- [the general data-reader](example/example_python_api_general.ipynb)
-- [the gis extract](example/example_gis_export.ipynb)
+- [the design rainfall](https://github.com/MarkusPic/ehyd_tools/tree/master/example/example_design_rainfall.ipynb)
+- [model rain creator](https://github.com/MarkusPic/ehyd_tools/tree/master/example/example_synthetic_rain.ipynb)
+- [the general data-reader](https://github.com/MarkusPic/ehyd_tools/tree/master/example/example_python_api_general.ipynb)
+- [the gis extract](https://github.com/MarkusPic/ehyd_tools/tree/master/example/example_gis_export.ipynb)
 
 # Usage for high-res precipitation time-series
 
@@ -113,23 +113,23 @@ ehyd_tools -h
 
 ## The high-res precipitation stations
 
-[List of ehyd-stations with the id-number and the label](ehyd_tools/ehyd_stations.json)
+[List of ehyd-stations with the id-number and the label](https://github.com/MarkusPic/ehyd_tools/tree/master/ehyd_tools/ehyd_stations.json)
 
 ## Examples
 
-[Example Jupyter notebook for the commandline](example/example_commandline.ipynb)
+[Example Jupyter notebook for the commandline](https://github.com/MarkusPic/ehyd_tools/tree/master/example/example_commandline.ipynb)
 
-[Example Jupyter notebook for the python api](example/example_python_api.ipynb)
+[Example Jupyter notebook for the python api](https://github.com/MarkusPic/ehyd_tools/tree/master/example/example_python_api.ipynb)
 
-[Example python skript](example/example_python_api.py)
+[Example python skript](https://github.com/MarkusPic/ehyd_tools/tree/master/example/example_python_api.py)
 
 ### Example results files
 
-[Data-gaps in the series](example/ehyd_112086_gaps.csv)
+[Data-gaps in the series](https://github.com/MarkusPic/ehyd_tools/tree/master/example/ehyd_112086_gaps.csv)
 
-[Meta-data of the series](example/ehyd_112086_meta.txt)
+[Meta-data of the series](https://github.com/MarkusPic/ehyd_tools/tree/master/example/ehyd_112086_meta.txt)
 
 
 ### Example Plot
 
-![Regenhöhenlinien](example/ehyd_112086_plot.png)
+![Regenhöhenlinien](https://github.com/MarkusPic/ehyd_tools/tree/master/example/ehyd_112086_plot.png)
