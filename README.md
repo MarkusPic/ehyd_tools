@@ -50,11 +50,6 @@ Add the following tags to the command for special options:
 - ```--user```: To install the package only for the local user account (no admin rights needed)
 - ```--upgrade```: To update the package
 
-# ToDo
-
-- [ ] metadata in dict
-- [ ] stammdaten to dict
-
 # Alternative Repositories
 
 - https://github.com/hydrogeology-graz/ehyd
