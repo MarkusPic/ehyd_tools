@@ -1,11 +1,12 @@
 from ehyd_tools.data_processing import (start_end_date, data_validation, data_availability, max_10a, check_period,
                                         rain_figure, create_statistics, )
 from ehyd_tools.in_out import (get_ehyd_data, import_series, FIELDS, DATA_KIND, available_files, get_basic_station_meta,
-                               get_ehyd_stations, get_ehyd_files, get_station_reference_data)
+                               get_ehyd_stations, get_ehyd_files, get_station_reference_data, translate_meta_dict, )
 from ehyd_tools.sww_utils import span_table
 
 # %%
-# a1 = get_station_reference_data(identifier=106559, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT)
+a1 = get_station_reference_data(identifier=106559, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT)
+# a1t = translate_meta_dict(a1)
 # a2 = get_ehyd_data(identifier=106559, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT, file_number=2)
 
 a = get_ehyd_files(identifier=106559, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT)

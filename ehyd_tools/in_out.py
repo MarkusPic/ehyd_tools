@@ -403,6 +403,16 @@ def _parse_meta_data(meta_str):
     return meta
 
 
+def translate_meta_dict(meta):
+    from translate import Translator
+    translator = Translator(from_lang='de', to_lang="en")
+    translation = translator.translate("This is a pen.")
+    meta_translate = dict()
+    for k in meta.keys():
+        meta_translate[translator.translate(k)] = meta[k]
+    return meta_translate
+
+
 def get_station_reference_data(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT):
     """
     get the station reference data (=Stammdaten der Station)
