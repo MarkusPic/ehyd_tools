@@ -1,3 +1,5 @@
+from warnings import warn
+
 import numpy as np
 import pandas as pd
 from math import floor
@@ -9,8 +11,13 @@ from ehyd_tools.design_rainfall import (get_ehyd_design_rainfall_file, read_ehyd
                                         get_max_calculation_method, get_calculation_method, )
 
 
+class ModelRainWarning(UserWarning):
+    """For Warning during the model rain script routines."""
+    pass
+
+
 class _AbstractModelRain(ABC):
-    def __init__(self, idf_table=None):
+    def __init__(self, idf_table: pd.DataFrame=None):
         self.idf_table = idf_table
 
     def _get_index(self, duration, interval=5):
@@ -60,6 +67,12 @@ class _EulerRain(_AbstractModelRain):
 
     def _get_series(self, return_period, duration, interval=5, kind=2):
         return_period_series = self.idf_table[return_period]
+
+        raising = return_period_series.diff().lt(0)
+        if raising.any():
+            error_from_duration = raising[raising.shift(-1).fillna(False)].index.tolist()
+            error_at_duration = raising[raising].index.tolist()
+            warn(f'IDF values for the return period of {return_period} a is not raising monotonically between the durations {error_from_duration} and {error_at_duration}! ', ModelRainWarning)
 
         index = self._get_index(duration, interval)
         filtered_series = pd.Series(data=np.interp(index, return_period_series.index, return_period_series),
