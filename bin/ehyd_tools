@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 __author__ = "Markus Pichler"
 __credits__ = ["Markus Pichler"]
@@ -7,10 +7,12 @@ __email__ = "markus.pichler@tugraz.at"
 __version__ = "0.1"
 __license__ = "MIT"
 
+from argh import dispatch_command
+
+from ehyd_tools.cl_tool import run_script
+
 """
 execute the command line tool
 """
 
-from ehyd_tools.cl_tool import execute_cl_tool
-
-execute_cl_tool()
+dispatch_command(run_script)

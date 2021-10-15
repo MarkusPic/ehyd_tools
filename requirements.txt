@@ -1,6 +1,7 @@
 numpy>=1.14
 pandas>=1
-matplotlib>=3
-requests
+matplotlib>=3  # plotting
+requests  # to get online data
+argh  # for the commandline tool
 # pyarrow # recommended package for parquet-export
 # fastparquet # another package for parquet-export

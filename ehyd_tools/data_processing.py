@@ -11,8 +11,7 @@ from warnings import warn
 from matplotlib.pyplot import subplots
 
 
-def start_end_date(series):
-    return series.index[[0, -1]].tolist()
+class EhydWarning(UserWarning): pass
 
 
 def year_delta(years):
@@ -106,8 +105,8 @@ def check_period(series):
         series (pandas.Series): time-series
     """
     if not is_longer(series, years=10):
-        print('WARNING: The Series is only {:.1f} < 10 years long!'.format(
-            (series.index[-1] - series.index[0]) / Timedelta(days=365)))
+        years = (series.index[-1] - series.index[0]) / Timedelta(days=365)
+        warn(f'The Series is only {years:.1f} < 10 years long!', EhydWarning)
 
 
 def is_longer(series, years):
@@ -125,14 +124,19 @@ def is_longer(series, years):
     # return (series.index[-1] - series.index[0]) > year_delta(years=years)
 
 
-def rain_figure(series, availability, freq=None, add_mean_line=False):
+def agg_data_figure(series, availability, agg='sum', freq=None, add_mean_line=False):
     """
-    creates a monthly sum bar plot
+    creates a aggregated bar plot
 
     Args:
-        series (pandas.Series): time-series
+        series (pandas.Series): time-series data
         availability (pandas.Series): availability
-        fn (str): path + filename of the resulting plot
+        agg(str): aggregation i.e.: 'sum', 'mean', 'median', ...
+        freq (str): frequency of the aggregation i.e. 'Y', 'M'
+        add_mean_line (bool): make a line where the mean value is
+
+    Returns:
+        (matplotlib.pyplot.Figure, matplotlib.pyplot.Axes): matplotlib figure an axes of the plot
     """
 
     freq_long = {
@@ -148,19 +152,19 @@ def rain_figure(series, availability, freq=None, add_mean_line=False):
             freq = 'M'
             # base_delta = year_delta(1) / 12
 
-    sums = series.resample(freq).sum()
+    ts_agg = series.resample(freq).agg(agg)
 
     if freq == 'Y':
-        index = sums.index.year.values
+        index = ts_agg.index.year.values
     else:
         # monthly
-        index = sums.index.year.values + sums.index.month.values / 12
+        index = ts_agg.index.year.values + ts_agg.index.month.values / 12
 
     # index = series.index.to_series().resample(freq).apply(lambda s: s.min() + abs(s.min() - s.max()) / 2).dt.date.values
     freq_avail = availability.resample(freq)
-    avail = (freq_avail.sum() / freq_avail.count())[sums.index]
+    avail = (freq_avail.sum() / freq_avail.count())[ts_agg.index]
 
-    # dummy = sums.rename('dummy').copy()
+    # dummy = ts_agg.rename('dummy').copy()
     # dummy.loc[:] = 0
 
     height_ratios = [1, 10]
@@ -180,12 +184,12 @@ def rain_figure(series, availability, freq=None, add_mean_line=False):
     ax1.set_axisbelow(True)
 
     if add_mean_line:
-        mean = sums[avail > 0.5].mean()
+        mean = ts_agg[avail > 0.5].mean()
         ax.text(ax.get_xlim()[0] + 1, mean + 15, f'Mittelwert: {mean:0.0f} (mm/{freq_long[freq]})',
                 bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 2, 'linewidth': '0'})
         ax.axhline(mean, ls='--', color='darkgray', linewidth=0.7)
 
-    ax.bar(x=index, height=sums.values, color='k')
+    ax.bar(x=index, height=ts_agg.values, color='k')
     ax.set_ylabel('Niederschlag (mm/{})'.format(freq_long[freq]))
     ax.set_xlabel('Zeit')
     # ax.set_xlim(left=ax.get_xlim()[0] - 0.5)
@@ -195,7 +199,7 @@ def rain_figure(series, availability, freq=None, add_mean_line=False):
     return fig, ax
 
 
-def rain_plot(series, availability, fn):
+def agg_data_plot(series, availability, fn, agg='sum', freq=None, add_mean_line=False):
     """
     creates a monthly sum bar plot
 
@@ -203,9 +207,11 @@ def rain_plot(series, availability, fn):
         series (pandas.Series): time-series
         availability (pandas.Series): availability
         fn (str): path + filename of the resulting plot
+        agg(str): aggregation i.e.: 'sum', 'mean', 'median', ...
+        freq (str): frequency of the aggregation i.e. 'Y', 'M'
+        add_mean_line (bool): make a line where the mean value is
     """
-    fig, ax = rain_figure(series, availability)
-    # fig.show()
+    fig, ax = agg_data_figure(series, availability, agg=agg, freq=freq, add_mean_line=add_mean_line)
     fig.savefig(fn)
 
 
@@ -230,7 +236,7 @@ def create_statistics(series, availability, availability_cut=0.2):
     avail_full = delta_per_year / base_freq
     avail = avail_sum / avail_full  # type: Series
     if (avail < availability_cut).all():
-        print('ATTENTION: only very small data availability! The statistic may be not very meaningful.')
+        warn('ATTENTION: only very small data availability! The statistic may be not very meaningful.', EhydWarning)
         if (avail < 0.1).all():
             return dict()
         sums[avail < 0.1] = NaN
@@ -238,7 +244,14 @@ def create_statistics(series, availability, availability_cut=0.2):
         sums[avail < availability_cut] = NaN
 
     stats = dict()
-    stats['maximum'] = (sums.max(), sums.idxmax(), avail.loc[sums.idxmax()])
-    stats['minimum'] = (sums.min(), sums.idxmin(), avail.loc[sums.idxmin()])
-    stats['mean'] = (sums.mean(), avail.mean())
+    stats['maximum'] = sums.max()
+    stats['maximum_date'] = sums.idxmax()
+    stats['maximum_avail'] = avail.loc[sums.idxmax()]
+
+    stats['minimum'] = sums.min()
+    stats['minimum_date'] = sums.idxmin()
+    stats['minimum_avail'] = avail.loc[sums.idxmin()]
+
+    stats['mean'] = sums.mean()
+    stats['mean_avail'] = avail.mean()
     return stats

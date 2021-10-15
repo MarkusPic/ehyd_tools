@@ -5,101 +5,97 @@ __email__ = "markus.pichler@tugraz.at"
 __version__ = "0.1"
 __license__ = "MIT"
 
-from pandas import to_datetime, DataFrame, Series
-from os import path
 import json
+from os import path
 from webbrowser import open as show_file
-from .data_processing import (data_validation, data_availability, max_10a, check_period, rain_plot, create_statistics,
-                              start_end_date, )
-from .arg_parser import ehyd_arg_parser
+
+from argh import arg
+from pandas import to_datetime
+
+from .data_processing import (data_validation, data_availability, max_10a, check_period, agg_data_plot,
+                              create_statistics, )
 from .in_out import (get_ehyd_data, import_series, export_series, csv_args, get_station_reference_data, FIELDS,
                      get_basic_station_meta, DATA_KIND, )
 from .sww_utils import span_table
 
 
-def convert_time(time=None, helper=''):
+def _convert_time(time=None, helper=''):
     try:
         return to_datetime(time)
     except ValueError():
         raise UserWarning('Wrong time format for the {} time. Use the format="YYYY-MM-DD"'.format(helper))
 
 
-def output_filename(fn):
+def _output_filename(fn):
     if '/' in fn or '\\' in fn:
-        message = 'in the file "{}"'
+        return f'in the file "{fn}"'
     else:
-        message = 'in the current working directory as "{}"'
-
-    return message.format(fn)
+        return f'in the current working directory as "{fn}"'
 
 
-def execute_cl_tool():
-    """execute the command line tool"""
-    # parse command line arguments
-    args = ehyd_arg_parser()
-    # convert argparse object to dict
-    args_dict = vars(args).copy()
-    args_dict['id_'] = args.id
-    del args_dict['id']
-    args_dict['input_'] = args.input
-    del args_dict['input']
-    run_script(**args_dict)
-
-
-def get_data(id_=None, input_=None, meta=False, unix=False):
+@arg('--identifier', '-id', help='the id number for the station from the ehyd.gv.at platform')
+@arg('--filename', '-fn', help='path to the rain input file including the filename')
+@arg('--start', help='custom start time (Format="YYYY-MM-DD") for clipping the data')
+@arg('--end', help='custom end time (Format="YYYY-MM-DD") for clipping the data')
+@arg('--max10a', help='consider only 10 years with the most availability (for clipping the data)')
+@arg('--add_gaps', help='save a gaps-table as a csv-file')
+@arg('--to_csv', help='save the time-series as csv-file '
+                      '(to the current directory if the id is used or in the directory of the input-file)')
+@arg('--to_parquet', help='save the time-series as parquet-file '
+                          '(to the current directory if the id is used or in the directory of the input-file)'
+                          ' - parquet is a much faster as csv to read and write')
+@arg('--plot', help='save a bar-plot with monthly sums and availability as a png-file')
+@arg('--statistics', help='save the basic statistics (sum, max & min) as a txt-file')
+@arg('--meta', help='save the meta-data presented in ehyd as a txt-file')
+@arg('--unix', help='export the csv files with a "," as separator and a "." as decimal sign '
+                    '(otherwise ";" as separator and a "," as decimal sign will be used)')
+@arg('--availability_cut', help='minimum percentage of availability of data to take account in the aggregations '
+                                'in the statistics')
+@arg('--agg', help='aggregation for the plot i.e.: "sum", "mean", "median", ...')
+@arg('--field', help='field of the observation [NIEDERSCHLAG, QUELLEN, GRUNDWASSER, OBERFLAECHENWASSER]',
+     choices=[FIELDS.NIEDERSCHLAG, FIELDS.QUELLEN, FIELDS.GRUNDWASSER, FIELDS.OBERFLAECHENWASSER])
+def run_script(identifier=None, filename=None, start=None, end=None, max10a=False, add_gaps=True,
+               to_csv=False, to_parquet=False, plot=False, statistics=False, meta=False, unix=False,
+               availability_cut=0.9, agg='sum', field=FIELDS.NIEDERSCHLAG):
     """
-    get time-series data with its name
-
-    Args:
-        id_ (str | int): ID-number of the series to be downloaded
-        input_ (str): filename of the series to be imported
-        meta (bool): if the meta data should be saved as txt file
-        unix (bool): if the <input_> file is a csv-file: True={sep=',', decimal='.'} False={sep=';', decimal=','}
-
-    Returns:
-        (pandas.Series, str): precipitation series and the label of the series
+    get eHYD.gv.at data and run simple analysis on it and finally save the data to a local file.
     """
-    if id_ is not None:
-        id_number = id_
-        name = 'ehyd_{}'.format(id_number)
+    # __________________________________________________________________________________________________________________
+    if start is not None:
+        start = _convert_time(start, 'start')
 
-        print(f'You choose the id: "{id_number}" with the meta-data: {get_basic_station_meta(id_number, field=FIELDS.NIEDERSCHLAG)}.')
+    # __________________________________________________________________________________________________________________
+    if end is not None:
+        end = _convert_time(end, 'end')
+
+    # __________________________________________________________________________________________________________________
+    if identifier is not None:
+        name = f'ehyd_{field}_{identifier}'
+
+        print(
+            f'You choose the id: "{identifier}" with the meta-data: '
+            f'{get_basic_station_meta(identifier, field=field)}.')
 
         if meta:
             with open('{}_meta.json'.format(name), 'w') as f:
-                json.dump(get_station_reference_data(id_number, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT), f, indent=4)
-                print('The meta-data are saved in {}.'.format(output_filename(f.name)))
+                json.dump(
+                    get_station_reference_data(identifier, field=field, data_kind=DATA_KIND.MEASUREMENT),
+                    f, indent=4)
+                print('The meta-data are saved in {}.'.format(_output_filename(f.name)))
 
-        series = get_ehyd_data(id_number, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT)
+        series = get_ehyd_data(identifier, field=field, data_kind=DATA_KIND.MEASUREMENT)
 
     # __________________________________________________________________________________________________________________
-    elif input_ is not None:
-        fn = input_
-        series = import_series(fn, unix=unix)
-        print('The data in "{}" were imported and are used as the precipitation time-series.'.format(fn))
-        name = path.basename(fn).split('.')[0]
+    elif filename is not None:
+        series = import_series(filename, unix=unix)
+        print(f'The data in "{filename}" were imported and are used as the precipitation time-series.')
+        name = path.basename(filename).split('.')[0]
 
     # __________________________________________________________________________________________________________________
     else:
         raise UserWarning('No data selected. Use either a input file or a id. See help menu.')
 
-    print('The selected time-series starts at "{:%Y-%m-%d}" and ends at "{:%Y-%m-%d}".'.format(*start_end_date(series)))
-
-    return series, name
-
-
-def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=False, add_gaps=True, statistics=False,
-               to_csv=False, to_parquet=False, plot=False, unix=False):
-    # __________________________________________________________________________________________________________________
-    if start is not None:
-        start = convert_time(start, 'start')
-
-    # __________________________________________________________________________________________________________________
-    if end is not None:
-        end = convert_time(end, 'end')
-
-    # __________________________________________________________________________________________________________________
-    series, name = get_data(id_, input_, meta, unix)
+    print(f'The selected time-series start at "{series.index[0]:%Y-%m-%d}" and ends at "{series.index[0]:%Y-%m-%d}".')
 
     # __________________________________________________________________________________________________________________
     series = series[start:end].copy()
@@ -118,8 +114,9 @@ def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=F
         check_period(series)
 
     if start or end or max10a:
-        print('The time-series is clipped to '
-              'start at "{:%Y-%m-%d}" and end at "{:%Y-%m-%d}".'.format(*start_end_date(series)))
+        print(
+            f'The time-series is clipped to start at "{series.index[0]:%Y-%m-%d}" and end at "'
+            f'{series.index[0]:%Y-%m-%d}".')
 
     # __________________________________________________________________________________________________________________
     if add_gaps:
@@ -133,11 +130,11 @@ def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=F
         gaps = gaps.sort_values('delta', ascending=False)
         gaps.columns = ['start', 'end', 'gaps in days']
 
-        gaps_fn = '{}_gaps.csv'.format(name)
+        gaps_fn = f'{name}_gaps.csv'
 
         gaps.to_csv(gaps_fn, float_format='%0.3f', **csv_args(unix))
 
-        print('The gaps table is saved {}.'.format(output_filename(gaps_fn)))
+        print(f'The gaps table is saved {_output_filename(gaps_fn)}.')
 
     # __________________________________________________________________________________________________________________
     if statistics:
@@ -145,8 +142,6 @@ def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=F
             tags = data_validation(series)
         if availability is None:
             availability = data_availability(tags)
-
-        availability_cut = 0.9
 
         stats = create_statistics(series, availability, availability_cut=availability_cut)
 
@@ -156,19 +151,18 @@ def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=F
             avail_fmt = '{:0.0%}'
 
             f.write(
-                'The annual totals of the data series serve as the data basis.\n'
-                'The following statistics were analyzed:\n'
-                'Only years with a availability of {avail} will be evaluated.\n'
-                '\n'
-                'The maximum is {rain} and was in the year {date} (with {avail} Data available).\n'
-                'The minimum is {rain} and was in the year {date} (with {avail} Data available).\n'
-                'The mean is {rain} (with {avail} Data available in average).'
-                ''.format(rain=rain_fmt, date=date_fmt, avail=avail_fmt).format(availability_cut,
-                                                                                *stats['maximum'],
-                                                                                *stats['minimum'],
-                                                                                *stats['mean'])
-            )
-            print('The statistics are saved {}.'.format(output_filename(f.name)))
+                f'The annual totals of the data series serve as the data basis.\n'
+                f'The following statistics were analyzed:\n'
+                f'Only years with a availability of {availability_cut:{avail_fmt}} will be evaluated.\n'
+                f'\n'
+                f'The maximum is {stats["maximum"]:{rain_fmt}} and was in the year {stats["maximum_date"]:{date_fmt}} '
+                f'(with {stats["maximum_avail"]:{avail_fmt}} Data available).\n'
+                f'The minimum is {stats["minimum"]:{rain_fmt}} and was in the year {stats["minimum_date"]:{date_fmt}} '
+                f'(with {stats["minimum_avail"]:{avail_fmt}} Data available).\n'
+                f'The mean is {stats["mean"]:{rain_fmt}} '
+                f'(with {stats["mean_avail"]:{avail_fmt}} Data available in average).')
+
+            print(f'The statistics are saved {_output_filename(f.name)}.')
 
     # __________________________________________________________________________________________________________________
     save_formats = list()
@@ -179,7 +173,7 @@ def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=F
 
     for save_as in save_formats:
         out_fn = export_series(series, filename=name, save_as=save_as, unix=unix)
-        print('The time-series is saved {}.'.format(output_filename(out_fn)))
+        print(f'The time-series is saved {_output_filename(out_fn)}.')
 
     # __________________________________________________________________________________________________________________
     if plot:
@@ -188,9 +182,9 @@ def run_script(start=None, end=None, id_=None, input_=None, meta=False, max10a=F
         if availability is None:
             availability = data_availability(tags)
 
-        plot_fn = '{}_plot.png'.format(name)
-        rain_plot(series, availability, plot_fn)
-        print('The plot is saved {}.'.format(output_filename(plot_fn)))
+        plot_fn = f'{name}_plot.png'
+        agg_data_plot(series, availability, plot_fn, agg=agg)
+        print(f'The plot is saved {_output_filename(plot_fn)}.')
         show = True
         if show:
             show_file(plot_fn)
