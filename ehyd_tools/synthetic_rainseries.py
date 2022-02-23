@@ -38,6 +38,7 @@ class _AbstractModelRain(ABC):
             if isinstance(start_time, str):
                 start_time = pd.to_datetime(start_time)
             rain.index = start_time + pd.to_timedelta(rain.index, unit='m')
+            rain = rain.asfreq(pd.infer_freq(rain.index))
         return rain
 
 
@@ -68,6 +69,11 @@ class _EulerRain(_AbstractModelRain):
     def _get_series(self, return_period, duration, interval=5, kind=2):
         return_period_series = self.idf_table[return_period]
 
+        # intensities = return_period_series / return_period_series.index
+        # slope = intensities.diff(-1) / intensities.index.to_series().diff(-1)
+
+        smallest_dur = sorted(return_period_series.index)[0]
+
         raising = return_period_series.diff().lt(0)
         if raising.any():
             error_from_duration = raising[raising.shift(-1).fillna(False)].index.tolist()
@@ -77,6 +83,10 @@ class _EulerRain(_AbstractModelRain):
         index = self._get_index(duration, interval)
         filtered_series = pd.Series(data=np.interp(index, return_period_series.index, return_period_series),
                                     index=index)
+
+        if smallest_dur > interval:
+            redo_durs = filtered_series.index[filtered_series.index < smallest_dur]
+            filtered_series[redo_durs] = return_period_series[smallest_dur] / smallest_dur * redo_durs
 
         d = filtered_series.diff()
         d.iloc[0] = filtered_series.iloc[0]
