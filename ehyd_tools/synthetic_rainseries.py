@@ -29,11 +29,11 @@ class _AbstractModelRain(ABC):
         return float(f(return_period, duration)[0])
 
     @abstractmethod
-    def _get_series(self, return_period, duration, interval=5, **kwargs):
+    def get_series(self, return_period, duration, interval=5, **kwargs):
         pass
 
     def get_time_series(self, return_period, duration, interval=5, start_time=None, **kwargs):
-        rain = self._get_series(return_period, duration, interval, **kwargs)
+        rain = self.get_series(return_period, duration, interval, **kwargs)
         if start_time is not None:
             if isinstance(start_time, str):
                 start_time = pd.to_datetime(start_time)
@@ -46,12 +46,11 @@ class _BlockRain(_AbstractModelRain):
     def __init__(self, idf_table=None):
         _AbstractModelRain.__init__(self, idf_table)
 
-    def _get_series(self, return_period, duration, interval=5, **kwargs):
+    def get_series(self, return_period, duration, interval=5, **kwargs):
         height = self._get_idf_value(duration, return_period)
         index = self._get_index(duration, interval)
         intensity = height / len(index)
-        r = pd.Series(index=index, data=intensity)
-        r = r.append(pd.Series({0: 0})).sort_index()
+        r = pd.Series(index=[0] + list(index), data=[0] + len(index) * [intensity])
         return r
 
 
@@ -66,7 +65,7 @@ class _EulerRain(_AbstractModelRain):
         elif kind == 2:
             return 1 / 3
 
-    def _get_series(self, return_period, duration, interval=5, kind=2):
+    def get_series(self, return_period, duration, interval=5, kind=2):
         return_period_series = self.idf_table[return_period]
 
         # intensities = return_period_series / return_period_series.index
@@ -102,7 +101,7 @@ class _EulerRain(_AbstractModelRain):
         r.loc[:max_index] = r.loc[max_index::-1].values
 
         # add Zero value at first posiotion (for SWMM ?)
-        r = r.append(pd.Series({0: 0})).sort_index()
+        r = pd.Series(data=[0] + r.tolist(), index=[0]+r.index.values.tolist())
 
         # ---------------
         if 0:
@@ -151,6 +150,10 @@ class RainModeller:
     @property
     def euler(self, ) -> _EulerRain:
         return _EulerRain(idf_table=self.idf_table)
+
+    class TYPE:
+        BLOCK = 'block'
+        EULER = 'euler'
 
 
 if __name__ == '__main__':
