@@ -1,6 +1,6 @@
 import re
 
-d = dict()
+d = {}
 fn = 'Stammdaten-112086.txt'
 fn = 'meta.txt'
 with open(fn, 'r', encoding='utf8') as f:

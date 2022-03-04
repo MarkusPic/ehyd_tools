@@ -229,7 +229,7 @@ def _get_url(identifier, data_kind=DATA_KIND.MEASUREMENT, field=FIELDS.NIEDERSCH
     return url
 
 
-_REQUESTS = dict()
+_REQUESTS = {}
 
 
 def _get_request(identifier, data_kind=DATA_KIND.MEASUREMENT, field=FIELDS.NIEDERSCHLAG, file_number=1) -> requests.Response:
@@ -263,7 +263,7 @@ def available_files(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.M
     Returns:
         dict[int, str]: dictionary of {file-number: file-name}
     """
-    files = dict()
+    files = {}
     for file_number in range(1, 15):
         r = _get_request(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind)
         if _file_available(r):
@@ -321,7 +321,7 @@ def get_ehyd_files(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.ME
     Returns:
         dict: with key=filename and value=tuple(meta_data, timeseries_data)
     """
-    files = dict()
+    files = {}
     for file_number, filename in available_files(identifier, field=field, data_kind=data_kind).items():
         if file_number == 1:
             files[filename] = get_station_reference_data(identifier, field=field, data_kind=data_kind)
@@ -407,7 +407,7 @@ def translate_meta_dict(meta):
     from translate import Translator
     translator = Translator(from_lang='de', to_lang="en")
     translation = translator.translate("This is a pen.")
-    meta_translate = dict()
+    meta_translate = {}
     for k in meta.keys():
         meta_translate[translator.translate(k)] = meta[k]
     return meta_translate

@@ -238,12 +238,12 @@ def create_statistics(series, availability, availability_cut=0.2):
     if (avail < availability_cut).all():
         warn('ATTENTION: only very small data availability! The statistic may be not very meaningful.', EhydWarning)
         if (avail < 0.1).all():
-            return dict()
+            return {}
         sums[avail < 0.1] = NaN
     else:
         sums[avail < availability_cut] = NaN
 
-    stats = dict()
+    stats = {}
     stats['maximum'] = sums.max()
     stats['maximum_date'] = sums.idxmax()
     stats['maximum_avail'] = avail.loc[sums.idxmax()]
