@@ -20,7 +20,7 @@ with open(fn, 'r', encoding='utf8') as f:
 
         if (line.count(':') == 1) and line.strip().endswith(':'):
             main_key = line.split(':')[0].strip()
-            d[main_key] = list()
+            d[main_key] = []
 
         elif (line.count(':') == 1) and not line.strip().endswith(':'):
             args = line.strip().split(':')
@@ -38,13 +38,13 @@ with open(fn, 'r', encoding='utf8') as f:
 
                 if main_key is None:
                     main_key = line.split(':')[0].strip()
-                    d[main_key] = list()
+                    d[main_key] = []
 
                 # d[main_key] += line
                 table_keys = [k.strip() for k in line.split(':')[:line.count(':')]]
             elif line.strip().endswith(':'):
                 main_key = line.split(':')[0].strip()
-                d[main_key] = list()
+                d[main_key] = []
             else:
                 args = line.strip().split(':')
                 key = args[0].strip()

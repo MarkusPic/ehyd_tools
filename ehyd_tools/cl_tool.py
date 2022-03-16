@@ -165,7 +165,7 @@ def run_script(identifier=None, filename=None, start=None, end=None, max10a=Fals
             print(f'The statistics are saved {_output_filename(f.name)}.')
 
     # __________________________________________________________________________________________________________________
-    save_formats = list()
+    save_formats = []
     if to_csv:
         save_formats.append('csv')
     if to_parquet:

@@ -347,7 +347,7 @@ def _parse_meta_data(meta_str):
             is_table = True
             table_key = line[:-1].split(':  ')[0]
             currant_header = re.split(sep, line.strip().strip(':'))
-            currant_table = list()
+            currant_table = []
 
         elif is_table and not line.startswith(' ') and line.endswith(':'):
             # end table | start new table
@@ -355,7 +355,7 @@ def _parse_meta_data(meta_str):
             # ------------
             table_key = line[:-1].split(':  ')[0]
             currant_header = re.split(sep, line.strip().strip(':'))
-            currant_table = list()
+            currant_table = []
 
         elif is_table and line.startswith(' ') and line.endswith(':'):
             # line is header
