@@ -143,7 +143,7 @@ def get_high_res_station(identifier):
     Returns:
         str: name of the station
     """
-    return STATIONS_PRECIPITATION_HIGH_RES[identifier]
+    return STATIONS_PRECIPITATION_HIGH_RES[str(identifier)]
 
 
 class DATA_KIND:
