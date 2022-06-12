@@ -472,7 +472,7 @@ def read_ehyd_file(filepath_or_buffer, series_label='data'):
 
     # ___________________________
     ts = pd.read_csv(io.StringIO('\n'.join(data).replace(' ', '')), sep=';', decimal=',', index_col=0,
-                     na_values='Lücke', header=None, squeeze=True,  # names=[series_label],
+                     na_values='Lücke', header=None,  # names=[series_label],
                      date_parser=lambda s: pd.to_datetime(s, format='%d.%m.%Y%H:%M:%S')
                      )
 
