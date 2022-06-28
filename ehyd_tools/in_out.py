@@ -334,6 +334,7 @@ def get_ehyd_files(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.ME
 def _parse_meta_data(meta_str):
     # print('#' * 100)
     # print(meta_str)
+    meta_str = meta_str.replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('A', 'AE').replace('Ö', 'OE').replace('U', 'ue').replace('ß', 'ss')
     meta = dict(_raw=meta_str)
     currant_table = None
     currant_header = None

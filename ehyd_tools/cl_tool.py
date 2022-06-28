@@ -52,7 +52,11 @@ def _output_filename(fn):
 @arg('--availability_cut', help='minimum percentage of availability of data to take account in the aggregations '
                                 'in the statistics')
 @arg('--agg', help='aggregation for the plot i.e.: "sum", "mean", "median", ...')
-@arg('--field', help='field of the observation [NIEDERSCHLAG, QUELLEN, GRUNDWASSER, OBERFLAECHENWASSER]',
+@arg('--field', help=f'field of the observation ['
+                     f'"{FIELDS.NIEDERSCHLAG}" for precipitation (= Niederschlag), '
+                     f'"{FIELDS.QUELLEN}" for springs (= Quellen), '
+                     f'"{FIELDS.GRUNDWASSER}" for groundwater (= Grundwasser), '
+                     f'"{FIELDS.OBERFLAECHENWASSER}" for surface water (= Oberflächenwasser)]',
      choices=[FIELDS.NIEDERSCHLAG, FIELDS.QUELLEN, FIELDS.GRUNDWASSER, FIELDS.OBERFLAECHENWASSER])
 def run_script(identifier=None, filename=None, start=None, end=None, max10a=False, add_gaps=True,
                to_csv=False, to_parquet=False, plot=False, statistics=False, meta=False, unix=False,
@@ -70,6 +74,7 @@ def run_script(identifier=None, filename=None, start=None, end=None, max10a=Fals
 
     # __________________________________________________________________________________________________________________
     if identifier is not None:
+        identifier = int(identifier)
         name = f'ehyd_{field}_{identifier}'
 
         print(
