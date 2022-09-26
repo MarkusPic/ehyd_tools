@@ -514,7 +514,7 @@ def get_ehyd_data(identifier, field=FIELDS.NIEDERSCHLAG, file_number=2, data_kin
     Returns:
         pandas.Series: time-series with meta-data ts.attrs
     """
-    if identifier not in get_ehyd_stations(field):
+    if int(identifier) not in get_ehyd_stations(field):
         raise ValueError(f'Identifier "{identifier}" not in ehyd!')
 
     return read_ehyd_file(*_get_file(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind))

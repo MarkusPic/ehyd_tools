@@ -5,10 +5,9 @@ __license__ = "MIT"
 __version__ = "1.0.0"
 __maintainer__ = "Markus Pichler"
 
-from pandas import read_fwf, IndexSlice as idx
-from os import path
-from io import BytesIO, TextIOWrapper
-
+import io
+import os
+import pandas as pd
 from scipy.interpolate import interp2d
 
 from ehyd_tools.in_out import FIELDS, DATA_KIND, _get_request
@@ -28,12 +27,12 @@ class INDICES_GER:
 
 def get_ehyd_design_rainfall_file(grid_point_number=5214):
     r = _get_request(grid_point_number, data_kind=DATA_KIND.DESIGN_PRECIPITATION, field=None, file_number=None)
-    return TextIOWrapper(BytesIO(r.content), encoding='ISO-8859-1')
+    return io.TextIOWrapper(io.BytesIO(r.content), encoding='ISO-8859-1')
 
 
 def save_ehyd_design_rainfall_pdf(grid_point_number, fn):
-    fn = path.join(fn, 'Bemessungsniederschlag_Gitterpunkt_{no}.pdf'.format(no=grid_point_number))
-    if not path.isfile(fn):
+    fn = os.path.join(fn, 'Bemessungsniederschlag_Gitterpunkt_{no}.pdf'.format(no=grid_point_number))
+    if not os.path.isfile(fn):
         r = _get_request(grid_point_number, data_kind=DATA_KIND.DESIGN_PRECIPITATION, field=FIELDS.PDF, file_number=None)
         open(fn, 'wb').write(r.content)
 
@@ -48,10 +47,10 @@ def read_ehyd_design_rainfall(filepath_or_buffer):
     first_three_lines = [txt_file.readlines(1) for _ in range(3)]
     # print(*first_three_lines, sep='\n')
 
-    df = read_fwf(txt_file, header=0, skiprows=0, index_col=[0, 1, 2],
-                  encoding='ISO-8859-1',
-                  comment='-',
-                  skip_blank_lines=True)
+    df = pd.read_fwf(txt_file, header=0, skiprows=0, index_col=[0, 1, 2],
+                     encoding='ISO-8859-1',
+                     comment='-',
+                     skip_blank_lines=True)
     txt_file.close()
 
     # drop empty rows
@@ -82,7 +81,7 @@ def get_max_calculation_method(df, methods=None):
     if methods is None:
         methods = ['ÖKOSTRA', 'Bemessung']
 
-    return df.loc[idx[:, methods], :].groupby(axis=0, level=0).max().copy()
+    return df.loc[pd.IndexSlice[:, methods], :].groupby(axis=0, level=0).max().copy()
 
 
 def get_calculation_method(df, method='Bemessung'):
@@ -92,3 +91,14 @@ def get_calculation_method(df, method='Bemessung'):
 def get_rainfall_height(table, return_period, duration):
     f = interp2d(x=table.columns.astype(float).values, y=table.index.astype(float).values, z=table.values, kind='linear')
     return float(f(return_period, duration)[0])
+
+
+def get_ehyd_design_rainfall_offline(grid_point_number, pth):
+    fn_csv = os.path.join(pth, f'design_rain_ehyd_{grid_point_number}.csv')
+    if os.path.isfile(fn_csv):
+        df = pd.read_csv(fn_csv, index_col=[0, 1])
+        df.columns = df.columns.astype(int)
+    else:
+        df = get_ehyd_design_rainfall(grid_point_number=grid_point_number)
+        df.to_csv(fn_csv)
+    return df
