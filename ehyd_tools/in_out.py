@@ -452,7 +452,7 @@ def _split_file(file):
 
 def read_ehyd_file(filepath_or_buffer, series_label='data'):
     """
-    read ehyd data file
+    Read ehyd data file
 
     Args:
         filepath_or_buffer (io.IOBase | str):
