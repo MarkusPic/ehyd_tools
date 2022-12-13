@@ -1,4 +1,11 @@
 .ipynb_checkpoints
 .idea
+.idea/
 .venv
+/venv/
 *.parquet
+
+.directory
+/build/*
+/dist/*
+*.egg-info
