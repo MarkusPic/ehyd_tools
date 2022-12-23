@@ -1,5 +1,7 @@
 # Changelog
 
+<!--next-version-placeholder-->
+
 ## 0.1dev17  (Sep 27, 2021)
 
 - general ehyd data reader

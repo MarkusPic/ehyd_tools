@@ -9,7 +9,7 @@ import json
 from os import path
 from webbrowser import open as show_file
 
-from argh import arg
+from argh import arg, dispatch_command
 from pandas import to_datetime
 
 from .data_processing import (data_validation, data_availability, max_10a, check_period, agg_data_plot,
@@ -193,3 +193,10 @@ def run_script(identifier=None, filename=None, start=None, end=None, max10a=Fals
         show = True
         if show:
             show_file(plot_fn)
+
+
+def command_line_tool():
+    """
+    Execute the command line tool
+    """
+    dispatch_command(run_script)

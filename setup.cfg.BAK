@@ -4,7 +4,7 @@ version = attr: ehyd_tools.__version__
 
 url = https://github.com/MarkusPic/ehyd_tools
 project_urls =
-    Changelog = https://github.com/MarkusPic/ehyd_tools/blob/master/CHANGES.md
+    Changelog = https://github.com/MarkusPic/ehyd_tools/blob/master/CHANGELOG.md
     Documentation = https://github.com/MarkusPic/ehyd_tools/blob/master/README.md
 
 license = MIT
@@ -46,5 +46,4 @@ install_requires =
     argh
 
 [options.extras_require]
-pyarrow = pyarrow
-fastparquet = fastparquet
+parquet = fastparquet, pyarrow

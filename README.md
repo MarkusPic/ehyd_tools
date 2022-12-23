@@ -6,6 +6,8 @@
 [![license](https://img.shields.io/github/license/markuspic/ehyd_tools.svg?style=flat)](https://github.com/MarkusPic/ehyd_tools/blob/master/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/ehyd_tools.svg)](https://pypi.python.org/pypi/ehyd-tools)
 
+Reading and analyzing hydro(geo)logic time series from the Austrian government's "ehyd.gv.at" platform.
+
 Various tools for exporting and analyzing >10a rain time-series from the [ehyd.gv.at](https://ehyd.gv.at) platform of the Austian government.
 
 If you are interested in a statistical heavy rain analysis like on *(Ö)Kostra*, take a look at my other python package [intensity_duration_frequency_analysis](https://github.com/MarkusPic/intensity_duration_frequency_analysis) which is compatible with this package.

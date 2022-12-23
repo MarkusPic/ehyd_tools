@@ -5,7 +5,7 @@ authors:
   given-names: "Markus"
   orcid: "https://orcid.org/0000-0002-8101-2163 "
 
-title: "SWMM-xsections-shape-generator: US-EPA SWMM Cross-Section curve shape generator."
-version: 0.7.post2
+title: "eHYD Tools: Reading and analyzing hydro(geo)logic time series from the Austrian government's "ehyd.gv.at" platform."
+version: 0.1.1
 date-released: 2022-09-06
-url: "https://github.com/MarkusPic/SWMM_xsections_shape_generator"
+url: "https://github.com/MarkusPic/ehyd_tools"

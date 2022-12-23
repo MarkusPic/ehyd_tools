@@ -1,3 +1,65 @@
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "ehyd-tools"
+description = "Reading and analyzing hydro(geo)logic time series from the Austrian government's \"ehyd.gv.at\" platform."
+readme = "README.md"
+authors = [
+    { name = "Markus Pichler", email = "markus.pichler@tugraz.at" }
+]
+requires-python = ">=3.7"
+keywords = ["austria", "precipitation", "groundwater", "hydrology", "data", "environment", "civil_engineering", "api"]
+
+license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Natural Language :: English",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Hydrology",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "numpy>=1.14",
+    "pandas>=1",
+    "matplotlib>=3",
+    "requests",
+    "argh",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+parquet = ['fastparquet', 'pyarrow']
+#docs = ["sphinx", "nbsphinx", "recommonmark", "pydata_sphinx_theme", "ipython==8.5.0"]
+
+[tool.setuptools.dynamic]
+version = { attr = "ehyd_tools.__version__" }
+
+[project.urls]
+#Documentation = "https://markuspic.github.io/intensity_duration_frequency_analysis/"
+Changelog = "https://github.com/MarkusPic/ehyd_tools/blob/master/CHANGELOG.md"
+homepage = "https://github.com/MarkusPic/ehyd_tools"
+
+[tool.setuptools.packages.find]
+include = ['ehyd_tools']
+#namespaces = false
+
+[tool.setuptools.package-data]
+idf_analysis = ["*.csv", "*.json"]
+#"idf_analysis.approaches" = ["*.yaml"]
+
+[project.scripts]
+ehyd_tools = "ehyd_tools._console_script:command_line_tool"
+
+# https://github.com/python-semantic-release/python-semantic-release
+[tool.semantic_release]
+branch = "main"
+version_variable = "ehyd_tools/__init__.py:__version__"
+major_on_zero = false
+upload_to_pypi = true
+hvcs = 'github'
+version_source = 'tag'
