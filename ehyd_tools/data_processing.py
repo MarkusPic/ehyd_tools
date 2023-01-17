@@ -169,7 +169,7 @@ def agg_data_figure(series, availability, agg='sum', freq=None, add_mean_line=Fa
 
     height_ratios = [1, 10]
 
-    fig, (ax1, ax) = subplots(2, gridspec_kw=dict(height_ratios=height_ratios), sharex=True)
+    fig, (ax1, ax) = subplots(2, gridspec_kw=dict(height_ratios=height_ratios), sharex=True, layout='constrained')
 
     # ax = dummy.plot(ax=ax, lw=0)
     fig.set_size_inches(w=29.7 / 2.54, h=21. / 2.54)
@@ -194,7 +194,6 @@ def agg_data_figure(series, availability, agg='sum', freq=None, add_mean_line=Fa
     ax.set_xlabel('Zeit')
     # ax.set_xlim(left=ax.get_xlim()[0] - 0.5)
     # ax.set_xlim(right=ax.get_xlim()[1] + 0.5)
-    fig.tight_layout()
     fig.subplots_adjust(hspace=0)
     return fig, ax
 

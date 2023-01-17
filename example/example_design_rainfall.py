@@ -8,7 +8,7 @@ if __name__ == '__main__':
     df = get_ehyd_design_rainfall(grid_point_number=5214)
     rain_height = get_max_calculation_method(df)
 
-    fig, (ax1, ax2) = plt.subplots(2, sharex=True)  # type: plt.Figure, (plt.Axes, plt.Axes)
+    fig, (ax1, ax2) = plt.subplots(2, sharex=True, layout='constrained')  # type: plt.Figure, (plt.Axes, plt.Axes)
 
     duration_max = 120
     return_periods = [1, 2, 3, 5, 10, 20, 50, 100][::-1]
@@ -35,6 +35,5 @@ if __name__ == '__main__':
     ax.legend().remove()
 
     fig.set_size_inches(7, 7)
-    fig.tight_layout()
     # fig.show()
     fig.savefig('5214_design_rainfall_plot2.png')
