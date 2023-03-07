@@ -100,7 +100,7 @@ class _EulerRain(_AbstractModelRain):
         # reverse first <occurrence_highest_intensity> values
         r.loc[:max_index] = r.loc[max_index::-1].values
 
-        # add Zero value at first posiotion (for SWMM ?)
+        # add Zero value at first position (for SWMM ?)
         r = pd.Series(data=[0] + r.tolist(), index=[0]+r.index.values.tolist())
 
         # ---------------
