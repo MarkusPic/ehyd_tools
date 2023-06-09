@@ -1,8 +1,11 @@
+import os.path
+
 from ehyd_tools.data_processing import (data_validation, data_availability, max_10a, check_period,
                                         agg_data_figure, create_statistics, )
 from ehyd_tools.in_out import (get_ehyd_data, import_series, FIELDS, DATA_KIND, available_files, get_basic_station_meta,
-                               get_ehyd_stations, get_ehyd_files, get_station_reference_data, translate_meta_dict, )
+                               get_ehyd_stations, get_ehyd_files, get_station_reference_data, translate_meta_dict, export_series, )
 from ehyd_tools.sww_utils import span_table
+
 
 def main2():
     a1 = get_station_reference_data(identifier=106559, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT)
@@ -25,24 +28,27 @@ def main():
     # __________________________________________________________________________________________________________________
     identifier = 112086
 
-    # print(get_basic_station_meta(identifier, field=field))
-    # series = get_ehyd_data(identifier, field=field, file_number=2, data_kind=DATA_KIND.MEASUREMENT)
-    # print(series)
-
-    start = '2007-01-01'
-    end = '2016-12-31'
-    # series = series[start:end].copy()
-    # check_period(series)
-
-    # __________________________________________________________________________________________________________________
     label = 'ehyd_{}'.format(identifier)
-    # export_series(series, filename=label, save_as='csv')
-    # export_series(series, filename=label, save_as='parquet')
-    # exit()
+
+    # print(get_basic_station_meta(identifier, field=field))
+    if not os.path.isfile(label + '.parquet'):
+        series = get_ehyd_data(identifier, field=field, file_number=2, data_kind=DATA_KIND.MEASUREMENT)
+        # print(series)
+
+        start = '2007-01-01'
+        end = '2016-12-31'
+        # series = series[start:end].copy()
+        # check_period(series)
+
+        # __________________________________________________________________________________________________________________
+        # export_series(series, filename=label, save_as='csv')
+        export_series(series, filename=label, save_as='parquet')
+
     # __________________________________________________________________________________________________________________
-    series = import_series(label + '.parquet')
-    # series = import_series(r'C:\Users\mp\PycharmProjects\ehyd_tools\example\112086_graz\N-Minutensummen-112086.csv')
-    # export_series(series, 'test', export_path=None, save_as='parquet', unix=False)
+    else:
+        series = import_series(label + '.parquet')
+        # series = import_series(r'C:\Users\mp\PycharmProjects\ehyd_tools\example\112086_graz\N-Minutensummen-112086.csv')
+        # export_series(series, 'test', export_path=None, save_as='parquet', unix=False)
 
     # __________________________________________________________________________________________________________________
     tags = data_validation(series)
