@@ -20,12 +20,12 @@ jobs:
 
       # ---
       # This action uses Python Semantic Release v7
-      - name: Python Semantic Release
-        uses: python-semantic-release/python-semantic-release@v7.34.6  # relekang/python-semantic-release@master
-        with:
-          github_token: ${{ secrets.GH_TOKEN }}
-          repository_username: __token__
-          repository_password: ${{ secrets.PyPI_TOKEN }}
+#      - name: Python Semantic Release
+#        uses: python-semantic-release/python-semantic-release@v7.34.6  # relekang/python-semantic-release@master
+#        with:
+#          github_token: ${{ secrets.GH_TOKEN }}
+#          repository_username: __token__
+#          repository_password: ${{ secrets.PyPI_TOKEN }}
       # ---
       # This action uses Python Semantic Release v8
       - name: Python Semantic Release
