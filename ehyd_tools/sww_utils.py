@@ -13,7 +13,7 @@ END = 'end'
 
 
 def _index_series(date_time_index):
-    """create a time series from a datetime index without loosing the timezone info"""
+    """Create a time series from a datetime index without losing the timezone info."""
     if isinstance(date_time_index, pd.DatetimeIndex) and date_time_index.tzinfo is not None:
         return pd.Series(data=date_time_index, index=date_time_index)
     else:
@@ -22,7 +22,7 @@ def _index_series(date_time_index):
 
 def span_table(span_bool, min_span=None):
     """
-    time span with consist "True" with a minimum span of <min_span> are the resulting events
+    Time span with consist "True" with a minimum span of <min_span> are the resulting events.
 
     Args:
         span_bool (pandas.Series[bool]): "True"=Event
@@ -57,7 +57,7 @@ def span_table(span_bool, min_span=None):
 
 def guess_freq(date_time_index, default=pd.Timedelta(minutes=1)):
     """
-    guess the frequency by evaluating the most often frequency
+    Guess the frequency by evaluating the most often frequency.
 
     Args:
         date_time_index (pandas.DatetimeIndex): index of a time-series
