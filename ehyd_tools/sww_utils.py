@@ -1,5 +1,5 @@
 __author__ = "David Camhy, Markus Pichler"
-__copyright__ = "Copyright 2018, University of Technology Graz"
+__copyright__ = "Copyright 2023, University of Technology Graz"
 __credits__ = ["David Camhy", "Markus Pichler"]
 __license__ = "MIT"
 __version__ = "1.0.0"
