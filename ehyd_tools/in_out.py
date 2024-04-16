@@ -121,7 +121,7 @@ def import_series(filename, series_label='precipitation', index_label='datetime'
             return read_ehyd_file(filename)
     elif filename.endswith('parquet'):
         try:
-            return pd.read_parquet(filename).iloc[:, 0].asfreq('T').copy()
+            return pd.read_parquet(filename).iloc[:, 0].asfreq('min').copy()
         except ImportError:
             raise PARQUET_ERROR
     else:

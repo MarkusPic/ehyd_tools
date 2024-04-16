@@ -56,7 +56,7 @@ def data_validation(series):
 
     tags = DataFrame(index=ts.index)
     tags['nans'] = isna(ts).astype(int)
-    tags = tags.reindex(tags.asfreq('T').index)
+    tags = tags.reindex(tags.asfreq('min').index)
     tags['gaps'] = isna(ts.fillna(0).reindex(tags.index)).astype(int)
     return tags
 
