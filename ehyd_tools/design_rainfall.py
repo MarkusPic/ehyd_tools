@@ -217,7 +217,7 @@ def read_ehyd_design_rainfall(filepath_or_buffer):
     df = df.dropna(axis=0, how='all')
 
     # convert string column names to integers
-    df.columns = [int(c.replace('min', '')) for c in df.columns]
+    df.columns = [int(c.replace('T', '')) for c in df.columns]
     # df.columns.name = 'Jährlichkeit'
     df.columns.name = INDICES.RETURN_PERIOD
 
