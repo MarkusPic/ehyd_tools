@@ -37,7 +37,7 @@ def span_table(span_bool, min_span=None):
 
     # minimum duration which is considered as one event
     if min_span is None:
-        min_span = guess_freq(index).delta  # TODO: Will not work on monthly or yearly data steps
+        min_span = pd.Timedelta(guess_freq(index))  # TODO: Will not work on monthly or yearly data steps
 
     # pandas.Series with DatetimeIndex as index AND data
     temp = _index_series(index[span_bool])
