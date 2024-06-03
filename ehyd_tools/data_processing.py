@@ -5,10 +5,10 @@ __license__ = "MIT"
 __version__ = "1.0.0"
 __maintainer__ = "David Camhy, Markus Pichler"
 
-from pandas import Timedelta, DataFrame, isna, Series, DateOffset
-from numpy import NaN
 from warnings import warn
-from matplotlib.pyplot import subplots
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 
 class EhydWarning(UserWarning): pass
@@ -24,7 +24,7 @@ def year_delta(years):
     Returns:
         pandas.Timedelta: time period
     """
-    return Timedelta(days=365.25) * years
+    return pd.Timedelta(days=365.25) * years
 
 
 def data_validation(series):
@@ -41,23 +41,23 @@ def data_validation(series):
 
     first_index = ts.index[0].replace(day=1, month=1, hour=0, minute=0)
     if first_index not in series.index:
-        ts = Series(index=[first_index]).append(ts)
+        ts = pd.concat([pd.Series(index=[first_index], data=[np.NaN]), ts])
 
     last_index = ts.index[-1].replace(day=31, month=12, hour=23, minute=59)
     if last_index not in ts.index:
-        ts = ts.append(Series(index=[last_index]))
+        ts = pd.concat([ts, pd.Series(index=[last_index], data=[np.NaN])])
 
     if ts.index.has_duplicates:  # very slow an large data sets
         ts = ts[~ts.index.duplicated()].copy()
 
     if not ts.index.is_monotonic_increasing:
         raise UserWarning('Series has not monotonic increasing of the timestamps.')
-        ts = ts.sort_index()
+        # ts = ts.sort_index()
 
-    tags = DataFrame(index=ts.index)
-    tags['nans'] = isna(ts).astype(int)
+    tags = pd.DataFrame(index=ts.index)
+    tags['nans'] = pd.isna(ts).astype(int)
     tags = tags.reindex(tags.asfreq('min').index)
-    tags['gaps'] = isna(ts.fillna(0).reindex(tags.index)).astype(int)
+    tags['gaps'] = pd.isna(ts.fillna(0).reindex(tags.index)).astype(int)
     return tags
 
 
@@ -90,7 +90,7 @@ def max_10a(availability):
     avail_sum = availability.rolling(window).sum()
 
     end = avail_sum[::-1].idxmax()
-    start = end - DateOffset(years=10)
+    start = end - pd.DateOffset(years=10)
     return start, end
 
 
@@ -105,7 +105,7 @@ def check_period(series):
         series (pandas.Series): time-series
     """
     if not is_longer(series, years=10):
-        years = (series.index[-1] - series.index[0]) / Timedelta(days=365)
+        years = (series.index[-1] - series.index[0]) / pd.Timedelta(days=365)
         warn(f'The Series is only {years:.1f} < 10 years long!', EhydWarning)
 
 
@@ -120,7 +120,7 @@ def is_longer(series, years):
     Returns:
         bool: whether the series is longer
     """
-    return series.index[0] + DateOffset(years=years) <= series.index[-1]
+    return series.index[0] + pd.DateOffset(years=years) <= series.index[-1]
     # return (series.index[-1] - series.index[0]) > year_delta(years=years)
 
 
@@ -140,16 +140,16 @@ def agg_data_figure(series, availability, agg='sum', freq=None, add_mean_line=Fa
     """
 
     freq_long = {
-        'Y': 'Jahr',
-        'M': 'Monat'
+        'YE': 'Jahr',
+        'ME': 'Monat'
     }
 
     if freq is None:
         if is_longer(series, years=15):
-            freq = 'Y'
+            freq = 'YE'
             # base_delta = year_delta(1)
         else:
-            freq = 'M'
+            freq = 'ME'
             # base_delta = year_delta(1) / 12
 
     ts_agg = series.resample(freq).agg(agg)
@@ -169,7 +169,7 @@ def agg_data_figure(series, availability, agg='sum', freq=None, add_mean_line=Fa
 
     height_ratios = [1, 10]
 
-    fig, (ax1, ax) = subplots(2, gridspec_kw=dict(height_ratios=height_ratios), sharex=True, layout='constrained')
+    fig, (ax1, ax) = plt.subplots(2, gridspec_kw=dict(height_ratios=height_ratios), sharex=True, layout='constrained')
 
     # ax = dummy.plot(ax=ax, lw=0)
     fig.set_size_inches(w=29.7 / 2.54, h=21. / 2.54)
@@ -180,7 +180,7 @@ def agg_data_figure(series, availability, agg='sum', freq=None, add_mean_line=Fa
     ax1.grid(axis='y', which='minor', color='lightgrey', linestyle=':', linewidth=0.5)  # , zorder=-10000000)
     # ax1 = dummy.plot(ax=ax1, lw=0)
     # ax1.scatter(x=index, y=avail.values * 100, color='grey', clip_on=False, marker='_')
-    ax1.bar(x=index, height=avail.values * 100, color='grey')
+    ax1.bar(x=index, height=avail.values * 100, color='grey', lw=.1, edgecolor='white', width=1/12)
     ax1.set_axisbelow(True)
 
     if add_mean_line:
@@ -189,12 +189,12 @@ def agg_data_figure(series, availability, agg='sum', freq=None, add_mean_line=Fa
                 bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 2, 'linewidth': '0'})
         ax.axhline(mean, ls='--', color='darkgray', linewidth=0.7)
 
-    ax.bar(x=index, height=ts_agg.values, color='black')
+    ax.bar(x=index, height=ts_agg.values, color='black', lw=0.1, edgecolor='white', width=1/12)
     ax.set_ylabel('Niederschlag (mm/{})'.format(freq_long[freq]))
     ax.set_xlabel('Zeit')
     # ax.set_xlim(left=ax.get_xlim()[0] - 0.5)
     # ax.set_xlim(right=ax.get_xlim()[1] + 0.5)
-    fig.subplots_adjust(hspace=0)
+    # fig.subplots_adjust(hspace=0)
     return fig, ax
 
 
@@ -226,21 +226,21 @@ def create_statistics(series, availability, availability_cut=0.2):
     Returns:
         dict: of the yearly statistics
     """
-    sums = series.resample('Y').sum()
-    avail_sum = availability.resample('Y').sum()
+    sums = series.resample('YE').sum()
+    avail_sum = availability.resample('YE').sum()
 
     base_freq = series.index.freq
     yearly_index = avail_sum.index
-    delta_per_year = yearly_index - (yearly_index - DateOffset(years=1))
+    delta_per_year = yearly_index - (yearly_index - pd.DateOffset(years=1))
     avail_full = delta_per_year / base_freq
     avail = avail_sum / avail_full  # type: Series
     if (avail < availability_cut).all():
         warn('ATTENTION: only very small data availability! The statistic may be not very meaningful.', EhydWarning)
         if (avail < 0.1).all():
             return {}
-        sums[avail < 0.1] = NaN
+        sums[avail < 0.1] = np.NaN
     else:
-        sums[avail < availability_cut] = NaN
+        sums[avail < availability_cut] = np.NaN
 
     stats = {}
     stats['maximum'] = sums.max()

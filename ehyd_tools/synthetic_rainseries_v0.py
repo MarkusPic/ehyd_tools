@@ -8,7 +8,7 @@ from scipy.interpolate import interp2d
 
 def block_rain(idf_table, return_period, duration, interval=5):
     if duration not in idf_table.index:
-        idf_table = idf_table.append(pd.Series(index=idf_table.columns, name=duration)).sort_index()
+        idf_table = pd.concat([idf_table, pd.Series(index=idf_table.columns, name=duration)], sort=True)
 
     if isinstance(return_period, float):
         idf_table.columns = idf_table.columns.astype(float)
@@ -23,8 +23,7 @@ def block_rain(idf_table, return_period, duration, interval=5):
     index = range(interval, duration + interval, interval)
     intensity = height / len(index)
     r = pd.Series(index=index, data=intensity)
-
-    r = r.append(pd.Series({0: 0})).sort_index()
+    r = pd.concat([r, pd.Series({0: 0})]).sort_index()
     return r
 
 
@@ -49,7 +48,7 @@ def euler_model_rain(idf_table, return_period, duration, interval=5, occurrence_
     r.loc[:max_index] = r.loc[max_index::-1].values
 
     # add Zero value at first posiotion (for SWMM ?)
-    r = r.append(pd.Series({0: 0})).sort_index()
+    r = pd.concat([r, pd.Series({0: 0})]).sort_index()
 
     # ---------------
     if 0:

@@ -45,7 +45,7 @@ def span_table(span_bool, min_span=None):
     # first value in diff will default to NaN
     # fill value is set to double the value of the greater than operation = fixed true value
     start_bool = temp.diff().gt(min_span, fill_value=min_span * 2)
-    end_bool = start_bool.shift(-1).fillna(True)
+    end_bool = start_bool.shift(-1, fill_value=True)
 
     events = pd.DataFrame()
 
