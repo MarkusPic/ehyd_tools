@@ -41,11 +41,11 @@ def data_validation(series):
 
     first_index = ts.index[0].replace(day=1, month=1, hour=0, minute=0)
     if first_index not in series.index:
-        ts = pd.concat([pd.Series(index=[first_index], data=[np.NaN]), ts])
+        ts = pd.concat([pd.Series(index=[first_index], data=[np.nan]), ts])
 
     last_index = ts.index[-1].replace(day=31, month=12, hour=23, minute=59)
     if last_index not in ts.index:
-        ts = pd.concat([ts, pd.Series(index=[last_index], data=[np.NaN])])
+        ts = pd.concat([ts, pd.Series(index=[last_index], data=[np.nan])])
 
     if ts.index.has_duplicates:  # very slow an large data sets
         ts = ts[~ts.index.duplicated()].copy()
@@ -238,19 +238,19 @@ def create_statistics(series, availability, availability_cut=0.2):
         warn('ATTENTION: only very small data availability! The statistic may be not very meaningful.', EhydWarning)
         if (avail < 0.1).all():
             return {}
-        sums[avail < 0.1] = np.NaN
+        sums[avail < 0.1] = np.nan
     else:
-        sums[avail < availability_cut] = np.NaN
+        sums[avail < availability_cut] = np.nan
 
-    stats = {}
-    stats['maximum'] = sums.max()
-    stats['maximum_date'] = sums.idxmax()
-    stats['maximum_avail'] = avail.loc[sums.idxmax()]
+    stats = {
+        'maximum': sums.max(),
+             'maximum_date': sums.idxmax(),
+             'maximum_avail': avail.loc[sums.idxmax()],
+             'minimum': sums.min(),
+             'minimum_date': sums.idxmin(),
+             'minimum_avail': avail.loc[sums.idxmin()],
+             'mean': sums.mean(),
+             'mean_avail': avail.mean()
+    }
 
-    stats['minimum'] = sums.min()
-    stats['minimum_date'] = sums.idxmin()
-    stats['minimum_avail'] = avail.loc[sums.idxmin()]
-
-    stats['mean'] = sums.mean()
-    stats['mean_avail'] = avail.mean()
     return stats

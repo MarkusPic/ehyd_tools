@@ -13,7 +13,7 @@ def block_rain(idf_table, return_period, duration, interval=5):
     if isinstance(return_period, float):
         idf_table.columns = idf_table.columns.astype(float)
     if return_period not in idf_table.columns:
-        idf_table[return_period] = np.NaN
+        idf_table[return_period] = np.nan
         idf_table = idf_table.sort_index(axis=1)
 
     if any(idf_table.isna()):
