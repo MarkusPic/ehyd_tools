@@ -51,7 +51,7 @@ def euler_model_rain(idf_table, return_period, duration, interval=5, occurrence_
     r = pd.concat([r, pd.Series({0: 0})]).sort_index()
 
     # ---------------
-    if 0:
+    if _ := 0:
         _res = pd.DataFrame(index=filtered_series.index)
         _res['basis'] = return_period_series
         _res['gefüllt'] = filtered_series

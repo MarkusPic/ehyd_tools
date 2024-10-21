@@ -104,7 +104,7 @@ class _EulerRain(_AbstractModelRain):
         r = pd.Series(data=[0] + r.tolist(), index=[0]+r.index.values.tolist())
 
         # ---------------
-        if 0:
+        if _ := 0:
             _res = pd.DataFrame(index=filtered_series.index)
             _res['basis'] = return_period_series
             _res['gefüllt'] = filtered_series
