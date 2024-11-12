@@ -39,7 +39,52 @@ Python is pre-installed on most operating systems (as you probably knew).
 
 ## Required python packages
 
-Packages required for this program will be installed with pip during the installation process and can be seen in the 'requirements.txt' file.
+Packages required for this program will be installed with pip during the installation process and can be seen in the [`requirements.txt`](requirements.txt) file.
+
+```mermaid
+flowchart TD
+    classDef missing stroke-dasharray: 5
+    argh["argh<br>0.31.3"]
+    certifi["certifi<br>2023.7.22"]
+    charset-normalizer["charset-normalizer<br>3.3.0"]
+    contourpy["contourpy<br>1.3.0"]
+    cycler["cycler<br>0.12.1"]
+    fonttools["fonttools<br>4.43.1"]
+    idna["idna<br>3.4"]
+    kiwisolver["kiwisolver<br>1.4.5"]
+    matplotlib["matplotlib<br>3.8.0"]
+    numpy["numpy<br>1.26.1"]
+    packaging["packaging<br>24.1"]
+    pandas["pandas<br>2.2.3"]
+    pillow["Pillow<br>10.1.0"]
+    pyparsing["pyparsing<br>3.1.1"]
+    python-dateutil["python-dateutil<br>2.8.2"]
+    pytz["pytz<br>2023.3.post1"]
+    requests["requests<br>2.31.0"]
+    six["six<br>1.16.0"]
+    tzdata["tzdata<br>2023.3"]
+    urllib3["urllib3<br>2.0.6"]
+    contourpy -- "&ge;1.23" --> numpy
+    matplotlib -- "&ge;0.10" --> cycler
+    matplotlib -- "&ge;1.0.1" --> contourpy
+    matplotlib -- "&ge;1.0.1" --> kiwisolver
+    matplotlib -- "&ge;1.21,&lt;2" --> numpy
+    matplotlib -- "&ge;2.3.1" --> pyparsing
+    matplotlib -- "&ge;2.7" --> python-dateutil
+    matplotlib -- "&ge;20.0" --> packaging
+    matplotlib -- "&ge;4.22.0" --> fonttools
+    matplotlib -- "&ge;6.2.0" --> pillow
+    pandas -- "&ge;1.26.0" --> numpy
+    pandas -- "&ge;2.8.2" --> python-dateutil
+    pandas -- "&ge;2020.1" --> pytz
+    pandas -- "&ge;2022.7" --> tzdata
+    python-dateutil -- "&ge;1.5" --> six
+    requests -- "&ge;1.21.1,&lt;3" --> urllib3
+    requests -- "&ge;2,&lt;4" --> charset-normalizer
+    requests -- "&ge;2.5,&lt;4" --> idna
+    requests -- "&ge;2017.4.17" --> certifi
+
+```
 
 ## Fresh install
 
