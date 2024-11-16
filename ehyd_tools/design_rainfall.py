@@ -6,8 +6,8 @@ __version__ = "1.0.0"
 __maintainer__ = "Markus Pichler"
 
 import io
-import os
 import re
+from pathlib import Path
 
 import pandas as pd
 
@@ -128,7 +128,7 @@ class EhydDesignRainfall:
     @classmethod
     def from_local_(cls, fn_txt, grid_point_number='???'):
         new = cls(grid_point_number)
-        if os.path.isfile(fn_txt):
+        if Path(fn_txt).is_file():
             with open(fn_txt, 'r', encoding='ISO-8859-1') as f:
                 new._raw = f.read()
         else:
@@ -139,12 +139,12 @@ class EhydDesignRainfall:
 
     @classmethod
     def from_local(cls, pth, grid_point_number):
-        return cls.from_local_(os.path.join(pth, f'design_rain_ehyd_{grid_point_number}.txt'), grid_point_number=grid_point_number)
+        return cls.from_local_(Path(pth) / f'design_rain_ehyd_{grid_point_number}.txt', grid_point_number=grid_point_number)
 
     @classmethod
     def from_csv(cls, pth, grid_point_number):
-        fn_csv = os.path.join(pth, f'design_rain_ehyd_{grid_point_number}.csv')
-        if os.path.isfile(fn_csv):
+        fn_csv = Path(pth) / f'design_rain_ehyd_{grid_point_number}.csv'
+        if fn_csv.is_file():
             df = pd.read_csv(fn_csv, index_col=[0, 1])
             df.columns = df.columns.astype(int)
             new = cls(grid_point_number)
@@ -164,8 +164,8 @@ class EhydDesignRainfall:
         return r.content.decode('ISO-8859-1').replace('\r', '')
 
     def save_pdf(self, pth):
-        fn = os.path.join(pth, f'Bemessungsniederschlag_Gitterpunkt_{self.grid_point_number}.pdf')
-        if not os.path.isfile(fn):
+        fn = Path(pth) / f'Bemessungsniederschlag_Gitterpunkt_{self.grid_point_number}.pdf'
+        if not fn.is_file():
             r = _get_request(self.grid_point_number, data_kind=DATA_KIND.DESIGN_PRECIPITATION, field=FIELDS.PDF, file_number=None)
             open(fn, 'wb').write(r.content)
 
@@ -191,8 +191,8 @@ def get_ehyd_design_rainfall_file(grid_point_number=5214):
 
 
 def save_ehyd_design_rainfall_pdf(grid_point_number, fn):
-    fn = os.path.join(fn, f'Bemessungsniederschlag_Gitterpunkt_{grid_point_number}.pdf')
-    if not os.path.isfile(fn):
+    fn = Path(fn) / f'Bemessungsniederschlag_Gitterpunkt_{grid_point_number}.pdf'
+    if not fn.is_file():
         r = _get_request(grid_point_number, data_kind=DATA_KIND.DESIGN_PRECIPITATION, field=FIELDS.PDF, file_number=None)
         open(fn, 'wb').write(r.content)
 
@@ -255,8 +255,8 @@ def get_rainfall_height(table, return_period, duration):
 
 
 def get_ehyd_design_rainfall_offline(grid_point_number, pth):
-    fn_csv = os.path.join(pth, f'design_rain_ehyd_{grid_point_number}.csv')
-    if os.path.isfile(fn_csv):
+    fn_csv = Path(pth) / f'design_rain_ehyd_{grid_point_number}.csv'
+    if fn_csv.is_file():
         df = pd.read_csv(fn_csv, index_col=[0, 1])
         df.columns = df.columns.astype(int)
     else:

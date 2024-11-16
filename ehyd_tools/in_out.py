@@ -11,6 +11,7 @@ import warnings
 import io
 import os
 import re
+from pathlib import Path
 from zipfile import ZipFile
 
 import pandas as pd
@@ -129,7 +130,7 @@ def import_series(filename, series_label='precipitation', index_label='datetime'
 
 
 # ######################################################################################################################
-STATIONS_PRECIPITATION_HIGH_RES = json.load(open(os.path.join(os.path.dirname(__file__), 'ehyd_stations.json'), 'r', encoding='utf-8'))
+STATIONS_PRECIPITATION_HIGH_RES = json.load(open(Path(__file__).parent / 'ehyd_stations.json', 'r', encoding='utf-8'))
 """Niederschlagsstationen mit Langzeitserie mit Minutensummen"""
 
 
@@ -159,14 +160,14 @@ class FIELDS:
     PDF = 'pdf'
 
 
-_path_file = os.path.dirname(__file__)
+_path_file = Path(__file__).parent
 _stations_files = {FIELDS.NIEDERSCHLAG: 'niederschl_lufttemp_verdunst.csv',
                    FIELDS.QUELLEN: 'unteririsches_wasser.csv',
                    FIELDS.OBERFLAECHENWASSER: 'oberflaechenwasser.csv'}
 
 
 def get_ehyd_station_frame(field):
-    return pd.read_csv(os.path.join(_path_file, _stations_files[field]), index_col=0, header=0)
+    return pd.read_csv(_path_file / _stations_files[field], index_col=0, header=0)
 
 
 EHYD_STATIONS = {k: get_ehyd_station_frame(k).to_dict(orient='index') for k, v in _stations_files.items()}
