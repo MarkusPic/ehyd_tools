@@ -2,6 +2,7 @@ import io
 from pandas import read_csv
 from ehyd_tools.synthetic_rainseries import RainModeller
 
+# language=csv
 rain = """duration,1,2,5,10,20
 5,12.9,14.7,17.2,19.0,20.9
 10,18.9,21.9,25.6,28.8,31.9
