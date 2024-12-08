@@ -83,7 +83,7 @@ class EhydDesignRainfall:
             # df = df.dropna(axis=0, how='all')
 
             # convert string column names to integers
-            df.columns = df.columns.str.replace('min', '').astype(int)
+            df.columns = df.columns.str.replace('T', '').astype(int)
             # df.columns.name = 'Jährlichkeit'
             df.columns.name = INDICES.RETURN_PERIOD
 
