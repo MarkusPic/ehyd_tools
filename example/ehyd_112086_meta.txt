@@ -5,19 +5,19 @@ Sachgebiet:                NLV
 Dienststelle:              HD-Steiermark
 Messstellenbetreiber:      Hydrographischer Dienst
 
-Höhe:
- gültig seit:              Höhe [m ü.A.]:
+HÃ¶he:
+ gÃ¼ltig seit:              HÃ¶he [m Ã¼.A.]:
   01.01.1946               360
   01.01.2011               361
 
 Geographische Koordinaten (Referenzellipsoid: Bessel 1841):
- gültig seit:              Länge (Grad,Min,Sek):    Breite  (Grad,Min,Sek):
+ gÃ¼ltig seit:              LÃ¤nge (Grad,Min,Sek):    Breite  (Grad,Min,Sek):
   01.01.1946               15 24 46                 47 06 05
   01.01.2011               15 24 57                 47 06 35
 
-Messgrößen,-art:           seit:     bis:
+MessgrÃ¶ÃŸen,-art:           seit:     bis:
   Niederschlag-Ombrometer  1946
   Niederschlag-Ombrograph  2007
-  Schneehöhe               1946
-  Neuschneehöhe            1946
+  SchneehÃ¶he               1946
+  NeuschneehÃ¶he            1946
   Temperatur               1947
