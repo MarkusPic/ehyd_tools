@@ -5,6 +5,7 @@
 
 [![license](https://img.shields.io/github/license/markuspic/ehyd_tools.svg?style=flat)](https://github.com/MarkusPic/ehyd_tools/blob/master/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/ehyd_tools.svg)](https://pypi.python.org/pypi/ehyd-tools)
+[![Buymeacoffee](https://badgen.net/badge/icon/buymeacoffee?icon=buymeacoffee&label=donate)](https://https://www.buymeacoffee.com/)
 
 Reading and analyzing hydro(geo)logic time series from the Austrian government's "ehyd.gv.at" platform.
 
