@@ -40,6 +40,7 @@ parquet = ["fastparquet", "pyarrow"]
 #Documentation = "https://markuspic.github.io/intensity_duration_frequency_analysis/"
 Changelog = "https://github.com/MarkusPic/ehyd_tools/blob/master/CHANGELOG.md"
 homepage = "https://github.com/MarkusPic/ehyd_tools"
+funding = "https://www.buymeacoffee.com/MarkusP"
 
 [project.scripts]
 ehyd_tools = "ehyd_tools._console_script:command_line_tool"
