@@ -180,7 +180,7 @@ def agg_data_figure(series, availability, agg='sum', freq=None, add_mean_line=Fa
     ax1.grid(axis='y', which='minor', color='lightgrey', linestyle=':', linewidth=0.5)  # , zorder=-10000000)
     # ax1 = dummy.plot(ax=ax1, lw=0)
     # ax1.scatter(x=index, y=avail.values * 100, color='grey', clip_on=False, marker='_')
-    ax1.bar(x=index, height=avail.values * 100, color='grey', lw=.1, edgecolor='white', width=1/12)
+    ax1.bar(x=index, height=avail.values * 100, color='grey', lw=.1, edgecolor='white', )  # width=1/12
     ax1.set_axisbelow(True)
 
     if add_mean_line:
@@ -189,9 +189,11 @@ def agg_data_figure(series, availability, agg='sum', freq=None, add_mean_line=Fa
                 bbox={'facecolor': 'white', 'alpha': 0.5, 'pad': 2, 'linewidth': '0'})
         ax.axhline(mean, ls='--', color='darkgray', linewidth=0.7)
 
-    ax.bar(x=index, height=ts_agg.values, color='black', lw=0.1, edgecolor='white', width=1/12)
+    ax.bar(x=index, height=ts_agg.values, color='black', lw=0.1, edgecolor='white', )  # width=1/12
     ax.set_ylabel('Niederschlag (mm/{})'.format(freq_long[freq]))
     ax.set_xlabel('Zeit')
+    from matplotlib.ticker import MaxNLocator
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
     # ax.set_xlim(left=ax.get_xlim()[0] - 0.5)
     # ax.set_xlim(right=ax.get_xlim()[1] + 0.5)
     # fig.subplots_adjust(hspace=0)
