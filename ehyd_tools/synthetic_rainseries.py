@@ -5,7 +5,7 @@ import pandas as pd
 from math import floor
 from abc import ABC, abstractmethod
 
-from scipy.interpolate import interp2d
+from scipy.interpolate import interp2d, RegularGridInterpolator
 
 from ehyd_tools.design_rainfall import (get_ehyd_design_rainfall_file, read_ehyd_design_rainfall,
                                         get_max_calculation_method, get_calculation_method, get_ehyd_design_rainfall, )
@@ -24,9 +24,12 @@ class _AbstractModelRain(ABC):
         return range(interval, duration + interval, interval)
 
     def _get_idf_value(self, duration, return_period):
-        f = interp2d(x=self.idf_table.columns.values, y=self.idf_table.index.values, z=self.idf_table.values,
-                     kind='linear')
-        return float(f(return_period, duration)[0])
+        # f = interp2d(x=self.idf_table.columns.values, y=self.idf_table.index.values, z=self.idf_table.values,
+        #              kind='linear')
+        f = RegularGridInterpolator((np.array(self.idf_table.index.values), np.array(self.idf_table.columns.values)), np.array(self.idf_table.values),
+                                    method='linear')
+
+        return float(f([duration, return_period])[0])
 
     @abstractmethod
     def get_series(self, return_period, duration, interval=5, **kwargs):
@@ -157,11 +160,12 @@ class RainModeller:
 
 
 if __name__ == '__main__':
-    model_rain = RainModeller()
-    model_rain.idf_table = pd.read_csv('/home/markus/PycharmProjects/ehyd_tools/example/kostra_s24z70.csv', index_col=0)
-    model_rain.idf_table.columns = model_rain.idf_table.columns.astype(int)
-    print(model_rain.block.get_time_series(return_period=2, duration=60, interval=5))
-    exit()
+    if _:=0:
+        model_rain = RainModeller()
+        model_rain.idf_table = pd.read_csv('/home/markus/PycharmProjects/ehyd_tools/example/kostra_s24z70.csv', index_col=0)
+        model_rain.idf_table.columns = model_rain.idf_table.columns.astype(int)
+        print(model_rain.block.get_time_series(return_period=2, duration=60, interval=5))
+        exit()
     model_rain = RainModeller()
     model_rain.set_idf_table_okostra(5214, kind='Bemessung')
     print(model_rain.block.get_time_series(return_period=2, duration=60, interval=5))

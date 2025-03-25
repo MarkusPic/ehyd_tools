@@ -179,9 +179,12 @@ class EhydDesignRainfall:
         return self.table.xs(method, axis=0, level=INDICES.CALCULATION_METHOD, drop_level=True).copy()
 
     def get_rainfall_height(self, return_period, duration):
-        from scipy.interpolate import interp2d
-        f = interp2d(x=self.table.columns.astype(float).values, y=self.table.index.astype(float).values, z=self.table.values, kind='linear')
-        return float(f(return_period, duration)[0])
+        # from scipy.interpolate import interp2d
+        # f = interp2d(x=self.table.columns.astype(float).values, y=self.table.index.astype(float).values, z=self.table.values, kind='linear')
+        from scipy.interpolate import RegularGridInterpolator
+        f = RegularGridInterpolator((self.table.index.astype(float).values, self.table.columns.astype(float).values),
+                                    self.table.values, method='linear')
+        return float(f([duration, return_period])[0])
 
 
 # ########################################################################################################################
@@ -249,9 +252,12 @@ def get_calculation_method(df, method='Bemessung'):
 
 
 def get_rainfall_height(table, return_period, duration):
-    from scipy.interpolate import interp2d
-    f = interp2d(x=table.columns.astype(float).values, y=table.index.astype(float).values, z=table.values, kind='linear')
-    return float(f(return_period, duration)[0])
+    # from scipy.interpolate import interp2d
+    # f = interp2d(x=table.columns.astype(float).values, y=table.index.astype(float).values, z=table.values, kind='linear')
+    from scipy.interpolate import RegularGridInterpolator
+    f = RegularGridInterpolator((table.index.astype(float).values, table.columns.astype(float).values),
+                                table.values, method='linear')
+    return float(f([duration, return_period])[0])
 
 
 def get_ehyd_design_rainfall_offline(grid_point_number, pth):
