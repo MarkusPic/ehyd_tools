@@ -534,3 +534,12 @@ def get_ehyd_data(identifier, field=FIELDS.NIEDERSCHLAG, file_number=2, data_kin
         raise ValueError(f'Identifier "{identifier}" not in ehyd!')
 
     return read_ehyd_file(*_get_file(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind))
+
+
+def get_ehyd_minutensummen_precipitation(identifier):
+    file_number = 0
+    kwargs = dict(identifier=identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT)
+    for file_number, filename in get_files_available(**kwargs).items():
+        if 'Minutensummen' in filename:
+            break
+    return get_ehyd_data(file_number=file_number, **kwargs)
