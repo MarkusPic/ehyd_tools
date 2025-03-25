@@ -32,8 +32,6 @@ There is also an option during the installation to add python to the PATH automa
 
 [^path2]: https://datatofish.com/add-python-to-windows-path/
 
-![python_install](https://datatofish.com/wp-content/uploads/2018/10/0001_add_Python_to_Path.png)
-
 ## Linux/Unix
 
 Python is pre-installed on most operating systems (as you probably knew).
