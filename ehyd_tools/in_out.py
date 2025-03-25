@@ -230,15 +230,15 @@ def _get_url(identifier, data_kind=DATA_KIND.MEASUREMENT, field=FIELDS.NIEDERSCH
     return url
 
 
-_REQUESTS = {}
+_HEADERS = {}
 
 
-def _get_request(identifier, data_kind=DATA_KIND.MEASUREMENT, field=FIELDS.NIEDERSCHLAG, file_number=1) -> requests.Response:
+def _get_header(identifier, data_kind=DATA_KIND.MEASUREMENT, field=FIELDS.NIEDERSCHLAG, file_number=1) -> requests.Response:
     """get request of website"""
     url = _get_url(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind)
-    if url not in _REQUESTS:
-        _REQUESTS[url] = requests.get(url, allow_redirects=True)
-    return _REQUESTS[url]
+    if url not in _HEADERS:
+        _HEADERS[url] = requests.head(url, allow_redirects=True)
+    return _HEADERS[url]
 
 
 def _file_available(r: requests.Response) -> bool:
@@ -252,7 +252,7 @@ def _get_filename(r: requests.Response) -> str:
     return r.headers['content-disposition'].split('filename=')[1]
 
 
-def available_files(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT):
+def get_files_available(identifier, data_kind=DATA_KIND.MEASUREMENT, field=FIELDS.NIEDERSCHLAG):
     """
     get the file of the series of the station
 
@@ -264,14 +264,27 @@ def available_files(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.M
     Returns:
         dict[int, str]: dictionary of {file-number: file-name}
     """
-    files = {}
-    for file_number in range(1, 15):
-        r = _get_request(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind)
-        if _file_available(r):
-            files[file_number] = _get_filename(r)
+    files_available = {}
+    for file_number in range(1, 10):
+        h = _get_header(identifier, data_kind=data_kind, field=field, file_number=file_number)
+        if _file_available(h):
+            files_available[file_number] = _get_filename(h)
         else:
             break
-    return files
+    return files_available
+
+
+available_files = get_files_available
+
+_REQUESTS = {}
+
+
+def _get_request(identifier, data_kind=DATA_KIND.MEASUREMENT, field=FIELDS.NIEDERSCHLAG, file_number=1) -> requests.Response:
+    """get request of website"""
+    url = _get_url(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind)
+    if url not in _REQUESTS:
+        _REQUESTS[url] = requests.get(url, allow_redirects=True)
+    return _REQUESTS[url]
 
 
 def _get_file_from_request(r: requests.Response) -> [str, (io.TextIOWrapper or io.IOBase)]:
@@ -308,6 +321,7 @@ def _get_file(identifier, field=FIELDS.NIEDERSCHLAG, file_number=1, data_kind=DA
         if csv_file is None:
             raise NotImplementedError('This kind of request is not implemented (yet?). Sorry!')
         return csv_file, filename
+    raise NotImplementedError(f'Requested file not found. You tried {file_number=}. Following files are available: {get_files_available(identifier, field=field, data_kind=data_kind)}')
 
 
 def get_ehyd_files(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.MEASUREMENT):
@@ -323,8 +337,8 @@ def get_ehyd_files(identifier, field=FIELDS.NIEDERSCHLAG, data_kind=DATA_KIND.ME
         dict: with key=filename and value=tuple(meta_data, timeseries_data)
     """
     files = {}
-    for file_number, filename in available_files(identifier, field=field, data_kind=data_kind).items():
-        if file_number == 1:
+    for file_number, filename in get_files_available(identifier, field=field, data_kind=data_kind).items():
+        if 'Stammdaten' in filename:
             files[filename] = get_station_reference_data(identifier, field=field, data_kind=data_kind)
         else:
             r = _get_request(identifier=identifier, field=field, file_number=file_number, data_kind=data_kind)
