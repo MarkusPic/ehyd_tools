@@ -2,7 +2,7 @@ import os.path
 
 from ehyd_tools.data_processing import (data_validation, data_availability, max_10a, check_period,
                                         agg_data_figure, create_statistics, )
-from ehyd_tools.in_out import (get_ehyd_data, import_series, FIELDS, DATA_KIND, available_files, get_basic_station_meta,
+from ehyd_tools.in_out import (get_ehyd_data, import_series, FIELDS, DATA_KIND, get_files_available, get_basic_station_meta,
                                get_ehyd_stations, get_ehyd_files, get_station_reference_data, translate_meta_dict, export_series, )
 from ehyd_tools.sww_utils import span_table
 
@@ -27,6 +27,7 @@ def main():
 
     # __________________________________________________________________________________________________________________
     identifier = 112086
+    identifier = 104604
 
     label = 'ehyd_{}'.format(identifier)
 
