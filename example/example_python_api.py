@@ -48,7 +48,7 @@ def main():
     # __________________________________________________________________________________________________________________
     else:
         series = import_series(label + '.parquet')
-        # series = import_series(r'C:\Users\mp\PycharmProjects\ehyd_tools\example\112086_graz\N-Minutensummen-112086.csv')
+        # series = import_series(Path(__file__).parent / '112086_graz/N-Minutensummen-112086.csv')
         # export_series(series, 'test', export_path=None, save_as='parquet', unix=False)
 
     # __________________________________________________________________________________________________________________
