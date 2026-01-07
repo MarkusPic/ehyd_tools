@@ -26,8 +26,8 @@ def main():
     get_ehyd_stations(field)
 
     # __________________________________________________________________________________________________________________
-    identifier = 112086
     identifier = 104604
+    identifier = 112086
 
     label = 'ehyd_{}'.format(identifier)
 
@@ -72,24 +72,24 @@ def main():
 
     stats = create_statistics(series, availability, availability_cut=availability_cut)
 
-    rain_fmt = '{:0.0f} mm'
-    date_fmt = '{:%Y}'
-    avail_fmt = '{:0.0%}'
+    rain_fmt = '0.0f'
+    date_fmt = '%Y'
+    avail_fmt = '0.0%'
 
     print(
         f'The annual totals of the data series serve as the data basis.\n'
         f'The following statistics were analyzed:\n'
         f'Only years with a availability of {availability_cut:{avail_fmt}} will be evaluated.\n'
         f'\n'
-        f'The maximum is {stats["maximum"]:{rain_fmt}} and was in the year {stats["maximum_date"]:{date_fmt}} '
+        f'The maximum is {stats["maximum"]:{rain_fmt}} mm and was in the year {stats["maximum_date"]:{date_fmt}} '
         f'(with {stats["maximum_avail"]:{avail_fmt}} Data available).\n'
-        f'The minimum is {stats["minimum"]:{rain_fmt}} and was in the year {stats["minimum_date"]:{date_fmt}} '
+        f'The minimum is {stats["minimum"]:{rain_fmt}} mm and was in the year {stats["minimum_date"]:{date_fmt}} '
         f'(with {stats["minimum_avail"]:{avail_fmt}} Data available).\n'
-        f'The mean is {stats["mean"]:{rain_fmt}} '
+        f'The mean is {stats["mean"]:{rain_fmt}} mm'
         f'(with {stats["mean_avail"]:{avail_fmt}} Data available in average).')
 
     # __________________________________________________________________________________________________________________
-    fig, ax = agg_data_figure(series, availability, freq='Y')
+    fig, ax = agg_data_figure(series, availability, freq='YE')
     fig.show()
 
 
