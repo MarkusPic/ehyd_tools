@@ -221,7 +221,7 @@ def _get_url(identifier, data_kind=DATA_KIND.MEASUREMENT, field=FIELDS.NIEDERSCH
     Returns:
         str: url to the file
     """
-    url = f'https://ehyd.gv.at/eHYD/{data_kind}'
+    url = f'https://ehyd.gv.at/services/{data_kind}'
     if field:
         url += f'/{field}'
     url += f'?id={identifier}'
